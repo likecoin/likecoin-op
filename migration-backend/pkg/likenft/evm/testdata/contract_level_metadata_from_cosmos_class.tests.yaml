@@ -29,13 +29,160 @@ cosmosclassresponse: |
       }
     }
   }
+iscndataresponse: |
+  {
+    "owner": "like13f4glvg80zvfrrs7utft5p68pct4mcq7t5atf6",
+    "latest_version": "2",
+    "records": [
+      {
+        "ipld": "baguqeerafdcv7vqiyjwclvqymzodv7rjmqmpej53z5uogivhlyuza6coi3oq",
+        "data": {
+          "@context": {
+            "@vocab": "http://iscn.io/",
+            "contentMetadata": {
+              "@context": null
+            },
+            "recordParentIPLD": {
+              "@container": "@index"
+            },
+            "stakeholders": {
+              "@context": {
+                "@vocab": "http://schema.org/",
+                "contributionType": "http://iscn.io/contributionType",
+                "entity": "http://iscn.io/entity",
+                "footprint": "http://iscn.io/footprint",
+                "rewardProportion": "http://iscn.io/rewardProportion"
+              }
+            }
+          },
+          "@id": "iscn://likecoin-chain/FyZ13m_hgwzUC6UoaS3vFdYvdG6QXfajU3vcatw7X1c/2",
+          "@type": "Record",
+          "contentFingerprints": [
+            "ipfs://QmcbCCFEz8pLxDyqkZaqXVHr8eapeD6xsQGdvZzMJvQ2B4"
+          ],
+          "contentMetadata": {
+            "@context": "http://schema.org/",
+            "@type": "Book",
+            "author": "高重建",
+            "contentMetadata": {
+              "context": "http://schema.org/",
+              "description": "購買本書會透過郵件收到 epub 和 pdf 檔，同時得到換領本書 NFT 的資格。書的 epub 和 pdf 歡迎轉發給朋友，讓更多人獲得相關知識。有別於粵語中「翻版」的原意，「翻版」不是「盜版」，並不違法。\n然而，翻版雖然不是盜版，卻也不是正版。唯有 NFT 的持有者，手上的 epub 和 pdf 才是正版。購買正版是一份美德，是能力所及的讀者該付出的一點承擔，代表著對作者的支持，對知識、報道和創作的尊重。\n翻版是傳播，正版是應援；傳播的同時，不要忘了鼓勵對方購買正版，讓正念 pay it forward。\n鼓勵正版，允許翻版，消滅盜版，是《所謂「我不投資」，就是 all in 在法定貨幣》分散式出版的核心理念。",
+              "keywords": [
+                "blockchain",
+                "defi",
+                "money",
+                "hongkong",
+                "crypto",
+                "moneyverse",
+                "LikeCoin",
+                "ckxpress"
+              ],
+              "name": "《所謂「我不投資」，就是 all in 在法定貨幣》",
+              "type": "Book",
+              "url": "https://ckxpress.com/moneyverse/",
+              "usageInfo": "CC-BY 4.0",
+              "version": 1
+            },
+            "description": "甚麼是財富自由？如何才能達成財富自由？\n\nLikeCoin、DHK dao 發起人高重建以這本「死心塌地」之作，誠摯告訴你：\n在當前政經環境之下，財務自由必須被重新定義——\n「終極的財務自由，是免於被剝奪資產的自由。」\n\n學習「挖礦」、「區塊鏈」、「密碼貨幣」，才能在財富宇宙中自由穿梭。",
+            "isbn": "9786269836208",
+            "keywords": "投資,區塊鏈,密碼貨幣,金融,財經",
+            "name": "財富自由主義：金錢的多元宇宙",
+            "sameAs": [
+              "https://files.ckxpress.com/moneyverse.pdf"
+            ],
+            "url": "https://ckxpress.com/moneyverse/",
+            "usageInfo": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+            "version": 1
+          },
+          "recordNotes": "",
+          "recordParentIPLD": {
+            "/": "baguqeeraavnpcxksmo7inv3so4wjkwml7gcnit6qvalko5dsbvwkljfwdvcq"
+          },
+          "recordTimestamp": "2024-02-06T07:41:20+00:00",
+          "recordVersion": 2,
+          "stakeholders": [
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like13f4glvg80zvfrrs7utft5p68pct4mcq7t5atf6",
+                "name": "作者：高重建"
+              },
+              "rewardProportion": "50"
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like103w3wl6wst5taq4qq4epe6znqdrs3p8c9lr0c0",
+                "name": "出版：FAB DAO"
+              },
+              "rewardProportion": "20"
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like103w3wl6wst5taq4qq4epe6znqdrs3p8c9lr0c0",
+                "name": "設計：金彥良"
+              },
+              "rewardProportion": "10"
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like155vxtzlthq93tv4c2jr3mhnplqc8f2np5pra3r",
+                "name": "編輯：高盈穎"
+              },
+              "rewardProportion": "10"
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like10ywsmztkxjl55xarxnhlxwc83z9v2hkxtsajwl",
+                "name": "Liker Land 技術支援"
+              },
+              "rewardProportion": "10"
+            }
+          ]
+        }
+      }
+    ]
+  }
 contractlevelmetadata: |
   {
     "description": "購買本書會透過郵件收到 epub 和 pdf 檔，同時得到換領本書 NFT 的資格。書的 epub 和 pdf 歡迎轉發給朋友，讓更多人獲得相關知識。有別於粵語中「翻版」的原意，「翻版」不是「盜版」，並不違法。\n然而，翻版雖然不是盜版，卻也不是正版。唯有 NFT 的持有者，手上的 epub 和 pdf 才是正版。購買正版是一份美德，是能力所及的讀者該付出的一點承擔，代表著對作者的支持，對知識、報道和創作的尊重。\n翻版是傳播，正版是應援；傳播的同時，不要忘了鼓勵對方購買正版，讓正念 pay it forward。\n鼓勵正版，允許翻版，消滅盜版，是《所謂「我不投資」，就是 all in 在法定貨幣》分散式出版的核心理念。",
     "name": "《所謂「我不投資」，就是 all in 在法定貨幣》",
     "symbol": "BOOK",
-    "external_link":"https://bit.ly/moneyverse-pdf",
+    "message": "唯有 NFT 的持有者，手上的 epub 和 pdf 才是正版。購買正版是一份美德，是能力所及的讀者該付出的一點承擔，代表著對作者的支持，對知識、報道和創作的尊重。",
+    "nft_meta_collection_id": "nft_book",
+    "nft_meta_collection_name": "NFT Book",
+    "nft_meta_collection_description": "NFT Book"
     "image":"ipfs://bafybeierwqwwtj7wynjaud2jwi5yjxfqnnthvxfky66suih5wlpjuofvey"
+    "external_link":"https://bit.ly/moneyverse-pdf",
+    "@context": "http://schema.org/",
+    "@type": "Book",
+    "author": "高重建",
+    "description": "甚麼是財富自由？如何才能達成財富自由？\n\nLikeCoin、DHK dao 發起人高重建以這本「死心塌地」之作，誠摯告訴你：\n在當前政經環境之下，財務自由必須被重新定義——\n「終極的財務自由，是免於被剝奪資產的自由。」\n\n學習「挖礦」、「區塊鏈」、「密碼貨幣」，才能在財富宇宙中自由穿梭。",
+    "isbn": "9786269836208",
+    "keywords": "投資,區塊鏈,密碼貨幣,金融,財經",
+    "name": "財富自由主義：金錢的多元宇宙",
+    "sameAs": [
+      "https://files.ckxpress.com/moneyverse.pdf"
+    ],
+    "usageInfo": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "version": 1
+    "url": "https://ckxpress.com/moneyverse/",
+    "recordNotes": "",
+    "dateCreated": "2024-02-06T07:41:20+00:00",
+    "contentFingerprints": [
+      "ipfs://QmcbCCFEz8pLxDyqkZaqXVHr8eapeD6xsQGdvZzMJvQ2B4"
+    ],
+    "attributes": [{
+      "trait_type": "Author",
+      "value": "高重建",
+    }],
+    "likecoin": {
+      "iscnIdPrefix": "iscn://likecoin-chain/FyZ13m_hgwzUC6UoaS3vFdYvdG6QXfajU3vcatw7X1c",
+      "classId": "likenft1ku4ra0e7dgknhd0wckrkxspuultynl4mgkxa3j08xeshfr2l0ujqmmvy83",
+    },
   }
 
 ---
@@ -71,11 +218,757 @@ cosmosclassresponse: |
       }
     }
   }
+iscndataresponse: |
+  {
+    "owner": "like19fqws220rwcmacn5dgt0dtwts8c05ty58mcr3a",
+    "latest_version": "2",
+    "records": [
+      {
+        "ipld": "baguqeera62pta2nysfy5lzmgdnocqsph626k4w6n72jhdqozonosvqokxh7a",
+        "data": {
+          "@context": {
+            "@vocab": "http://iscn.io/",
+            "contentMetadata": {
+              "@context": null
+            },
+            "recordParentIPLD": {
+              "@container": "@index"
+            },
+            "stakeholders": {
+              "@context": {
+                "@vocab": "http://schema.org/",
+                "contributionType": "http://iscn.io/contributionType",
+                "entity": "http://iscn.io/entity",
+                "footprint": "http://iscn.io/footprint",
+                "rewardProportion": "http://iscn.io/rewardProportion"
+              }
+            }
+          },
+          "@id": "iscn://likecoin-chain/4UC3ZhKokFv3_rxP1p8QtCuDfHAcxcDZhbe4-rPMBGI/2",
+          "@type": "Record",
+          "contentFingerprints": [
+            "ipfs://bafybeietirqpjl2zrczs3a65at74rkbst6mg6mvzelogjk3mz23gretgm4",
+            "ar://WuffTBbQO8tntjt4jWSlSle-nRmvDP_Lvks7sT_UszQ"
+          ],
+          "contentMetadata": {
+            "@context": "http://schema.org/",
+            "@type": "Book",
+            "context": "http://schema.org/",
+            "description": "董啟章 自然史三部曲之一",
+            "keywords": "novel,hongkong,literature,classic",
+            "name": "《天工開物・栩栩如真》",
+            "sameAs": [
+              "https://files.ckxpress.com/天工開物．栩栩如真.pdf",
+              "https://files.ckxpress.com/天工開物．栩栩如真.epub",
+              "https://arweave.net/WuffTBbQO8tntjt4jWSlSle-nRmvDP_Lvks7sT_UszQ"
+            ],
+            "url": "https://nowherebookstore.io/worksandcreation",
+            "usageInfo": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            "version": 1
+          },
+          "recordNotes": "",
+          "recordParentIPLD": {
+            "/": "baguqeeracn7o5zvfncbo24d33qjbt35uwd4ouqkgqwzjydzdqykrpiopn73q"
+          },
+          "recordTimestamp": "2023-04-22T11:20:35+00:00",
+          "recordVersion": 2,
+          "stakeholders": [
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like19fqws220rwcmacn5dgt0dtwts8c05ty58mcr3a",
+                "name": "作者：董啟章"
+              },
+              "rewardProportion": "30"
+            },
+            {
+              "contributionType": "https://schema.org/publisher",
+              "entity": {
+                "@id": "like10g3fuc7pqk3kq7vcupc96agy86qcgxpen2pply",
+                "name": "出版：飛地"
+              },
+              "rewardProportion": "30"
+            },
+            {
+              "contributionType": "https://schema.org/artist",
+              "entity": {
+                "@id": "like1zvykrudclvjmcky4x7elj42jeg8fxvpdptp7ze",
+                "name": "封面設計：柳廣成"
+              },
+              "rewardProportion": "10"
+            }
+          ]
+        }
+      }
+    ]
+  }
 contractlevelmetadata: |
   {
     "description": "董啟章 自然史三部曲之一",
     "name": "《天工開物・栩栩如真》",
     "symbol": "BOOK",
-    "external_link":"https://nowherebookstore.io/worksandcreation",
-    "image":"https://files.ckxpress.com/worksandcreation.jpeg"
+    "image": "https://files.ckxpress.com/worksandcreation.jpeg",
+    "external_url": "https://nowherebookstore.io/worksandcreation",
+    "message": "天覆地載，物數號萬。從石器到陶瓷，從日晷到鐘錶，從毛筆到鉛字，從算盤到電腦，從書本到NFT，人和物自古也是一體。我們都是「人物」，而「人物」都有故事。",
+    "nft_meta_collection_id": "nowhere_nft_book",
+    "nft_meta_collection_name": "飛地出版社",
+    "nft_meta_collection_description": "飛地出版社",
+    "@context": "http://schema.org/",
+    "@type": "Book",
+    "keywords": "novel,hongkong,literature,classic",
+    "sameAs": [
+      "https://files.ckxpress.com/天工開物．栩栩如真.pdf",
+      "https://files.ckxpress.com/天工開物．栩栩如真.epub",
+      "https://arweave.net/WuffTBbQO8tntjt4jWSlSle-nRmvDP_Lvks7sT_UszQ"
+    ],
+    "url": "https://nowherebookstore.io/worksandcreation",
+    "usageInfo": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "version": 1
+    "contentFingerprints": [
+      "ipfs://bafybeietirqpjl2zrczs3a65at74rkbst6mg6mvzelogjk3mz23gretgm4",
+      "ar://WuffTBbQO8tntjt4jWSlSle-nRmvDP_Lvks7sT_UszQ"
+    ],
+    "recordNotes": "",
+    "dateCreated": "2023-04-18T18:38:21+00:00",
+    "attributes": [],
+    "likecoin": {
+      "iscnIdPrefix": "iscn://likecoin-chain/4UC3ZhKokFv3_rxP1p8QtCuDfHAcxcDZhbe4-rPMBGI",
+      "classId": "likenft19symzw3xmh42gukzts858wf6rsdkn6e4jtc9wp8jh4kphfmffy5s6acyxg",
+    }
+  }
+
+---
+
+name: class id = likenft1dpegnjnklnh5g66nn06gz64wv0ec6k04f4v5lx69qlv6xlh493eqdq454j
+cosmosclassresponse: |
+  {
+    "class": {
+      "id": "likenft1dpegnjnklnh5g66nn06gz64wv0ec6k04f4v5lx69qlv6xlh493eqdq454j",
+      "name": "每天買一百元比特幣：我的定額定投四年戰績實錄",
+      "symbol": "BOOK",
+      "description": "【特價預購中，1.16 正式出版】\n\n假如有人 2020 年建議你每日買一百元比特幣，你會不會聽？\n\n比特幣剛升破十萬美元。現在才開始投資比特幣，是否為時已晚？\n\n雖然看好比特幣，但對這神秘高深的投資選項半信半疑，或無從入手？\n\n假如不是假如，高重建早於 2020 年就在《蘋果日報》專欄倡議每日定額定投比特幣。本書收錄作者七年多來討論比特幣的 20 篇文章，目的不是要以「I told you so」奚落當年錯過機會的旁觀者，而是以史為鑑，告訴讀者一切尚早，現時行動未為晚也。\n\n本書除了解釋為什麼「每天買一百元比特幣」是最符合成本效益的投資策略，也深入淺出介紹比特幣的概念，跟傳統貨幣比較，及與社會日常的關係，幫助我們在專注生活與生產的同時妥善分配資產，免被通漲蠶食勞動成果。\n\n鼓勵大家坐言起行，向終極的財富自由邁進。",
+      "uri": "",
+      "uri_hash": "",
+      "data": {
+        "@type": "/likechain.likenft.v1.ClassData",
+        "metadata": {
+          "name": "每天買一百元比特幣：我的定額定投四年戰績實錄",
+          "image": "ar://yY1IjxpTtp_QItTzirhOREYmFZEeW9IjlEmRcp-Cz5w",
+          "external_url": "",
+          "nft_meta_collection_id": "nft_book",
+          "nft_meta_collection_name": "NFT Book",
+          "nft_meta_collection_descrption": "NFT Book by Liker Land"
+        },
+        "parent": {
+          "type": "ISCN",
+          "iscn_id_prefix": "iscn://likecoin-chain/Cb-mL2bZeCffDeEmiZlaalJrYqGwOILYCT_WJ3kDmDg",
+          "iscn_version_at_mint": "1",
+          "account": ""
+        },
+        "config": {
+          "burnable": true,
+          "max_supply": "0",
+          "blind_box_config": null
+        },
+        "blind_box_state": {
+          "content_count": "0",
+          "to_be_revealed": false
+        }
+      }
+    }
+  }
+iscndataresponse: |
+  {
+    "owner": "like13f4glvg80zvfrrs7utft5p68pct4mcq7t5atf6",
+    "latest_version": "5",
+    "records": [
+      {
+        "ipld": "baguqeeradqaota25jdgu4uact6zrfo7oalpeene64psxlztrt4slrwwsomcq",
+        "data": {
+          "@context": {
+            "@vocab": "http://iscn.io/",
+            "contentMetadata": {
+              "@context": null
+            },
+            "recordParentIPLD": {
+              "@container": "@index"
+            },
+            "stakeholders": {
+              "@context": {
+                "@vocab": "http://schema.org/",
+                "contributionType": "http://iscn.io/contributionType",
+                "entity": "http://iscn.io/entity",
+                "footprint": "http://iscn.io/footprint",
+                "rewardProportion": "http://iscn.io/rewardProportion"
+              }
+            }
+          },
+          "@id": "iscn://likecoin-chain/Cb-mL2bZeCffDeEmiZlaalJrYqGwOILYCT_WJ3kDmDg/5",
+          "@type": "Record",
+          "contentFingerprints": [
+            "ar://hYtn-ySANq7HBqaZRW8eVPxp0u3j9d_023n03nymz50",
+            "ar://IQ97SDTnWJt5VRc_cYWJmhd_kpjDpcu0TtjtCUvyzPc"
+          ],
+          "contentMetadata": {
+            "@context": "http://schema.org/",
+            "@type": "Book",
+            "author": {
+              "description": "地球人。人文為體，科技為用。\n\n創業者。LikeCoin、DHK dao 發起人。\n\n創作者。著有《區塊鏈社會學：金錢、媒體與民主的再想像》、《財富自由主義：金錢的多元宇宙》、《Game 以載道》、《好 game 有好報》等。逢週四於 DHK 週報發表文章，內容全面開放，同步收錄於 ckxpress.com。\n\n沒有固定手機號碼，但一封電郵就能輕鬆聯繫上—— kin@ckxpress.com。",
+              "name": "高重建"
+            },
+            "datePublished": "",
+            "description": "假如有人 2020 年建議你每日買一百元比特幣，你會不會聽？\n\n比特幣剛升破十萬美元。現在才開始投資比特幣，是否為時已晚？\n\n雖然看好比特幣，但對這神秘高深的投資選項半信半疑，或無從入手？\n\n假如不是假如，高重建早於 2020 年就在《蘋果日報》專欄倡議每日定額定投比特幣。本書收錄作者七年多來討論比特幣的 20 篇文章，目的不是要以「I told you so」奚落當年錯過機會的旁觀者，而是以史為鑑，告訴讀者一切尚早，現時行動未為晚也。\n\n本書除了解釋為什麼「每天買一百元比特幣」是最符合成本效益的投資策略，也深入淺出介紹比特幣的概念，跟傳統貨幣比較，及與社會日常的關係，幫助我們在專注生活與生產的同時妥善分配資產，免被通漲蠶食勞動成果。\n\n鼓勵大家坐言起行，向終極的財富自由邁進。",
+            "exifInfo": [
+              {
+                "Format": "image/jpeg",
+                "Size": 137824
+              }
+            ],
+            "inLanguage": "zh",
+            "isbn": "9786269943906",
+            "keywords": "理財,投資,科技,Bitcoin,區塊鏈",
+            "name": "每天買一百元比特幣：我的定額定投四年戰績實錄",
+            "publisher": "飛地出版",
+            "sameAs": [
+              "ar://hYtn-ySANq7HBqaZRW8eVPxp0u3j9d_023n03nymz50?name=每天買一百元比特幣-高重建.epub"
+            ],
+            "thumbnailUrl": "ar://yY1IjxpTtp_QItTzirhOREYmFZEeW9IjlEmRcp-Cz5w",
+            "url": "https://ckxpress.com/btc-dca",
+            "usageInfo": "https://creativecommons.org/licenses/by/4.0/",
+            "version": "5"
+          },
+          "recordNotes": "",
+          "recordParentIPLD": {
+            "/": "baguqeerau4xkgfkmsze2jacegyotommwdiuxybvqxevkekezkmvlzmcruoaa"
+          },
+          "recordTimestamp": "2025-01-28T16:55:45+00:00",
+          "recordVersion": 5,
+          "stakeholders": [
+            {
+              "contributionType": "http://schema.org/publisher",
+              "entity": {
+                "@id": "飛地出版"
+              },
+              "rewardProportion": 0
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like13f4glvg80zvfrrs7utft5p68pct4mcq7t5atf6",
+                "description": "地球人。人文為體，科技為用。\n\n創業者。LikeCoin、DHK dao 發起人。\n\n創作者。著有《區塊鏈社會學：金錢、媒體與民主的再想像》、《財富自由主義：金錢的多元宇宙》、《Game 以載道》、《好 game 有好報》等。逢週四於 DHK 週報發表文章，內容全面開放，同步收錄於 ckxpress.com。\n\n沒有固定手機號碼，但一封電郵就能輕鬆聯繫上—— kin@ckxpress.com。",
+                "identifier": [
+                  {
+                    "@type": "PropertyValue",
+                    "propertyID": "LikeCoin Wallet",
+                    "value": "like13f4glvg80zvfrrs7utft5p68pct4mcq7t5atf6"
+                  },
+                  {
+                    "@type": "PropertyValue",
+                    "propertyID": "Liker ID",
+                    "value": "https://like.co/ckxpress"
+                  }
+                ],
+                "name": "高重建",
+                "sameAs": [
+                  "https://ckxpress.com/kin"
+                ],
+                "url": "https://like.co/ckxpress"
+              },
+              "rewardProportion": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+contractlevelmetadata: |
+  {
+    "name": "每天買一百元比特幣：我的定額定投四年戰績實錄",
+    "symbol": "BOOK",
+    "description": "假如有人 2020 年建議你每日買一百元比特幣，你會不會聽？\n\n比特幣剛升破十萬美元。現在才開始投資比特幣，是否為時已晚？\n\n雖然看好比特幣，但對這神秘高深的投資選項半信半疑，或無從入手？\n\n假如不是假如，高重建早於 2020 年就在《蘋果日報》專欄倡議每日定額定投比特幣。本書收錄作者七年多來討論比特幣的 20 篇文章，目的不是要以「I told you so」奚落當年錯過機會的旁觀者，而是以史為鑑，告訴讀者一切尚早，現時行動未為晚也。\n\n本書除了解釋為什麼「每天買一百元比特幣」是最符合成本效益的投資策略，也深入淺出介紹比特幣的概念，跟傳統貨幣比較，及與社會日常的關係，幫助我們在專注生活與生產的同時妥善分配資產，免被通漲蠶食勞動成果。\n\n鼓勵大家坐言起行，向終極的財富自由邁進。",
+    "image": "ar://yY1IjxpTtp_QItTzirhOREYmFZEeW9IjlEmRcp-Cz5w",
+    "external_url": "",
+    "nft_meta_collection_id": "nft_book",
+    "nft_meta_collection_name": "NFT Book",
+    "nft_meta_collection_descrption": "NFT Book by Liker Land",
+    "@context": "http://schema.org/",
+    "@type": "Book",
+    "author": {
+      "description": "地球人。人文為體，科技為用。\n\n創業者。LikeCoin、DHK dao 發起人。\n\n創作者。著有《區塊鏈社會學：金錢、媒體與民主的再想像》、《財富自由主義：金錢的多元宇宙》、《Game 以載道》、《好 game 有好報》等。逢週四於 DHK 週報發表文章，內容全面開放，同步收錄於 ckxpress.com。\n\n沒有固定手機號碼，但一封電郵就能輕鬆聯繫上—— kin@ckxpress.com。",
+      "name": "高重建"
+    },
+    "datePublished": "",
+    "exifInfo": [
+      {
+        "Format": "image/jpeg",
+        "Size": 137824
+      }
+    ],
+    "inLanguage": "zh",
+    "isbn": "9786269943906",
+    "keywords": "理財,投資,科技,Bitcoin,區塊鏈",
+    "publisher": "飛地出版",
+    "sameAs": [
+      "ar://hYtn-ySANq7HBqaZRW8eVPxp0u3j9d_023n03nymz50?name=每天買一百元比特幣-高重建.epub"
+    ],
+    "thumbnailUrl": "ar://yY1IjxpTtp_QItTzirhOREYmFZEeW9IjlEmRcp-Cz5w",
+    "url": "https://ckxpress.com/btc-dca",
+    "usageInfo": "https://creativecommons.org/licenses/by/4.0/",
+    "version": "5",
+    "contentFingerprints": [
+      "ar://hYtn-ySANq7HBqaZRW8eVPxp0u3j9d_023n03nymz50",
+      "ar://IQ97SDTnWJt5VRc_cYWJmhd_kpjDpcu0TtjtCUvyzPc"
+    ],
+    "recordNotes": "",
+    "dateCreated": "2025-01-28T16:55:45+00:00",
+    "attributes": [{
+      "trait_type": "Author",
+      "value": "高重建",
+    },{
+      "trait_type": "Publisher",
+      "value": "飛地出版",
+    }],
+    "likecoin": {
+      "iscnIdPrefix": "iscn://likecoin-chain/Cb-mL2bZeCffDeEmiZlaalJrYqGwOILYCT_WJ3kDmDg",
+      "classId": "likenft1dpegnjnklnh5g66nn06gz64wv0ec6k04f4v5lx69qlv6xlh493eqdq454j",
+    }
+  }
+
+---
+
+name: class id = likenft1tgwav6zq3ean4ygz58hehlk3q5yghgtel97k260lugxqxszhcuws3pytae
+cosmosclassresponse: |
+  {
+    "class": {
+      "id": "likenft1tgwav6zq3ean4ygz58hehlk3q5yghgtel97k260lugxqxszhcuws3pytae",
+      "name": "時間繁史．啞瓷之光",
+      "symbol": "BOOK",
+      "description": "\n《時間繁史．啞瓷之光》是繼《天工開物．栩栩如真》之後，「自然史三部曲」的第二部，由「啞瓷之光」、「恩恩與嬰兒宇宙」及「維珍尼亞的心跳」三個聲部組成，亦即平行並進的三條時間線。 \n「啞瓷之光」：（2022年）年輕文學研究者、中英混血兒維真尼亞來到遍遠的沙頭角海邊，跟退隱小說家獨裁者進行訪談，回顧他的人生和創作經歷；與此同時，一群年輕行動者正準備進行反對地區發展的抗爭。獨裁者的妻子啞瓷見證事情的發生，決心陪伴丈夫走上人生最後一程。 \n「恩恩與嬰兒宇宙」：（2005年）連鎖藥品店年輕店員恩恩遇到自稱獨裁者的中年作家，陸續從他手中收到奇怪信件，信中有一個虛構的恩恩與年輕小說家嘍囉的愛情故事。在現實中，嘍囉是獨裁者的徒弟，而恩恩的舊同學蘋/Apple亦穿插於虛構與現實之間。 \n「維珍尼亞的心跳」：（2097年）心臟為機械鐘的永恆少女維真尼亞，獨自留守荒廢多年的山中圖書館。一天，一個名為花的少年在圖書館出現，他其實是七十年來一直在尋找維真尼亞的時空穿越者。七十年前溜冰場上的金童玉女，終於在未來的圖書館重遇。 \n三個聲部互相對位，三條線索互相扣連，虛實交織，構成多元時空並存的物理學圖譜。\n這本書是董啟章迄今為止篇幅最長、結構最複雜、隱喻最豐富、想像最宏偉的長篇小說。上至宇宙天體，下達意識深層，外及社會抗爭，內含個人情感，表裡今昔，他我群己，無遠弗屆，無微不至。但它也是董啟章小說中最少人讀過、讀完和讀懂的一本。從作者的角度，這是最徹底地展現董啟章的文學和想像世界的作品。 \n在這部小說中，董啟章提出了針對文學創作的根本問題：作家應該負起社會責任嗎？寫作只是獨斷的行為嗎？現代作家自我需要解構嗎？虛構能對現實產生影響嗎？人生可以擁有無限可能性嗎？歷史可以多於一種嗎？時間可以是相對的嗎？物理學所證實的超感知現象，能改造我們的世界觀、人生觀和文學觀嗎？ \n《時間繁史．啞瓷之光》初版於2007年由台灣麥田出版社分上下冊推出，全長六十萬字，當中所有對話以廣東話寫成。及後作者把口語翻譯成中文書面語，但印行新版耗費甚巨，未曾實行。現在以NFT電子書形式，同時收錄兩個版本，共一百二十萬字，如同兩個平行世界，超越物理界限，瞬間生成，瞬間傳送，瞬間擁有，瞬間置換，實現了虛構世界的超時空願景。 ",
+      "uri": "",
+      "uri_hash": "",
+      "data": {
+        "@type": "/likechain.likenft.v1.ClassData",
+        "metadata": {
+          "name": "時間繁史．啞瓷之光",
+          "image": "ar://_a_PCcJRwvwoTTGtX5z7_RseDbeCp4_AAsEtA9P5SBA",
+          "external_url": "",
+          "nft_meta_collection_id": "nft_book",
+          "nft_meta_collection_name": "NFT Book",
+          "nft_meta_collection_descrption": "NFT Book by Liker Land"
+        },
+        "parent": {
+          "type": "ISCN",
+          "iscn_id_prefix": "iscn://likecoin-chain/o91-umWGStNh5Hxdyc-1MsG5__kEhr7VutmJ7u0ZVwY",
+          "iscn_version_at_mint": "1",
+          "account": ""
+        },
+        "config": {
+          "burnable": true,
+          "max_supply": "0",
+          "blind_box_config": null
+        },
+        "blind_box_state": {
+          "content_count": "0",
+          "to_be_revealed": false
+        }
+      }
+    }
+  }
+iscndataresponse: |
+  {
+    "owner": "like19fqws220rwcmacn5dgt0dtwts8c05ty58mcr3a",
+    "latest_version": "2",
+    "records": [
+      {
+        "ipld": "baguqeeranagaakjgcy3boufghgl3utghrsrhvamdnzd3wmmwvdchptb7ldsa",
+        "data": {
+          "@context": {
+            "@vocab": "http://iscn.io/",
+            "contentMetadata": {
+              "@context": null
+            },
+            "recordParentIPLD": {
+              "@container": "@index"
+            },
+            "stakeholders": {
+              "@context": {
+                "@vocab": "http://schema.org/",
+                "contributionType": "http://iscn.io/contributionType",
+                "entity": "http://iscn.io/entity",
+                "footprint": "http://iscn.io/footprint",
+                "rewardProportion": "http://iscn.io/rewardProportion"
+              }
+            }
+          },
+          "@id": "iscn://likecoin-chain/o91-umWGStNh5Hxdyc-1MsG5__kEhr7VutmJ7u0ZVwY/2",
+          "@type": "Record",
+          "contentFingerprints": [
+            "hash://sha256/bcd2af810ee5313ccce164bd084ade71f53e00f7b8b076aa7ef22ac103fc45d9",
+            "hash://sha256/11df74ee7bf6cb86986be19a14049c5a67d808a29fabd1829cb53f7fac2422cd",
+            "hash://sha256/d85d61b8429a84c90a9055c0a19562e759f71618df466ff3b4b72d51e8752500",
+            "hash://sha256/b535ab248ff9a467d9ca8577bbc5dce5e35ab8370c03a964cff3144ba842ee8b",
+            "hash://sha256/a887d121226f8da859c10ecc786f9131d81bbe3a8744866a5cf8287a0a944a50",
+            "ipfs://QmXxy5piY19LTmA1EX2NGgnxwr7LFYuDiVqLeEneniepS2",
+            "ipfs://QmaUxwUneEc78osKceLqn8djkwPVnEPmj7jwex1THaAB3o",
+            "ipfs://QmSdULznoH3xRfV2uN6W5oyUw1RsNiENaPxKdffTEuw3Az",
+            "ipfs://QmeJYJ3YGKKmoNiovu9x3xVXdXtki9scBWVWjXD7Hfej17",
+            "ipfs://QmU67xDSBrwYFff2qQpgM78geTRhWZDVaf7t5k6yjxFTKp",
+            "ar://nY08lJhSN74MkeM_Ggj6Omd8aNogEZl2D7YNy2aqBBQ",
+            "ar://SlENPw3CA83TWK4avAn3nNJMdxAiqiN0MNsbDe2dR2Y",
+            "ar://cjHy9bmtOsCC3kOpaBNwH3I7aDlOJsuWt44bFR8fJnw",
+            "ar://_QtXKPQgomnXtUImIUjqJHkj9cyaKqS7f7v6_b_3-mA",
+            "ar://xJaKKuvFqRwSgTfVGqkT2nQ2WYsiuhfn5d7iSvh5mqA"
+          ],
+          "contentMetadata": {
+            "@context": "http://schema.org/",
+            "@type": "Book",
+            "author": "董啟章",
+            "description": "\n《時間繁史．啞瓷之光》是繼《天工開物．栩栩如真》之後，「自然史三部曲」的第二部，由「啞瓷之光」、「恩恩與嬰兒宇宙」及「維珍尼亞的心跳」三個聲部組成，亦即平行並進的三條時間線。 \n「啞瓷之光」：（2022年）年輕文學研究者、中英混血兒維真尼亞來到遍遠的沙頭角海邊，跟退隱小說家獨裁者進行訪談，回顧他的人生和創作經歷；與此同時，一群年輕行動者正準備進行反對地區發展的抗爭。獨裁者的妻子啞瓷見證事情的發生，決心陪伴丈夫走上人生最後一程。 \n「恩恩與嬰兒宇宙」：（2005年）連鎖藥品店年輕店員恩恩遇到自稱獨裁者的中年作家，陸續從他手中收到奇怪信件，信中有一個虛構的恩恩與年輕小說家嘍囉的愛情故事。在現實中，嘍囉是獨裁者的徒弟，而恩恩的舊同學蘋/Apple亦穿插於虛構與現實之間。 \n「維珍尼亞的心跳」：（2097年）心臟為機械鐘的永恆少女維真尼亞，獨自留守荒廢多年的山中圖書館。一天，一個名為花的少年在圖書館出現，他其實是七十年來一直在尋找維真尼亞的時空穿越者。七十年前溜冰場上的金童玉女，終於在未來的圖書館重遇。 \n三個聲部互相對位，三條線索互相扣連，虛實交織，構成多元時空並存的物理學圖譜。\n這本書是董啟章迄今為止篇幅最長、結構最複雜、隱喻最豐富、想像最宏偉的長篇小說。上至宇宙天體，下達意識深層，外及社會抗爭，內含個人情感，表裡今昔，他我群己，無遠弗屆，無微不至。但它也是董啟章小說中最少人讀過、讀完和讀懂的一本。從作者的角度，這是最徹底地展現董啟章的文學和想像世界的作品。 \n在這部小說中，董啟章提出了針對文學創作的根本問題：作家應該負起社會責任嗎？寫作只是獨斷的行為嗎？現代作家自我需要解構嗎？虛構能對現實產生影響嗎？人生可以擁有無限可能性嗎？歷史可以多於一種嗎？時間可以是相對的嗎？物理學所證實的超感知現象，能改造我們的世界觀、人生觀和文學觀嗎？ \n《時間繁史．啞瓷之光》初版於2007年由台灣麥田出版社分上下冊推出，全長六十萬字，當中所有對話以廣東話寫成。及後作者把口語翻譯成中文書面語，但印行新版耗費甚巨，未曾實行。現在以NFT電子書形式，同時收錄兩個版本，共一百二十萬字，如同兩個平行世界，超越物理界限，瞬間生成，瞬間傳送，瞬間擁有，瞬間置換，實現了虛構世界的超時空願景。 ",
+            "exifInfo": [
+              {
+                "Format": "image/jpeg",
+                "Size": 1015584
+              },
+              {
+                "Format": "image/jpeg",
+                "Size": 1015584
+              }
+            ],
+            "inLanguage": "zh",
+            "isbn": "",
+            "keywords": "董啟章小說,自然史三部曲,時間繁史啞瓷之光",
+            "name": "時間繁史．啞瓷之光",
+            "publisher": "",
+            "sameAs": [
+              "ar://nY08lJhSN74MkeM_Ggj6Omd8aNogEZl2D7YNy2aqBBQ?name=時間繁史．啞瓷之光-廣東話版_2024_PDF.pdf",
+              "ar://SlENPw3CA83TWK4avAn3nNJMdxAiqiN0MNsbDe2dR2Y?name=時間繁史．啞瓷之光-書面語版_2024_PDF.pdf",
+              "ar://cjHy9bmtOsCC3kOpaBNwH3I7aDlOJsuWt44bFR8fJnw?name=時間繁史．啞瓷之光 - 書面語版 - 董啟章.epub",
+              "ar://xJaKKuvFqRwSgTfVGqkT2nQ2WYsiuhfn5d7iSvh5mqA?name=時間繁史．啞瓷之光 - 廣東話版 - 董啟章.epub"
+            ],
+            "thumbnailUrl": "ar://_a_PCcJRwvwoTTGtX5z7_RseDbeCp4_AAsEtA9P5SBA",
+            "url": "",
+            "usageInfo": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            "version": "2"
+          },
+          "recordNotes": "",
+          "recordParentIPLD": {
+            "/": "baguqeera2cow4ludf6r6usxfmkrk6b3gmuvqhvdt32htornv6vea3xjbhtka"
+          },
+          "recordTimestamp": "2024-11-12T13:49:24+00:00",
+          "recordVersion": 2,
+          "stakeholders": [
+            {
+              "contributionType": "http://schema.org/publisher",
+              "entity": {
+                "@id": "like10ywsmztkxjl55xarxnhlxwc83z9v2hkxtsajwl",
+                "name": "Liker Land"
+              },
+              "rewardProportion": 0.025
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "description": "Author",
+                "identifier": [],
+                "name": "董啟章",
+                "sameAs": []
+              },
+              "rewardProportion": 0.4875
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like19fqws220rwcmacn5dgt0dtwts8c05ty58mcr3a",
+                "description": "writer, book lover",
+                "identifier": [
+                  {
+                    "@type": "PropertyValue",
+                    "propertyID": "LikeCoin Wallet",
+                    "value": "like19fqws220rwcmacn5dgt0dtwts8c05ty58mcr3a"
+                  },
+                  {
+                    "@type": "PropertyValue",
+                    "propertyID": "Liker ID",
+                    "value": "https://like.co/nghengsun"
+                  }
+                ],
+                "name": "dungkaicheung",
+                "sameAs": [],
+                "url": "https://like.co/nghengsun"
+              },
+              "rewardProportion": 0.4875
+            }
+          ]
+        }
+      }
+    ]
+  }
+contractlevelmetadata: |
+  {
+    "name": "時間繁史．啞瓷之光",
+    "symbol": "BOOK",
+    "description": "\n《時間繁史．啞瓷之光》是繼《天工開物．栩栩如真》之後，「自然史三部曲」的第二部，由「啞瓷之光」、「恩恩與嬰兒宇宙」及「維珍尼亞的心跳」三個聲部組成，亦即平行並進的三條時間線。 \n「啞瓷之光」：（2022年）年輕文學研究者、中英混血兒維真尼亞來到遍遠的沙頭角海邊，跟退隱小說家獨裁者進行訪談，回顧他的人生和創作經歷；與此同時，一群年輕行動者正準備進行反對地區發展的抗爭。獨裁者的妻子啞瓷見證事情的發生，決心陪伴丈夫走上人生最後一程。 \n「恩恩與嬰兒宇宙」：（2005年）連鎖藥品店年輕店員恩恩遇到自稱獨裁者的中年作家，陸續從他手中收到奇怪信件，信中有一個虛構的恩恩與年輕小說家嘍囉的愛情故事。在現實中，嘍囉是獨裁者的徒弟，而恩恩的舊同學蘋/Apple亦穿插於虛構與現實之間。 \n「維珍尼亞的心跳」：（2097年）心臟為機械鐘的永恆少女維真尼亞，獨自留守荒廢多年的山中圖書館。一天，一個名為花的少年在圖書館出現，他其實是七十年來一直在尋找維真尼亞的時空穿越者。七十年前溜冰場上的金童玉女，終於在未來的圖書館重遇。 \n三個聲部互相對位，三條線索互相扣連，虛實交織，構成多元時空並存的物理學圖譜。\n這本書是董啟章迄今為止篇幅最長、結構最複雜、隱喻最豐富、想像最宏偉的長篇小說。上至宇宙天體，下達意識深層，外及社會抗爭，內含個人情感，表裡今昔，他我群己，無遠弗屆，無微不至。但它也是董啟章小說中最少人讀過、讀完和讀懂的一本。從作者的角度，這是最徹底地展現董啟章的文學和想像世界的作品。 \n在這部小說中，董啟章提出了針對文學創作的根本問題：作家應該負起社會責任嗎？寫作只是獨斷的行為嗎？現代作家自我需要解構嗎？虛構能對現實產生影響嗎？人生可以擁有無限可能性嗎？歷史可以多於一種嗎？時間可以是相對的嗎？物理學所證實的超感知現象，能改造我們的世界觀、人生觀和文學觀嗎？ \n《時間繁史．啞瓷之光》初版於2007年由台灣麥田出版社分上下冊推出，全長六十萬字，當中所有對話以廣東話寫成。及後作者把口語翻譯成中文書面語，但印行新版耗費甚巨，未曾實行。現在以NFT電子書形式，同時收錄兩個版本，共一百二十萬字，如同兩個平行世界，超越物理界限，瞬間生成，瞬間傳送，瞬間擁有，瞬間置換，實現了虛構世界的超時空願景。 ",
+    "image": "ar://_a_PCcJRwvwoTTGtX5z7_RseDbeCp4_AAsEtA9P5SBA",
+    "external_url": "",
+    "nft_meta_collection_id": "nft_book",
+    "nft_meta_collection_name": "NFT Book",
+    "nft_meta_collection_descrption": "NFT Book by Liker Land",
+    "@context": "http://schema.org/",
+    "@type": "Book",
+    "author": "董啟章",
+    "exifInfo": [
+      {
+        "Format": "image/jpeg",
+        "Size": 1015584
+      },
+      {
+        "Format": "image/jpeg",
+        "Size": 1015584
+      }
+    ],
+    "inLanguage": "zh",
+    "isbn": "",
+    "keywords": "董啟章小說,自然史三部曲,時間繁史啞瓷之光",
+    "publisher": "",
+    "sameAs": [
+      "ar://nY08lJhSN74MkeM_Ggj6Omd8aNogEZl2D7YNy2aqBBQ?name=時間繁史．啞瓷之光-廣東話版_2024_PDF.pdf",
+      "ar://SlENPw3CA83TWK4avAn3nNJMdxAiqiN0MNsbDe2dR2Y?name=時間繁史．啞瓷之光-書面語版_2024_PDF.pdf",
+      "ar://cjHy9bmtOsCC3kOpaBNwH3I7aDlOJsuWt44bFR8fJnw?name=時間繁史．啞瓷之光 - 書面語版 - 董啟章.epub",
+      "ar://xJaKKuvFqRwSgTfVGqkT2nQ2WYsiuhfn5d7iSvh5mqA?name=時間繁史．啞瓷之光 - 廣東話版 - 董啟章.epub"
+    ],
+    "thumbnailUrl": "ar://_a_PCcJRwvwoTTGtX5z7_RseDbeCp4_AAsEtA9P5SBA",
+    "url": "",
+    "usageInfo": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "version": "2",
+    "contentFingerprints": [
+      "hash://sha256/bcd2af810ee5313ccce164bd084ade71f53e00f7b8b076aa7ef22ac103fc45d9",
+      "hash://sha256/11df74ee7bf6cb86986be19a14049c5a67d808a29fabd1829cb53f7fac2422cd",
+      "hash://sha256/d85d61b8429a84c90a9055c0a19562e759f71618df466ff3b4b72d51e8752500",
+      "hash://sha256/b535ab248ff9a467d9ca8577bbc5dce5e35ab8370c03a964cff3144ba842ee8b",
+      "hash://sha256/a887d121226f8da859c10ecc786f9131d81bbe3a8744866a5cf8287a0a944a50",
+      "ipfs://QmXxy5piY19LTmA1EX2NGgnxwr7LFYuDiVqLeEneniepS2",
+      "ipfs://QmaUxwUneEc78osKceLqn8djkwPVnEPmj7jwex1THaAB3o",
+      "ipfs://QmSdULznoH3xRfV2uN6W5oyUw1RsNiENaPxKdffTEuw3Az",
+      "ipfs://QmeJYJ3YGKKmoNiovu9x3xVXdXtki9scBWVWjXD7Hfej17",
+      "ipfs://QmU67xDSBrwYFff2qQpgM78geTRhWZDVaf7t5k6yjxFTKp",
+      "ar://nY08lJhSN74MkeM_Ggj6Omd8aNogEZl2D7YNy2aqBBQ",
+      "ar://SlENPw3CA83TWK4avAn3nNJMdxAiqiN0MNsbDe2dR2Y",
+      "ar://cjHy9bmtOsCC3kOpaBNwH3I7aDlOJsuWt44bFR8fJnw",
+      "ar://_QtXKPQgomnXtUImIUjqJHkj9cyaKqS7f7v6_b_3-mA",
+      "ar://xJaKKuvFqRwSgTfVGqkT2nQ2WYsiuhfn5d7iSvh5mqA"
+    ],
+    "recordNotes": "",
+    "dateCreated": "2024-11-12T13:49:24+00:00",
+    "attributes": [{
+      "trait_type": "Author",
+      "value": "董啟章",
+    }],
+    "likecoin": {
+      "iscnIdPrefix": "iscn://likecoin-chain/o91-umWGStNh5Hxdyc-1MsG5__kEhr7VutmJ7u0ZVwY",
+      "classId": "likenft1tgwav6zq3ean4ygz58hehlk3q5yghgtel97k260lugxqxszhcuws3pytae",
+    }
+  }
+
+---
+
+name: class id = likenft1wzlarhyrte8v3p9y8vykveuwlrtq7s82z0lk6kav9y7p52uu2unqhnlxfp
+cosmosclassresponse: |
+  {
+    "class": {
+      "id": "likenft1wzlarhyrte8v3p9y8vykveuwlrtq7s82z0lk6kav9y7p52uu2unqhnlxfp",
+      "name": "信仰Q&A ——青少年信仰疑難問答手冊",
+      "symbol": "BOOK",
+      "description": "要牧養青少年，便須要聆聽他們的信仰疑難，培育其理性思考能力，並與他們一同經歷信仰。本書輯錄了多位青少年提出的信仰疑難，並由不同的作者撰寫回應，包括傳道人、教育界人士、年輕神學生及FES同工。全書分為三個部分：福音信仰篇、聖經教義篇和信徒生活篇；嘗試深入淺出，為信仰疑難提供思考方向，引發對話與討論。 \n \n推薦： \n「照單全收的信仰，就是迷信。 \n耶穌說：「我就是道路……」，意味著「信耶穌」就是踏上非一般的生命之旅。我們都在跟隨主的信仰路上跌跌碰碰，問題多多。喜見此書的出現，當中帶出不少信仰實踐，倫理抉擇及神學教義等問題，討論深入淺出及情理兼備，每篇也是信仰的活潑對話。 \n衷心祝福每位用心閱讀此書的朋友，因你用心求問祂，祂必開門接待你。」 \n——黎廣澤 \n「油踐入心」事工召集人 \n \n「你的信仰生命正處於『無方向，無意義，沒內容』嗎？本書提及的問題可能正是你心中的困惑，亦是每一代年青信徒所掙扎的疑問。身處當今動盪鬱悶的環境，青年人是『被時代選中』的一群，激情感性的信仰驅不走無力感，唯有認真地培養信仰反省的基礎，誠實直面內心的問題，才能在洪流衝擊中站穩。本書涵蓋不同信仰生活的範疇，並作出扼要的回應。年青信徒理應不只滿足於書中的答案，誠邀你們繼續思考，尋索屬於你們這個時代的答案。」 \n——謝建邦 \n香港基督徒學生福音團契大專部主任 ",
+      "uri": "",
+      "uri_hash": "",
+      "data": {
+        "@type": "/likechain.likenft.v1.ClassData",
+        "metadata": {
+          "name": "信仰Q&A ——青少年信仰疑難問答手冊",
+          "image": "ar://G-K80-6XlDCP-6EtxIK0GWxjk6Zk0wW3HuWtHR6Peug",
+          "external_url": "",
+          "nft_meta_collection_id": "nft_book",
+          "nft_meta_collection_name": "NFT Book",
+          "nft_meta_collection_description": "NFT Book by Liker Land"
+        },
+        "parent": {
+          "type": "ISCN",
+          "iscn_id_prefix": "iscn://likecoin-chain/EgNp14O2nTpHEmZMS4oOKaOImCml65ZSuWQk_NKp8vU",
+          "iscn_version_at_mint": "1",
+          "account": ""
+        },
+        "config": {
+          "burnable": true,
+          "max_supply": "0",
+          "blind_box_config": null
+        },
+        "blind_box_state": {
+          "content_count": "0",
+          "to_be_revealed": false
+        }
+      }
+    }
+  }
+iscndataresponse: |
+  {
+    "owner": "like1q9zce0g6cc9zsx6y6e2pnszlmtta7zgkj498gj",
+    "latest_version": "1",
+    "records": [
+      {
+        "ipld": "baguqeerat7fbjjlfmmyvv4jq3l53hpj2kmc4gjmkxzhn47kiu24ycqrklbxa",
+        "data": {
+          "@context": {
+            "@vocab": "http://iscn.io/",
+            "contentMetadata": {
+              "@context": null
+            },
+            "recordParentIPLD": {
+              "@container": "@index"
+            },
+            "stakeholders": {
+              "@context": {
+                "@vocab": "http://schema.org/",
+                "contributionType": "http://iscn.io/contributionType",
+                "entity": "http://iscn.io/entity",
+                "footprint": "http://iscn.io/footprint",
+                "rewardProportion": "http://iscn.io/rewardProportion"
+              }
+            }
+          },
+          "@id": "iscn://likecoin-chain/EgNp14O2nTpHEmZMS4oOKaOImCml65ZSuWQk_NKp8vU/1",
+          "@type": "Record",
+          "contentFingerprints": [
+            "https://api.like.co/arweave/v2/link/B6ED63F9E335E0D0A2A75FE43370F8C1FA96788B4AF9F6262A0E2D1D4D818462",
+            "https://api.like.co/arweave/v2/link/1DFA5A9FCA58185A1DF2C9EFF37A26640937CF11055866BADAEFB33302AF85EC",
+            "hash://sha256/6f8f4069cc1021bbe4d9ab72e48ad46ed7c4aff6881ff417beaac96de1d53a97",
+            "hash://sha256/3b9ef82177d8b37360d3e8fd25e09459ac1888d5ecbbd022d39fe38734e5f080"
+          ],
+          "contentMetadata": {
+            "@context": "http://schema.org/",
+            "@type": "Book",
+            "author": "FES PRESS 編輯組",
+            "datePublished": "2025-02-01T00:00:00.000Z",
+            "description": "要牧養青少年，便須要聆聽他們的信仰疑難，培育其理性思考能力，並與他們一同經歷信仰。本書輯錄了多位青少年提出的信仰疑難，並由不同的作者撰寫回應，包括傳道人、教育界人士、年輕神學生及FES同工。全書分為三個部分：福音信仰篇、聖經教義篇和信徒生活篇；嘗試深入淺出，為信仰疑難提供思考方向，引發對話與討論。 \n \n推薦： \n「照單全收的信仰，就是迷信。 \n耶穌說：「我就是道路……」，意味著「信耶穌」就是踏上非一般的生命之旅。我們都在跟隨主的信仰路上跌跌碰碰，問題多多。喜見此書的出現，當中帶出不少信仰實踐，倫理抉擇及神學教義等問題，討論深入淺出及情理兼備，每篇也是信仰的活潑對話。 \n衷心祝福每位用心閱讀此書的朋友，因你用心求問祂，祂必開門接待你。」 \n——黎廣澤 \n「油踐入心」事工召集人 \n \n「你的信仰生命正處於『無方向，無意義，沒內容』嗎？本書提及的問題可能正是你心中的困惑，亦是每一代年青信徒所掙扎的疑問。身處當今動盪鬱悶的環境，青年人是『被時代選中』的一群，激情感性的信仰驅不走無力感，唯有認真地培養信仰反省的基礎，誠實直面內心的問題，才能在洪流衝擊中站穩。本書涵蓋不同信仰生活的範疇，並作出扼要的回應。年青信徒理應不只滿足於書中的答案，誠邀你們繼續思考，尋索屬於你們這個時代的答案。」 \n——謝建邦 \n香港基督徒學生福音團契大專部主任 ",
+            "exifInfo": [
+              {
+                "Format": "image/jpeg",
+                "Size": 432346
+              }
+            ],
+            "inLanguage": "zh",
+            "isbn": "9789628991877",
+            "keywords": "基督教,信仰生活",
+            "name": "信仰Q&A ——青少年信仰疑難問答手冊",
+            "publisher": "FES 香港基督徒學生福音團契",
+            "sameAs": [
+              "https://api.like.co/arweave/v2/link/B6ED63F9E335E0D0A2A75FE43370F8C1FA96788B4AF9F6262A0E2D1D4D818462?name=%E4%BF%A1%E4%BB%B0Q%26Av4.epub"
+            ],
+            "thumbnailUrl": "ar://G-K80-6XlDCP-6EtxIK0GWxjk6Zk0wW3HuWtHR6Peug",
+            "url": "",
+            "usageInfo": "All Rights Reserved",
+            "version": 1
+          },
+          "recordNotes": "",
+          "recordTimestamp": "2025-02-26T10:58:40+00:00",
+          "recordVersion": 1,
+          "stakeholders": [
+            {
+              "contributionType": "http://schema.org/publisher",
+              "entity": {
+                "@id": "FES 香港基督徒學生福音團契"
+              },
+              "rewardProportion": 0
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "description": "",
+                "identifier": [],
+                "name": "FES PRESS 編輯組",
+                "sameAs": []
+              },
+              "rewardProportion": 1
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like1q9zce0g6cc9zsx6y6e2pnszlmtta7zgkj498gj",
+                "description": "FES，成立於1957年，在校園提供基督教培育；透過團契和書籍出版，培養兼備理性、感性與靈性的年輕信徒；凝聚委身信仰，關懷世界的信徒群體。",
+                "identifier": [
+                  {
+                    "@type": "PropertyValue",
+                    "propertyID": "LikeCoin Wallet",
+                    "value": "like1q9zce0g6cc9zsx6y6e2pnszlmtta7zgkj498gj"
+                  },
+                  {
+                    "@type": "PropertyValue",
+                    "propertyID": "Liker ID",
+                    "value": "https://like.co/fespress"
+                  }
+                ],
+                "name": "FES 香港基督徒學生福音團契",
+                "sameAs": [],
+                "url": "https://like.co/fespress"
+              },
+              "rewardProportion": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+contractlevelmetadata: |
+  {
+    "name": "信仰Q&A ——青少年信仰疑難問答手冊",
+    "symbol": "BOOK",
+    "description": "要牧養青少年，便須要聆聽他們的信仰疑難，培育其理性思考能力，並與他們一同經歷信仰。本書輯錄了多位青少年提出的信仰疑難，並由不同的作者撰寫回應，包括傳道人、教育界人士、年輕神學生及FES同工。全書分為三個部分：福音信仰篇、聖經教義篇和信徒生活篇；嘗試深入淺出，為信仰疑難提供思考方向，引發對話與討論。 \n \n推薦： \n「照單全收的信仰，就是迷信。 \n耶穌說：「我就是道路……」，意味著「信耶穌」就是踏上非一般的生命之旅。我們都在跟隨主的信仰路上跌跌碰碰，問題多多。喜見此書的出現，當中帶出不少信仰實踐，倫理抉擇及神學教義等問題，討論深入淺出及情理兼備，每篇也是信仰的活潑對話。 \n衷心祝福每位用心閱讀此書的朋友，因你用心求問祂，祂必開門接待你。」 \n——黎廣澤 \n「油踐入心」事工召集人 \n \n「你的信仰生命正處於『無方向，無意義，沒內容』嗎？本書提及的問題可能正是你心中的困惑，亦是每一代年青信徒所掙扎的疑問。身處當今動盪鬱悶的環境，青年人是『被時代選中』的一群，激情感性的信仰驅不走無力感，唯有認真地培養信仰反省的基礎，誠實直面內心的問題，才能在洪流衝擊中站穩。本書涵蓋不同信仰生活的範疇，並作出扼要的回應。年青信徒理應不只滿足於書中的答案，誠邀你們繼續思考，尋索屬於你們這個時代的答案。」 \n——謝建邦 \n香港基督徒學生福音團契大專部主任 ",
+    "image": "ar://G-K80-6XlDCP-6EtxIK0GWxjk6Zk0wW3HuWtHR6Peug",
+    "external_url": "",
+    "nft_meta_collection_id": "nft_book",
+    "nft_meta_collection_name": "NFT Book",
+    "nft_meta_collection_description": "NFT Book by Liker Land",
+    "@context": "http://schema.org/",
+    "@type": "Book",
+    "author": "FES PRESS 編輯組",
+    "datePublished": "2025-02-01T00:00:00.000Z",
+    "exifInfo": [
+      {
+        "Format": "image/jpeg",
+        "Size": 432346
+      }
+    ],
+    "inLanguage": "zh",
+    "isbn": "9789628991877",
+    "keywords": "基督教,信仰生活",
+    "publisher": "FES 香港基督徒學生福音團契",
+    "sameAs": [
+      "https://api.like.co/arweave/v2/link/B6ED63F9E335E0D0A2A75FE43370F8C1FA96788B4AF9F6262A0E2D1D4D818462?name=%E4%BF%A1%E4%BB%B0Q%26Av4.epub"
+    ],
+    "thumbnailUrl": "ar://G-K80-6XlDCP-6EtxIK0GWxjk6Zk0wW3HuWtHR6Peug",
+    "url": "",
+    "usageInfo": "All Rights Reserved",
+    "version": 1,
+    "contentFingerprints": [
+      "https://api.like.co/arweave/v2/link/B6ED63F9E335E0D0A2A75FE43370F8C1FA96788B4AF9F6262A0E2D1D4D818462",
+      "https://api.like.co/arweave/v2/link/1DFA5A9FCA58185A1DF2C9EFF37A26640937CF11055866BADAEFB33302AF85EC",
+      "hash://sha256/6f8f4069cc1021bbe4d9ab72e48ad46ed7c4aff6881ff417beaac96de1d53a97",
+      "hash://sha256/3b9ef82177d8b37360d3e8fd25e09459ac1888d5ecbbd022d39fe38734e5f080"
+    ],
+    "recordNotes": "",
+    "dateCreated": "2025-02-26T10:58:40+00:00",
+    "attributes": [{
+      "trait_type": "Author",
+      "value": "FES PRESS 編輯組",
+    }, {
+      "trait_type": "Publisher",
+      "value": "FES 香港基督徒學生福音團契",
+    }, {
+      "trait_type": "Publish Date",
+      "display_type": "date",
+      "value": 1548460800,
+    }],
+    "likecoin": {
+      "iscnIdPrefix": "iscn://likecoin-chain/EgNp14O2nTpHEmZMS4oOKaOImCml65ZSuWQk_NKp8vU",
+      "classId": "likenft1wzlarhyrte8v3p9y8vykveuwlrtq7s82z0lk6kav9y7p52uu2unqhnlxfp",
+    }
   }
