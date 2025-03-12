@@ -164,9 +164,7 @@ contractlevelmetadata: |
     "isbn": "9786269836208",
     "keywords": "投資,區塊鏈,密碼貨幣,金融,財經",
     "name": "財富自由主義：金錢的多元宇宙",
-    "sameAs": [
-      "https://files.ckxpress.com/moneyverse.pdf"
-    ],
+    "sameAs": [],
     "usageInfo": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
     "version": 1
     "url": "https://ckxpress.com/moneyverse/",
@@ -179,6 +177,15 @@ contractlevelmetadata: |
       "trait_type": "Author",
       "value": "高重建",
     }],
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": [{
+        "@type": "EntryPoint",
+        "contentType": "application/pdf",
+        "url": "https://files.ckxpress.com/moneyverse.pdf",
+        "name": "moneyverse.pdf"
+      }]
+    },
     "likecoin": {
       "iscnIdPrefix": "iscn://likecoin-chain/FyZ13m_hgwzUC6UoaS3vFdYvdG6QXfajU3vcatw7X1c",
       "classId": "likenft1ku4ra0e7dgknhd0wckrkxspuultynl4mgkxa3j08xeshfr2l0ujqmmvy83",
@@ -316,11 +323,7 @@ contractlevelmetadata: |
     "@context": "http://schema.org/",
     "@type": "Book",
     "keywords": "novel,hongkong,literature,classic",
-    "sameAs": [
-      "https://files.ckxpress.com/天工開物．栩栩如真.pdf",
-      "https://files.ckxpress.com/天工開物．栩栩如真.epub",
-      "https://arweave.net/WuffTBbQO8tntjt4jWSlSle-nRmvDP_Lvks7sT_UszQ"
-    ],
+    "sameAs": [],
     "url": "https://nowherebookstore.io/worksandcreation",
     "usageInfo": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     "version": 1
@@ -331,6 +334,20 @@ contractlevelmetadata: |
     "recordNotes": "",
     "dateCreated": "2023-04-18T18:38:21+00:00",
     "attributes": [],
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": [{
+        "@type": "EntryPoint",
+        "contentType": "application/pdf",
+        "url": "https://files.ckxpress.com/天工開物．栩栩如真.pdf",
+        "name": "天工開物．栩栩如真.pdf"
+      }, {
+        "@type": "EntryPoint",
+        "contentType": "application/epub+zip",
+        "url": "https://files.ckxpress.com/天工開物．栩栩如真.epub",
+        "name": "天工開物．栩栩如真.epub"
+      }]
+    },
     "likecoin": {
       "iscnIdPrefix": "iscn://likecoin-chain/4UC3ZhKokFv3_rxP1p8QtCuDfHAcxcDZhbe4-rPMBGI",
       "classId": "likenft19symzw3xmh42gukzts858wf6rsdkn6e4jtc9wp8jh4kphfmffy5s6acyxg",
@@ -508,9 +525,7 @@ contractlevelmetadata: |
     "isbn": "9786269943906",
     "keywords": "理財,投資,科技,Bitcoin,區塊鏈",
     "publisher": "飛地出版",
-    "sameAs": [
-      "ar://hYtn-ySANq7HBqaZRW8eVPxp0u3j9d_023n03nymz50?name=每天買一百元比特幣-高重建.epub"
-    ],
+    "sameAs": [],
     "thumbnailUrl": "ar://yY1IjxpTtp_QItTzirhOREYmFZEeW9IjlEmRcp-Cz5w",
     "url": "https://ckxpress.com/btc-dca",
     "usageInfo": "https://creativecommons.org/licenses/by/4.0/",
@@ -528,6 +543,15 @@ contractlevelmetadata: |
       "trait_type": "Publisher",
       "value": "飛地出版",
     }],
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": [{
+        "@type": "EntryPoint",
+        "contentType": "application/epub+zip",
+        "url": "ar://hYtn-ySANq7HBqaZRW8eVPxp0u3j9d_023n03nymz50",
+        "name": "每天買一百元比特幣-高重建.epub"
+      }]
+    },
     "likecoin": {
       "iscnIdPrefix": "iscn://likecoin-chain/Cb-mL2bZeCffDeEmiZlaalJrYqGwOILYCT_WJ3kDmDg",
       "classId": "likenft1dpegnjnklnh5g66nn06gz64wv0ec6k04f4v5lx69qlv6xlh493eqdq454j",
@@ -730,12 +754,7 @@ contractlevelmetadata: |
     "isbn": "",
     "keywords": "董啟章小說,自然史三部曲,時間繁史啞瓷之光",
     "publisher": "",
-    "sameAs": [
-      "ar://nY08lJhSN74MkeM_Ggj6Omd8aNogEZl2D7YNy2aqBBQ?name=時間繁史．啞瓷之光-廣東話版_2024_PDF.pdf",
-      "ar://SlENPw3CA83TWK4avAn3nNJMdxAiqiN0MNsbDe2dR2Y?name=時間繁史．啞瓷之光-書面語版_2024_PDF.pdf",
-      "ar://cjHy9bmtOsCC3kOpaBNwH3I7aDlOJsuWt44bFR8fJnw?name=時間繁史．啞瓷之光 - 書面語版 - 董啟章.epub",
-      "ar://xJaKKuvFqRwSgTfVGqkT2nQ2WYsiuhfn5d7iSvh5mqA?name=時間繁史．啞瓷之光 - 廣東話版 - 董啟章.epub"
-    ],
+    "sameAs": [],
     "thumbnailUrl": "ar://_a_PCcJRwvwoTTGtX5z7_RseDbeCp4_AAsEtA9P5SBA",
     "url": "",
     "usageInfo": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
@@ -763,6 +782,30 @@ contractlevelmetadata: |
       "trait_type": "Author",
       "value": "董啟章",
     }],
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": [{
+        "@type": "EntryPoint",
+        "contentType": "application/pdf",
+        "url": "ar://nY08lJhSN74MkeM_Ggj6Omd8aNogEZl2D7YNy2aqBBQ",
+        "name": "時間繁史．啞瓷之光-廣東話版_2024_PDF.pdf"
+      }, {
+        "@type": "EntryPoint",
+        "contentType": "application/pdf",
+        "url": "ar://SlENPw3CA83TWK4avAn3nNJMdxAiqiN0MNsbDe2dR2Y",
+        "name": "時間繁史．啞瓷之光-書面語版_2024_PDF.pdf"
+      }, {
+        "@type": "EntryPoint",
+        "contentType": "application/epub+zip",
+        "url": "ar://cjHy9bmtOsCC3kOpaBNwH3I7aDlOJsuWt44bFR8fJnw",
+        "name": "時間繁史．啞瓷之光 - 書面語版 - 董啟章.epub"
+      }, {
+        "@type": "EntryPoint",
+        "contentType": "application/epub+zip",
+        "url": "ar://xJaKKuvFqRwSgTfVGqkT2nQ2WYsiuhfn5d7iSvh5mqA",
+        "name": "時間繁史．啞瓷之光 - 廣東話版 - 董啟章.epub"
+      }]
+    },
     "likecoin": {
       "iscnIdPrefix": "iscn://likecoin-chain/o91-umWGStNh5Hxdyc-1MsG5__kEhr7VutmJ7u0ZVwY",
       "classId": "likenft1tgwav6zq3ean4ygz58hehlk3q5yghgtel97k260lugxqxszhcuws3pytae",
@@ -941,9 +984,7 @@ contractlevelmetadata: |
     "isbn": "9789628991877",
     "keywords": "基督教,信仰生活",
     "publisher": "FES 香港基督徒學生福音團契",
-    "sameAs": [
-      "https://api.like.co/arweave/v2/link/B6ED63F9E335E0D0A2A75FE43370F8C1FA96788B4AF9F6262A0E2D1D4D818462?name=%E4%BF%A1%E4%BB%B0Q%26Av4.epub"
-    ],
+    "sameAs": [],
     "thumbnailUrl": "ar://G-K80-6XlDCP-6EtxIK0GWxjk6Zk0wW3HuWtHR6Peug",
     "url": "",
     "usageInfo": "All Rights Reserved",
@@ -967,6 +1008,16 @@ contractlevelmetadata: |
       "display_type": "date",
       "value": 1548460800,
     }],
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": [{
+        "@type": "EntryPoint",
+        "contentType": "application/epub+zip",
+        "url": "https://api.like.co/arweave/v2/link/B6ED63F9E335E0D0A2A75FE43370F8C1FA96788B4AF9F6262A0E2D1D4D818462",
+        "name": "信仰Q&Av4.epub",
+        "encodingType": "aes256gcm",
+      }],
+    },
     "likecoin": {
       "iscnIdPrefix": "iscn://likecoin-chain/EgNp14O2nTpHEmZMS4oOKaOImCml65ZSuWQk_NKp8vU",
       "classId": "likenft1wzlarhyrte8v3p9y8vykveuwlrtq7s82z0lk6kav9y7p52uu2unqhnlxfp",
