@@ -1,0 +1,186 @@
+name: likenft19symzw3xmh42gukzts858wf6rsdkn6e4jtc9wp8jh4kphfmffy5s6acyxg/worksandcreation-388
+cosmosnft: |
+  {
+    "class_id": "likenft19symzw3xmh42gukzts858wf6rsdkn6e4jtc9wp8jh4kphfmffy5s6acyxg",
+    "id": "worksandcreation-388",
+    "uri": "https://nft-api.liker.land/?book_id=dungfookei1&class_id=likenft19symzw3xmh42gukzts858wf6rsdkn6e4jtc9wp8jh4kphfmffy5s6acyxg&nft_id=worksandcreation-388",
+    "uri_hash": "",
+    "data": {
+      "@type": "/likechain.likenft.v1.NFTData",
+      "metadata": {
+        "name": "《天工開物・栩栩如真》",
+        "description": "數位典藏版 #388",
+        "image": "ipfs://bafkreiea72dqqcb6knkd2st747634xfzvqdu3xrlvzadnvseno5kaf42qi",
+        "external_url": "https://nowherebookstore.io/worksandcreation",
+        "fileName": "388.jpg",
+        "ipfs_hash": "ipfs://bafybeiguggiu6ys2cdq6xkbwiunw6gh225wd3qbpel5ohsw3jz3xeo2bzm",
+        "animation_url": "ipfs://bafybeiguggiu6ys2cdq6xkbwiunw6gh225wd3qbpel5ohsw3jz3xeo2bzm"
+      },
+      "class_parent": {
+        "type": "ISCN",
+        "iscn_id_prefix": "iscn://likecoin-chain/4UC3ZhKokFv3_rxP1p8QtCuDfHAcxcDZhbe4-rPMBGI",
+        "iscn_version_at_mint": "2",
+        "account": ""
+      },
+      "to_be_revealed": false
+    }
+  }
+cosmosclassresponse: |
+  {
+    "class": {
+      "id": "likenft19symzw3xmh42gukzts858wf6rsdkn6e4jtc9wp8jh4kphfmffy5s6acyxg",
+      "name": "《天工開物・栩栩如真》",
+      "symbol": "BOOK",
+      "description": "董啟章 自然史三部曲之一",
+      "uri": "https://nft-api.liker.land/?book_id=dungfookei1\u0026iscn_id=iscn%3A%2F%2Flikecoin-chain%2F4UC3ZhKokFv3_rxP1p8QtCuDfHAcxcDZhbe4-rPMBGI%2F2",
+      "uri_hash": "",
+      "data": {
+        "@type": "/likechain.likenft.v1.ClassData",
+        "metadata": {"image":"https://files.ckxpress.com/worksandcreation.jpeg","external_url":"https://nowherebookstore.io/worksandcreation","message":"天覆地載，物數號萬。從石器到陶瓷，從日晷到鐘錶，從毛筆到鉛字，從算盤到電腦，從書本到NFT，人和物自古也是一體。我們都是「人物」，而「人物」都有故事。","nft_meta_collection_id":"nowhere_nft_book","nft_meta_collection_name":"飛地出版社","nft_meta_collection_description":"飛地出版社"},
+        "parent": {
+          "type": "ISCN",
+          "iscn_id_prefix": "iscn://likecoin-chain/4UC3ZhKokFv3_rxP1p8QtCuDfHAcxcDZhbe4-rPMBGI",
+          "iscn_version_at_mint": "2",
+          "account": ""
+        },
+        "config": {
+          "burnable": false,
+          "max_supply": "0",
+          "blind_box_config": null
+        },
+        "blind_box_state": {
+          "content_count": "0",
+          "to_be_revealed": false
+        }
+      }
+    }
+  }
+iscndataresponse: |
+  {
+    "owner": "like19fqws220rwcmacn5dgt0dtwts8c05ty58mcr3a",
+    "latest_version": "2",
+    "records": [
+      {
+        "ipld": "baguqeera62pta2nysfy5lzmgdnocqsph626k4w6n72jhdqozonosvqokxh7a",
+        "data": {
+          "@context": {
+            "@vocab": "http://iscn.io/",
+            "contentMetadata": {
+              "@context": null
+            },
+            "recordParentIPLD": {
+              "@container": "@index"
+            },
+            "stakeholders": {
+              "@context": {
+                "@vocab": "http://schema.org/",
+                "contributionType": "http://iscn.io/contributionType",
+                "entity": "http://iscn.io/entity",
+                "footprint": "http://iscn.io/footprint",
+                "rewardProportion": "http://iscn.io/rewardProportion"
+              }
+            }
+          },
+          "@id": "iscn://likecoin-chain/4UC3ZhKokFv3_rxP1p8QtCuDfHAcxcDZhbe4-rPMBGI/2",
+          "@type": "Record",
+          "contentFingerprints": [
+            "ipfs://bafybeietirqpjl2zrczs3a65at74rkbst6mg6mvzelogjk3mz23gretgm4",
+            "ar://WuffTBbQO8tntjt4jWSlSle-nRmvDP_Lvks7sT_UszQ"
+          ],
+          "contentMetadata": {
+            "@context": "http://schema.org/",
+            "@type": "Book",
+            "context": "http://schema.org/",
+            "description": "董啟章 自然史三部曲之一",
+            "keywords": "novel,hongkong,literature,classic",
+            "name": "《天工開物・栩栩如真》",
+            "sameAs": [
+              "https://files.ckxpress.com/天工開物．栩栩如真.pdf",
+              "https://files.ckxpress.com/天工開物．栩栩如真.epub",
+              "https://arweave.net/WuffTBbQO8tntjt4jWSlSle-nRmvDP_Lvks7sT_UszQ"
+            ],
+            "url": "https://nowherebookstore.io/worksandcreation",
+            "usageInfo": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            "version": 1
+          },
+          "recordNotes": "",
+          "recordParentIPLD": {
+            "/": "baguqeeracn7o5zvfncbo24d33qjbt35uwd4ouqkgqwzjydzdqykrpiopn73q"
+          },
+          "recordTimestamp": "2023-04-22T11:20:35+00:00",
+          "recordVersion": 2,
+          "stakeholders": [
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like19fqws220rwcmacn5dgt0dtwts8c05ty58mcr3a",
+                "name": "作者：董啟章"
+              },
+              "rewardProportion": "30"
+            },
+            {
+              "contributionType": "https://schema.org/publisher",
+              "entity": {
+                "@id": "like10g3fuc7pqk3kq7vcupc96agy86qcgxpen2pply",
+                "name": "出版：飛地"
+              },
+              "rewardProportion": "30"
+            },
+            {
+              "contributionType": "https://schema.org/artist",
+              "entity": {
+                "@id": "like1zvykrudclvjmcky4x7elj42jeg8fxvpdptp7ze",
+                "name": "封面設計：柳廣成"
+              },
+              "rewardProportion": "10"
+            }
+          ]
+        }
+      }
+    ]
+  }
+contractlevelmetadata: |
+  {
+    "description": "董啟章 自然史三部曲之一",
+    "name": "《天工開物・栩栩如真》",
+    "symbol": "BOOK",
+    "image": "https://files.ckxpress.com/worksandcreation.jpeg",
+    "animation_url": "ipfs://bafybeiguggiu6ys2cdq6xkbwiunw6gh225wd3qbpel5ohsw3jz3xeo2bzm",
+    "external_url": "https://nowherebookstore.io/worksandcreation",
+    "message": "天覆地載，物數號萬。從石器到陶瓷，從日晷到鐘錶，從毛筆到鉛字，從算盤到電腦，從書本到NFT，人和物自古也是一體。我們都是「人物」，而「人物」都有故事。",
+    "nft_meta_collection_id": "nowhere_nft_book",
+    "nft_meta_collection_name": "飛地出版社",
+    "nft_meta_collection_description": "飛地出版社",
+    "@context": "http://schema.org/",
+    "@type": "Book",
+    "keywords": "novel,hongkong,literature,classic",
+    "sameAs": [],
+    "url": "https://nowherebookstore.io/worksandcreation",
+    "usageInfo": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "version": 1,
+    "contentFingerprints": [
+      "ipfs://bafybeietirqpjl2zrczs3a65at74rkbst6mg6mvzelogjk3mz23gretgm4",
+      "ar://WuffTBbQO8tntjt4jWSlSle-nRmvDP_Lvks7sT_UszQ"
+    ],
+    "dateCreated": "2023-04-22T11:20:35+00:00",
+    "attributes": [],
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": [{
+        "@type": "EntryPoint",
+        "contentType": "application/pdf",
+        "url": "https://files.ckxpress.com/天工開物．栩栩如真.pdf",
+        "name": "天工開物．栩栩如真.pdf"
+      }, {
+        "@type": "EntryPoint",
+        "contentType": "application/epub+zip",
+        "url": "https://files.ckxpress.com/天工開物．栩栩如真.epub",
+        "name": "天工開物．栩栩如真.epub"
+      }]
+    },
+    "likecoin": {
+      "iscnIdPrefix": "iscn://likecoin-chain/4UC3ZhKokFv3_rxP1p8QtCuDfHAcxcDZhbe4-rPMBGI",
+      "classId": "likenft19symzw3xmh42gukzts858wf6rsdkn6e4jtc9wp8jh4kphfmffy5s6acyxg"
+      "nftId": "worksandcreation-388"
+    }
+  }

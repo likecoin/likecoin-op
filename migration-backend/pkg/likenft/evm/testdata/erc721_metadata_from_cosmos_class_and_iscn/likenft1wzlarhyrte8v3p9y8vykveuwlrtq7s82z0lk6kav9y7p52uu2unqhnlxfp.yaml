@@ -1,0 +1,229 @@
+name: likenft1wzlarhyrte8v3p9y8vykveuwlrtq7s82z0lk6kav9y7p52uu2unqhnlxfp/BOOKSN-0000
+cosmosnft: |
+  {
+    "class_id": "likenft1wzlarhyrte8v3p9y8vykveuwlrtq7s82z0lk6kav9y7p52uu2unqhnlxfp",
+    "id": "BOOKSN-0000",
+    "uri": "",
+    "uri_hash": "",
+    "data": {
+      "@type": "/likechain.likenft.v1.NFTData",
+      "metadata": {
+        "name": "信仰Q&A ——青少年信仰疑難問答手冊",
+        "image": "ar://G-K80-6XlDCP-6EtxIK0GWxjk6Zk0wW3HuWtHR6Peug",
+        "external_url": ""
+      },
+      "class_parent": {
+        "type": "ISCN",
+        "iscn_id_prefix": "iscn://likecoin-chain/EgNp14O2nTpHEmZMS4oOKaOImCml65ZSuWQk_NKp8vU",
+        "iscn_version_at_mint": "1",
+        "account": ""
+      },
+      "to_be_revealed": false
+    }
+  }
+cosmosclassresponse: |
+  {
+    "class": {
+      "id": "likenft1wzlarhyrte8v3p9y8vykveuwlrtq7s82z0lk6kav9y7p52uu2unqhnlxfp",
+      "name": "信仰Q&A ——青少年信仰疑難問答手冊",
+      "symbol": "BOOK",
+      "description": "要牧養青少年，便須要聆聽他們的信仰疑難，培育其理性思考能力，並與他們一同經歷信仰。本書輯錄了多位青少年提出的信仰疑難，並由不同的作者撰寫回應，包括傳道人、教育界人士、年輕神學生及FES同工。全書分為三個部分：福音信仰篇、聖經教義篇和信徒生活篇；嘗試深入淺出，為信仰疑難提供思考方向，引發對話與討論。 \n \n推薦： \n「照單全收的信仰，就是迷信。 \n耶穌說：「我就是道路……」，意味著「信耶穌」就是踏上非一般的生命之旅。我們都在跟隨主的信仰路上跌跌碰碰，問題多多。喜見此書的出現，當中帶出不少信仰實踐，倫理抉擇及神學教義等問題，討論深入淺出及情理兼備，每篇也是信仰的活潑對話。 \n衷心祝福每位用心閱讀此書的朋友，因你用心求問祂，祂必開門接待你。」 \n——黎廣澤 \n「油踐入心」事工召集人 \n \n「你的信仰生命正處於『無方向，無意義，沒內容』嗎？本書提及的問題可能正是你心中的困惑，亦是每一代年青信徒所掙扎的疑問。身處當今動盪鬱悶的環境，青年人是『被時代選中』的一群，激情感性的信仰驅不走無力感，唯有認真地培養信仰反省的基礎，誠實直面內心的問題，才能在洪流衝擊中站穩。本書涵蓋不同信仰生活的範疇，並作出扼要的回應。年青信徒理應不只滿足於書中的答案，誠邀你們繼續思考，尋索屬於你們這個時代的答案。」 \n——謝建邦 \n香港基督徒學生福音團契大專部主任 ",
+      "uri": "",
+      "uri_hash": "",
+      "data": {
+        "@type": "/likechain.likenft.v1.ClassData",
+        "metadata": {
+          "name": "信仰Q&A ——青少年信仰疑難問答手冊",
+          "image": "ar://G-K80-6XlDCP-6EtxIK0GWxjk6Zk0wW3HuWtHR6Peug",
+          "external_url": "",
+          "nft_meta_collection_id": "nft_book",
+          "nft_meta_collection_name": "NFT Book",
+          "nft_meta_collection_description": "NFT Book by Liker Land"
+        },
+        "parent": {
+          "type": "ISCN",
+          "iscn_id_prefix": "iscn://likecoin-chain/EgNp14O2nTpHEmZMS4oOKaOImCml65ZSuWQk_NKp8vU",
+          "iscn_version_at_mint": "1",
+          "account": ""
+        },
+        "config": {
+          "burnable": true,
+          "max_supply": "0",
+          "blind_box_config": null
+        },
+        "blind_box_state": {
+          "content_count": "0",
+          "to_be_revealed": false
+        }
+      }
+    }
+  }
+iscndataresponse: |
+  {
+    "owner": "like1q9zce0g6cc9zsx6y6e2pnszlmtta7zgkj498gj",
+    "latest_version": "1",
+    "records": [
+      {
+        "ipld": "baguqeerat7fbjjlfmmyvv4jq3l53hpj2kmc4gjmkxzhn47kiu24ycqrklbxa",
+        "data": {
+          "@context": {
+            "@vocab": "http://iscn.io/",
+            "contentMetadata": {
+              "@context": null
+            },
+            "recordParentIPLD": {
+              "@container": "@index"
+            },
+            "stakeholders": {
+              "@context": {
+                "@vocab": "http://schema.org/",
+                "contributionType": "http://iscn.io/contributionType",
+                "entity": "http://iscn.io/entity",
+                "footprint": "http://iscn.io/footprint",
+                "rewardProportion": "http://iscn.io/rewardProportion"
+              }
+            }
+          },
+          "@id": "iscn://likecoin-chain/EgNp14O2nTpHEmZMS4oOKaOImCml65ZSuWQk_NKp8vU/1",
+          "@type": "Record",
+          "contentFingerprints": [
+            "https://api.like.co/arweave/v2/link/B6ED63F9E335E0D0A2A75FE43370F8C1FA96788B4AF9F6262A0E2D1D4D818462",
+            "https://api.like.co/arweave/v2/link/1DFA5A9FCA58185A1DF2C9EFF37A26640937CF11055866BADAEFB33302AF85EC",
+            "hash://sha256/6f8f4069cc1021bbe4d9ab72e48ad46ed7c4aff6881ff417beaac96de1d53a97",
+            "hash://sha256/3b9ef82177d8b37360d3e8fd25e09459ac1888d5ecbbd022d39fe38734e5f080"
+          ],
+          "contentMetadata": {
+            "@context": "http://schema.org/",
+            "@type": "Book",
+            "author": "FES PRESS 編輯組",
+            "datePublished": "2025-02-01T00:00:00.000Z",
+            "description": "要牧養青少年，便須要聆聽他們的信仰疑難，培育其理性思考能力，並與他們一同經歷信仰。本書輯錄了多位青少年提出的信仰疑難，並由不同的作者撰寫回應，包括傳道人、教育界人士、年輕神學生及FES同工。全書分為三個部分：福音信仰篇、聖經教義篇和信徒生活篇；嘗試深入淺出，為信仰疑難提供思考方向，引發對話與討論。 \n \n推薦： \n「照單全收的信仰，就是迷信。 \n耶穌說：「我就是道路……」，意味著「信耶穌」就是踏上非一般的生命之旅。我們都在跟隨主的信仰路上跌跌碰碰，問題多多。喜見此書的出現，當中帶出不少信仰實踐，倫理抉擇及神學教義等問題，討論深入淺出及情理兼備，每篇也是信仰的活潑對話。 \n衷心祝福每位用心閱讀此書的朋友，因你用心求問祂，祂必開門接待你。」 \n——黎廣澤 \n「油踐入心」事工召集人 \n \n「你的信仰生命正處於『無方向，無意義，沒內容』嗎？本書提及的問題可能正是你心中的困惑，亦是每一代年青信徒所掙扎的疑問。身處當今動盪鬱悶的環境，青年人是『被時代選中』的一群，激情感性的信仰驅不走無力感，唯有認真地培養信仰反省的基礎，誠實直面內心的問題，才能在洪流衝擊中站穩。本書涵蓋不同信仰生活的範疇，並作出扼要的回應。年青信徒理應不只滿足於書中的答案，誠邀你們繼續思考，尋索屬於你們這個時代的答案。」 \n——謝建邦 \n香港基督徒學生福音團契大專部主任 ",
+            "exifInfo": [
+              {
+                "Format": "image/jpeg",
+                "Size": 432346
+              }
+            ],
+            "inLanguage": "zh",
+            "isbn": "9789628991877",
+            "keywords": "基督教,信仰生活",
+            "name": "信仰Q&A ——青少年信仰疑難問答手冊",
+            "publisher": "FES 香港基督徒學生福音團契",
+            "sameAs": [
+              "https://api.like.co/arweave/v2/link/B6ED63F9E335E0D0A2A75FE43370F8C1FA96788B4AF9F6262A0E2D1D4D818462?name=%E4%BF%A1%E4%BB%B0Q%26Av4.epub"
+            ],
+            "thumbnailUrl": "ar://G-K80-6XlDCP-6EtxIK0GWxjk6Zk0wW3HuWtHR6Peug",
+            "url": "",
+            "usageInfo": "All Rights Reserved",
+            "version": 1
+          },
+          "recordNotes": "",
+          "recordTimestamp": "2025-02-26T10:58:40+00:00",
+          "recordVersion": 1,
+          "stakeholders": [
+            {
+              "contributionType": "http://schema.org/publisher",
+              "entity": {
+                "@id": "FES 香港基督徒學生福音團契"
+              },
+              "rewardProportion": 0
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "description": "",
+                "identifier": [],
+                "name": "FES PRESS 編輯組",
+                "sameAs": []
+              },
+              "rewardProportion": 1
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like1q9zce0g6cc9zsx6y6e2pnszlmtta7zgkj498gj",
+                "description": "FES，成立於1957年，在校園提供基督教培育；透過團契和書籍出版，培養兼備理性、感性與靈性的年輕信徒；凝聚委身信仰，關懷世界的信徒群體。",
+                "identifier": [
+                  {
+                    "@type": "PropertyValue",
+                    "propertyID": "LikeCoin Wallet",
+                    "value": "like1q9zce0g6cc9zsx6y6e2pnszlmtta7zgkj498gj"
+                  },
+                  {
+                    "@type": "PropertyValue",
+                    "propertyID": "Liker ID",
+                    "value": "https://like.co/fespress"
+                  }
+                ],
+                "name": "FES 香港基督徒學生福音團契",
+                "sameAs": [],
+                "url": "https://like.co/fespress"
+              },
+              "rewardProportion": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+contractlevelmetadata: |
+  {
+    "name": "信仰Q&A ——青少年信仰疑難問答手冊",
+    "symbol": "BOOK",
+    "description": "要牧養青少年，便須要聆聽他們的信仰疑難，培育其理性思考能力，並與他們一同經歷信仰。本書輯錄了多位青少年提出的信仰疑難，並由不同的作者撰寫回應，包括傳道人、教育界人士、年輕神學生及FES同工。全書分為三個部分：福音信仰篇、聖經教義篇和信徒生活篇；嘗試深入淺出，為信仰疑難提供思考方向，引發對話與討論。 \n \n推薦： \n「照單全收的信仰，就是迷信。 \n耶穌說：「我就是道路……」，意味著「信耶穌」就是踏上非一般的生命之旅。我們都在跟隨主的信仰路上跌跌碰碰，問題多多。喜見此書的出現，當中帶出不少信仰實踐，倫理抉擇及神學教義等問題，討論深入淺出及情理兼備，每篇也是信仰的活潑對話。 \n衷心祝福每位用心閱讀此書的朋友，因你用心求問祂，祂必開門接待你。」 \n——黎廣澤 \n「油踐入心」事工召集人 \n \n「你的信仰生命正處於『無方向，無意義，沒內容』嗎？本書提及的問題可能正是你心中的困惑，亦是每一代年青信徒所掙扎的疑問。身處當今動盪鬱悶的環境，青年人是『被時代選中』的一群，激情感性的信仰驅不走無力感，唯有認真地培養信仰反省的基礎，誠實直面內心的問題，才能在洪流衝擊中站穩。本書涵蓋不同信仰生活的範疇，並作出扼要的回應。年青信徒理應不只滿足於書中的答案，誠邀你們繼續思考，尋索屬於你們這個時代的答案。」 \n——謝建邦 \n香港基督徒學生福音團契大專部主任 ",
+    "image": "ar://G-K80-6XlDCP-6EtxIK0GWxjk6Zk0wW3HuWtHR6Peug",
+    "nft_meta_collection_id": "nft_book",
+    "nft_meta_collection_name": "NFT Book",
+    "nft_meta_collection_description": "NFT Book by Liker Land",
+    "@context": "http://schema.org/",
+    "@type": "Book",
+    "author": "FES PRESS 編輯組",
+    "datePublished": "2025-02-01T00:00:00.000Z",
+    "exifInfo": [
+      {
+        "Format": "image/jpeg",
+        "Size": 432346
+      }
+    ],
+    "inLanguage": "zh",
+    "isbn": "9789628991877",
+    "keywords": "基督教,信仰生活",
+    "publisher": "FES 香港基督徒學生福音團契",
+    "sameAs": [],
+    "thumbnailUrl": "ar://G-K80-6XlDCP-6EtxIK0GWxjk6Zk0wW3HuWtHR6Peug",
+    "usageInfo": "All Rights Reserved",
+    "version": 1,
+    "contentFingerprints": [
+      "https://api.like.co/arweave/v2/link/B6ED63F9E335E0D0A2A75FE43370F8C1FA96788B4AF9F6262A0E2D1D4D818462",
+      "https://api.like.co/arweave/v2/link/1DFA5A9FCA58185A1DF2C9EFF37A26640937CF11055866BADAEFB33302AF85EC",
+      "hash://sha256/6f8f4069cc1021bbe4d9ab72e48ad46ed7c4aff6881ff417beaac96de1d53a97",
+      "hash://sha256/3b9ef82177d8b37360d3e8fd25e09459ac1888d5ecbbd022d39fe38734e5f080"
+    ],
+    "dateCreated": "2025-02-26T10:58:40+00:00",
+    "attributes": [{
+      "trait_type": "Author",
+      "value": "FES PRESS 編輯組"
+    }, {
+      "trait_type": "Publisher",
+      "value": "FES 香港基督徒學生福音團契"
+    }, {
+      "trait_type": "Publish Date",
+      "display_type": "date",
+      "value": 1738368000,
+    }],
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": [{
+        "@type": "EntryPoint",
+        "contentType": "application/epub+zip",
+        "url": "https://api.like.co/arweave/v2/link/B6ED63F9E335E0D0A2A75FE43370F8C1FA96788B4AF9F6262A0E2D1D4D818462",
+        "name": "信仰Q&Av4.epub",
+        "encodingType": "aes256gcm",
+      }],
+    },
+    "likecoin": {
+      "iscnIdPrefix": "iscn://likecoin-chain/EgNp14O2nTpHEmZMS4oOKaOImCml65ZSuWQk_NKp8vU",
+      "classId": "likenft1wzlarhyrte8v3p9y8vykveuwlrtq7s82z0lk6kav9y7p52uu2unqhnlxfp",
+      "nftId": "BOOKSN-0000",
+    }
+  }

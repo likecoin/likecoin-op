@@ -1,0 +1,269 @@
+name: likenft1tgwav6zq3ean4ygz58hehlk3q5yghgtel97k260lugxqxszhcuws3pytae/TIMEHISTORY-0023
+cosmosnft: |
+  {
+    "class_id": "likenft1tgwav6zq3ean4ygz58hehlk3q5yghgtel97k260lugxqxszhcuws3pytae",
+    "id": "TIMEHISTORY-0023",
+    "uri": "",
+    "uri_hash": "",
+    "data": {
+      "@type": "/likechain.likenft.v1.NFTData",
+      "metadata": {
+        "name": "時間繁史．啞瓷之光",
+        "image": "ar://_a_PCcJRwvwoTTGtX5z7_RseDbeCp4_AAsEtA9P5SBA",
+        "external_url": ""
+      },
+      "class_parent": {
+        "type": "ISCN",
+        "iscn_id_prefix": "iscn://likecoin-chain/o91-umWGStNh5Hxdyc-1MsG5__kEhr7VutmJ7u0ZVwY",
+        "iscn_version_at_mint": "1",
+        "account": ""
+      },
+      "to_be_revealed": false
+    }
+  }
+cosmosclassresponse: |
+  {
+    "class": {
+      "id": "likenft1tgwav6zq3ean4ygz58hehlk3q5yghgtel97k260lugxqxszhcuws3pytae",
+      "name": "時間繁史．啞瓷之光",
+      "symbol": "BOOK",
+      "description": "\n《時間繁史．啞瓷之光》是繼《天工開物．栩栩如真》之後，「自然史三部曲」的第二部，由「啞瓷之光」、「恩恩與嬰兒宇宙」及「維珍尼亞的心跳」三個聲部組成，亦即平行並進的三條時間線。 \n「啞瓷之光」：（2022年）年輕文學研究者、中英混血兒維真尼亞來到遍遠的沙頭角海邊，跟退隱小說家獨裁者進行訪談，回顧他的人生和創作經歷；與此同時，一群年輕行動者正準備進行反對地區發展的抗爭。獨裁者的妻子啞瓷見證事情的發生，決心陪伴丈夫走上人生最後一程。 \n「恩恩與嬰兒宇宙」：（2005年）連鎖藥品店年輕店員恩恩遇到自稱獨裁者的中年作家，陸續從他手中收到奇怪信件，信中有一個虛構的恩恩與年輕小說家嘍囉的愛情故事。在現實中，嘍囉是獨裁者的徒弟，而恩恩的舊同學蘋/Apple亦穿插於虛構與現實之間。 \n「維珍尼亞的心跳」：（2097年）心臟為機械鐘的永恆少女維真尼亞，獨自留守荒廢多年的山中圖書館。一天，一個名為花的少年在圖書館出現，他其實是七十年來一直在尋找維真尼亞的時空穿越者。七十年前溜冰場上的金童玉女，終於在未來的圖書館重遇。 \n三個聲部互相對位，三條線索互相扣連，虛實交織，構成多元時空並存的物理學圖譜。\n這本書是董啟章迄今為止篇幅最長、結構最複雜、隱喻最豐富、想像最宏偉的長篇小說。上至宇宙天體，下達意識深層，外及社會抗爭，內含個人情感，表裡今昔，他我群己，無遠弗屆，無微不至。但它也是董啟章小說中最少人讀過、讀完和讀懂的一本。從作者的角度，這是最徹底地展現董啟章的文學和想像世界的作品。 \n在這部小說中，董啟章提出了針對文學創作的根本問題：作家應該負起社會責任嗎？寫作只是獨斷的行為嗎？現代作家自我需要解構嗎？虛構能對現實產生影響嗎？人生可以擁有無限可能性嗎？歷史可以多於一種嗎？時間可以是相對的嗎？物理學所證實的超感知現象，能改造我們的世界觀、人生觀和文學觀嗎？ \n《時間繁史．啞瓷之光》初版於2007年由台灣麥田出版社分上下冊推出，全長六十萬字，當中所有對話以廣東話寫成。及後作者把口語翻譯成中文書面語，但印行新版耗費甚巨，未曾實行。現在以NFT電子書形式，同時收錄兩個版本，共一百二十萬字，如同兩個平行世界，超越物理界限，瞬間生成，瞬間傳送，瞬間擁有，瞬間置換，實現了虛構世界的超時空願景。 ",
+      "uri": "",
+      "uri_hash": "",
+      "data": {
+        "@type": "/likechain.likenft.v1.ClassData",
+        "metadata": {
+          "name": "時間繁史．啞瓷之光",
+          "image": "ar://_a_PCcJRwvwoTTGtX5z7_RseDbeCp4_AAsEtA9P5SBA",
+          "external_url": "",
+          "nft_meta_collection_id": "nft_book",
+          "nft_meta_collection_name": "NFT Book",
+          "nft_meta_collection_descrption": "NFT Book by Liker Land"
+        },
+        "parent": {
+          "type": "ISCN",
+          "iscn_id_prefix": "iscn://likecoin-chain/o91-umWGStNh5Hxdyc-1MsG5__kEhr7VutmJ7u0ZVwY",
+          "iscn_version_at_mint": "1",
+          "account": ""
+        },
+        "config": {
+          "burnable": true,
+          "max_supply": "0",
+          "blind_box_config": null
+        },
+        "blind_box_state": {
+          "content_count": "0",
+          "to_be_revealed": false
+        }
+      }
+    }
+  }
+iscndataresponse: |
+  {
+    "owner": "like19fqws220rwcmacn5dgt0dtwts8c05ty58mcr3a",
+    "latest_version": "2",
+    "records": [
+      {
+        "ipld": "baguqeeranagaakjgcy3boufghgl3utghrsrhvamdnzd3wmmwvdchptb7ldsa",
+        "data": {
+          "@context": {
+            "@vocab": "http://iscn.io/",
+            "contentMetadata": {
+              "@context": null
+            },
+            "recordParentIPLD": {
+              "@container": "@index"
+            },
+            "stakeholders": {
+              "@context": {
+                "@vocab": "http://schema.org/",
+                "contributionType": "http://iscn.io/contributionType",
+                "entity": "http://iscn.io/entity",
+                "footprint": "http://iscn.io/footprint",
+                "rewardProportion": "http://iscn.io/rewardProportion"
+              }
+            }
+          },
+          "@id": "iscn://likecoin-chain/o91-umWGStNh5Hxdyc-1MsG5__kEhr7VutmJ7u0ZVwY/2",
+          "@type": "Record",
+          "contentFingerprints": [
+            "hash://sha256/bcd2af810ee5313ccce164bd084ade71f53e00f7b8b076aa7ef22ac103fc45d9",
+            "hash://sha256/11df74ee7bf6cb86986be19a14049c5a67d808a29fabd1829cb53f7fac2422cd",
+            "hash://sha256/d85d61b8429a84c90a9055c0a19562e759f71618df466ff3b4b72d51e8752500",
+            "hash://sha256/b535ab248ff9a467d9ca8577bbc5dce5e35ab8370c03a964cff3144ba842ee8b",
+            "hash://sha256/a887d121226f8da859c10ecc786f9131d81bbe3a8744866a5cf8287a0a944a50",
+            "ipfs://QmXxy5piY19LTmA1EX2NGgnxwr7LFYuDiVqLeEneniepS2",
+            "ipfs://QmaUxwUneEc78osKceLqn8djkwPVnEPmj7jwex1THaAB3o",
+            "ipfs://QmSdULznoH3xRfV2uN6W5oyUw1RsNiENaPxKdffTEuw3Az",
+            "ipfs://QmeJYJ3YGKKmoNiovu9x3xVXdXtki9scBWVWjXD7Hfej17",
+            "ipfs://QmU67xDSBrwYFff2qQpgM78geTRhWZDVaf7t5k6yjxFTKp",
+            "ar://nY08lJhSN74MkeM_Ggj6Omd8aNogEZl2D7YNy2aqBBQ",
+            "ar://SlENPw3CA83TWK4avAn3nNJMdxAiqiN0MNsbDe2dR2Y",
+            "ar://cjHy9bmtOsCC3kOpaBNwH3I7aDlOJsuWt44bFR8fJnw",
+            "ar://_QtXKPQgomnXtUImIUjqJHkj9cyaKqS7f7v6_b_3-mA",
+            "ar://xJaKKuvFqRwSgTfVGqkT2nQ2WYsiuhfn5d7iSvh5mqA"
+          ],
+          "contentMetadata": {
+            "@context": "http://schema.org/",
+            "@type": "Book",
+            "author": "董啟章",
+            "description": "\n《時間繁史．啞瓷之光》是繼《天工開物．栩栩如真》之後，「自然史三部曲」的第二部，由「啞瓷之光」、「恩恩與嬰兒宇宙」及「維珍尼亞的心跳」三個聲部組成，亦即平行並進的三條時間線。 \n「啞瓷之光」：（2022年）年輕文學研究者、中英混血兒維真尼亞來到遍遠的沙頭角海邊，跟退隱小說家獨裁者進行訪談，回顧他的人生和創作經歷；與此同時，一群年輕行動者正準備進行反對地區發展的抗爭。獨裁者的妻子啞瓷見證事情的發生，決心陪伴丈夫走上人生最後一程。 \n「恩恩與嬰兒宇宙」：（2005年）連鎖藥品店年輕店員恩恩遇到自稱獨裁者的中年作家，陸續從他手中收到奇怪信件，信中有一個虛構的恩恩與年輕小說家嘍囉的愛情故事。在現實中，嘍囉是獨裁者的徒弟，而恩恩的舊同學蘋/Apple亦穿插於虛構與現實之間。 \n「維珍尼亞的心跳」：（2097年）心臟為機械鐘的永恆少女維真尼亞，獨自留守荒廢多年的山中圖書館。一天，一個名為花的少年在圖書館出現，他其實是七十年來一直在尋找維真尼亞的時空穿越者。七十年前溜冰場上的金童玉女，終於在未來的圖書館重遇。 \n三個聲部互相對位，三條線索互相扣連，虛實交織，構成多元時空並存的物理學圖譜。\n這本書是董啟章迄今為止篇幅最長、結構最複雜、隱喻最豐富、想像最宏偉的長篇小說。上至宇宙天體，下達意識深層，外及社會抗爭，內含個人情感，表裡今昔，他我群己，無遠弗屆，無微不至。但它也是董啟章小說中最少人讀過、讀完和讀懂的一本。從作者的角度，這是最徹底地展現董啟章的文學和想像世界的作品。 \n在這部小說中，董啟章提出了針對文學創作的根本問題：作家應該負起社會責任嗎？寫作只是獨斷的行為嗎？現代作家自我需要解構嗎？虛構能對現實產生影響嗎？人生可以擁有無限可能性嗎？歷史可以多於一種嗎？時間可以是相對的嗎？物理學所證實的超感知現象，能改造我們的世界觀、人生觀和文學觀嗎？ \n《時間繁史．啞瓷之光》初版於2007年由台灣麥田出版社分上下冊推出，全長六十萬字，當中所有對話以廣東話寫成。及後作者把口語翻譯成中文書面語，但印行新版耗費甚巨，未曾實行。現在以NFT電子書形式，同時收錄兩個版本，共一百二十萬字，如同兩個平行世界，超越物理界限，瞬間生成，瞬間傳送，瞬間擁有，瞬間置換，實現了虛構世界的超時空願景。 ",
+            "exifInfo": [
+              {
+                "Format": "image/jpeg",
+                "Size": 1015584
+              },
+              {
+                "Format": "image/jpeg",
+                "Size": 1015584
+              }
+            ],
+            "inLanguage": "zh",
+            "isbn": "",
+            "keywords": "董啟章小說,自然史三部曲,時間繁史啞瓷之光",
+            "name": "時間繁史．啞瓷之光",
+            "publisher": "",
+            "sameAs": [
+              "ar://nY08lJhSN74MkeM_Ggj6Omd8aNogEZl2D7YNy2aqBBQ?name=時間繁史．啞瓷之光-廣東話版_2024_PDF.pdf",
+              "ar://SlENPw3CA83TWK4avAn3nNJMdxAiqiN0MNsbDe2dR2Y?name=時間繁史．啞瓷之光-書面語版_2024_PDF.pdf",
+              "ar://cjHy9bmtOsCC3kOpaBNwH3I7aDlOJsuWt44bFR8fJnw?name=時間繁史．啞瓷之光 - 書面語版 - 董啟章.epub",
+              "ar://xJaKKuvFqRwSgTfVGqkT2nQ2WYsiuhfn5d7iSvh5mqA?name=時間繁史．啞瓷之光 - 廣東話版 - 董啟章.epub"
+            ],
+            "thumbnailUrl": "ar://_a_PCcJRwvwoTTGtX5z7_RseDbeCp4_AAsEtA9P5SBA",
+            "url": "",
+            "usageInfo": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+            "version": "2"
+          },
+          "recordNotes": "",
+          "recordParentIPLD": {
+            "/": "baguqeera2cow4ludf6r6usxfmkrk6b3gmuvqhvdt32htornv6vea3xjbhtka"
+          },
+          "recordTimestamp": "2024-11-12T13:49:24+00:00",
+          "recordVersion": 2,
+          "stakeholders": [
+            {
+              "contributionType": "http://schema.org/publisher",
+              "entity": {
+                "@id": "like10ywsmztkxjl55xarxnhlxwc83z9v2hkxtsajwl",
+                "name": "Liker Land"
+              },
+              "rewardProportion": 0.025
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "description": "Author",
+                "identifier": [],
+                "name": "董啟章",
+                "sameAs": []
+              },
+              "rewardProportion": 0.4875
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like19fqws220rwcmacn5dgt0dtwts8c05ty58mcr3a",
+                "description": "writer, book lover",
+                "identifier": [
+                  {
+                    "@type": "PropertyValue",
+                    "propertyID": "LikeCoin Wallet",
+                    "value": "like19fqws220rwcmacn5dgt0dtwts8c05ty58mcr3a"
+                  },
+                  {
+                    "@type": "PropertyValue",
+                    "propertyID": "Liker ID",
+                    "value": "https://like.co/nghengsun"
+                  }
+                ],
+                "name": "dungkaicheung",
+                "sameAs": [],
+                "url": "https://like.co/nghengsun"
+              },
+              "rewardProportion": 0.4875
+            }
+          ]
+        }
+      }
+    ]
+  }
+contractlevelmetadata: |
+  {
+    "name": "時間繁史．啞瓷之光",
+    "symbol": "BOOK",
+    "description": "\n《時間繁史．啞瓷之光》是繼《天工開物．栩栩如真》之後，「自然史三部曲」的第二部，由「啞瓷之光」、「恩恩與嬰兒宇宙」及「維珍尼亞的心跳」三個聲部組成，亦即平行並進的三條時間線。 \n「啞瓷之光」：（2022年）年輕文學研究者、中英混血兒維真尼亞來到遍遠的沙頭角海邊，跟退隱小說家獨裁者進行訪談，回顧他的人生和創作經歷；與此同時，一群年輕行動者正準備進行反對地區發展的抗爭。獨裁者的妻子啞瓷見證事情的發生，決心陪伴丈夫走上人生最後一程。 \n「恩恩與嬰兒宇宙」：（2005年）連鎖藥品店年輕店員恩恩遇到自稱獨裁者的中年作家，陸續從他手中收到奇怪信件，信中有一個虛構的恩恩與年輕小說家嘍囉的愛情故事。在現實中，嘍囉是獨裁者的徒弟，而恩恩的舊同學蘋/Apple亦穿插於虛構與現實之間。 \n「維珍尼亞的心跳」：（2097年）心臟為機械鐘的永恆少女維真尼亞，獨自留守荒廢多年的山中圖書館。一天，一個名為花的少年在圖書館出現，他其實是七十年來一直在尋找維真尼亞的時空穿越者。七十年前溜冰場上的金童玉女，終於在未來的圖書館重遇。 \n三個聲部互相對位，三條線索互相扣連，虛實交織，構成多元時空並存的物理學圖譜。\n這本書是董啟章迄今為止篇幅最長、結構最複雜、隱喻最豐富、想像最宏偉的長篇小說。上至宇宙天體，下達意識深層，外及社會抗爭，內含個人情感，表裡今昔，他我群己，無遠弗屆，無微不至。但它也是董啟章小說中最少人讀過、讀完和讀懂的一本。從作者的角度，這是最徹底地展現董啟章的文學和想像世界的作品。 \n在這部小說中，董啟章提出了針對文學創作的根本問題：作家應該負起社會責任嗎？寫作只是獨斷的行為嗎？現代作家自我需要解構嗎？虛構能對現實產生影響嗎？人生可以擁有無限可能性嗎？歷史可以多於一種嗎？時間可以是相對的嗎？物理學所證實的超感知現象，能改造我們的世界觀、人生觀和文學觀嗎？ \n《時間繁史．啞瓷之光》初版於2007年由台灣麥田出版社分上下冊推出，全長六十萬字，當中所有對話以廣東話寫成。及後作者把口語翻譯成中文書面語，但印行新版耗費甚巨，未曾實行。現在以NFT電子書形式，同時收錄兩個版本，共一百二十萬字，如同兩個平行世界，超越物理界限，瞬間生成，瞬間傳送，瞬間擁有，瞬間置換，實現了虛構世界的超時空願景。 ",
+    "image": "ar://_a_PCcJRwvwoTTGtX5z7_RseDbeCp4_AAsEtA9P5SBA",
+    "nft_meta_collection_id": "nft_book",
+    "nft_meta_collection_name": "NFT Book",
+    "nft_meta_collection_description": "NFT Book by Liker Land",
+    "@context": "http://schema.org/",
+    "@type": "Book",
+    "author": "董啟章",
+    "exifInfo": [
+      {
+        "Format": "image/jpeg",
+        "Size": 1015584
+      },
+      {
+        "Format": "image/jpeg",
+        "Size": 1015584
+      }
+    ],
+    "inLanguage": "zh",
+    "keywords": "董啟章小說,自然史三部曲,時間繁史啞瓷之光",
+    "sameAs": [],
+    "thumbnailUrl": "ar://_a_PCcJRwvwoTTGtX5z7_RseDbeCp4_AAsEtA9P5SBA",
+    "usageInfo": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "version": "2",
+    "contentFingerprints": [
+      "hash://sha256/bcd2af810ee5313ccce164bd084ade71f53e00f7b8b076aa7ef22ac103fc45d9",
+      "hash://sha256/11df74ee7bf6cb86986be19a14049c5a67d808a29fabd1829cb53f7fac2422cd",
+      "hash://sha256/d85d61b8429a84c90a9055c0a19562e759f71618df466ff3b4b72d51e8752500",
+      "hash://sha256/b535ab248ff9a467d9ca8577bbc5dce5e35ab8370c03a964cff3144ba842ee8b",
+      "hash://sha256/a887d121226f8da859c10ecc786f9131d81bbe3a8744866a5cf8287a0a944a50",
+      "ipfs://QmXxy5piY19LTmA1EX2NGgnxwr7LFYuDiVqLeEneniepS2",
+      "ipfs://QmaUxwUneEc78osKceLqn8djkwPVnEPmj7jwex1THaAB3o",
+      "ipfs://QmSdULznoH3xRfV2uN6W5oyUw1RsNiENaPxKdffTEuw3Az",
+      "ipfs://QmeJYJ3YGKKmoNiovu9x3xVXdXtki9scBWVWjXD7Hfej17",
+      "ipfs://QmU67xDSBrwYFff2qQpgM78geTRhWZDVaf7t5k6yjxFTKp",
+      "ar://nY08lJhSN74MkeM_Ggj6Omd8aNogEZl2D7YNy2aqBBQ",
+      "ar://SlENPw3CA83TWK4avAn3nNJMdxAiqiN0MNsbDe2dR2Y",
+      "ar://cjHy9bmtOsCC3kOpaBNwH3I7aDlOJsuWt44bFR8fJnw",
+      "ar://_QtXKPQgomnXtUImIUjqJHkj9cyaKqS7f7v6_b_3-mA",
+      "ar://xJaKKuvFqRwSgTfVGqkT2nQ2WYsiuhfn5d7iSvh5mqA"
+    ],
+    "dateCreated": "2024-11-12T13:49:24+00:00",
+    "attributes": [{
+      "trait_type": "Author",
+      "value": "董啟章"
+    }],
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": [{
+        "@type": "EntryPoint",
+        "contentType": "application/pdf",
+        "url": "ar://nY08lJhSN74MkeM_Ggj6Omd8aNogEZl2D7YNy2aqBBQ",
+        "name": "時間繁史．啞瓷之光-廣東話版_2024_PDF.pdf"
+      }, {
+        "@type": "EntryPoint",
+        "contentType": "application/pdf",
+        "url": "ar://SlENPw3CA83TWK4avAn3nNJMdxAiqiN0MNsbDe2dR2Y",
+        "name": "時間繁史．啞瓷之光-書面語版_2024_PDF.pdf"
+      }, {
+        "@type": "EntryPoint",
+        "contentType": "application/epub+zip",
+        "url": "ar://cjHy9bmtOsCC3kOpaBNwH3I7aDlOJsuWt44bFR8fJnw",
+        "name": "時間繁史．啞瓷之光 - 書面語版 - 董啟章.epub"
+      }, {
+        "@type": "EntryPoint",
+        "contentType": "application/epub+zip",
+        "url": "ar://xJaKKuvFqRwSgTfVGqkT2nQ2WYsiuhfn5d7iSvh5mqA",
+        "name": "時間繁史．啞瓷之光 - 廣東話版 - 董啟章.epub"
+      }]
+    },
+    "likecoin": {
+      "iscnIdPrefix": "iscn://likecoin-chain/o91-umWGStNh5Hxdyc-1MsG5__kEhr7VutmJ7u0ZVwY",
+      "classId": "likenft1tgwav6zq3ean4ygz58hehlk3q5yghgtel97k260lugxqxszhcuws3pytae",
+      "nftId": "TIMEHISTORY-0023"
+    }
+  }

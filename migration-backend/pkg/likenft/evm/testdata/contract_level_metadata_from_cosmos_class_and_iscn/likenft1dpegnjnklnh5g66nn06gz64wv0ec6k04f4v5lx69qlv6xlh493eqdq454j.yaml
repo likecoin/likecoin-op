@@ -1,0 +1,199 @@
+name: class id = likenft1dpegnjnklnh5g66nn06gz64wv0ec6k04f4v5lx69qlv6xlh493eqdq454j
+cosmosclassresponse: |
+  {
+    "class": {
+      "id": "likenft1dpegnjnklnh5g66nn06gz64wv0ec6k04f4v5lx69qlv6xlh493eqdq454j",
+      "name": "每天買一百元比特幣：我的定額定投四年戰績實錄",
+      "symbol": "BOOK",
+      "description": "【特價預購中，1.16 正式出版】\n\n假如有人 2020 年建議你每日買一百元比特幣，你會不會聽？\n\n比特幣剛升破十萬美元。現在才開始投資比特幣，是否為時已晚？\n\n雖然看好比特幣，但對這神秘高深的投資選項半信半疑，或無從入手？\n\n假如不是假如，高重建早於 2020 年就在《蘋果日報》專欄倡議每日定額定投比特幣。本書收錄作者七年多來討論比特幣的 20 篇文章，目的不是要以「I told you so」奚落當年錯過機會的旁觀者，而是以史為鑑，告訴讀者一切尚早，現時行動未為晚也。\n\n本書除了解釋為什麼「每天買一百元比特幣」是最符合成本效益的投資策略，也深入淺出介紹比特幣的概念，跟傳統貨幣比較，及與社會日常的關係，幫助我們在專注生活與生產的同時妥善分配資產，免被通漲蠶食勞動成果。\n\n鼓勵大家坐言起行，向終極的財富自由邁進。",
+      "uri": "",
+      "uri_hash": "",
+      "data": {
+        "@type": "/likechain.likenft.v1.ClassData",
+        "metadata": {
+          "name": "每天買一百元比特幣：我的定額定投四年戰績實錄",
+          "image": "ar://yY1IjxpTtp_QItTzirhOREYmFZEeW9IjlEmRcp-Cz5w",
+          "external_url": "",
+          "nft_meta_collection_id": "nft_book",
+          "nft_meta_collection_name": "NFT Book",
+          "nft_meta_collection_descrption": "NFT Book by Liker Land"
+        },
+        "parent": {
+          "type": "ISCN",
+          "iscn_id_prefix": "iscn://likecoin-chain/Cb-mL2bZeCffDeEmiZlaalJrYqGwOILYCT_WJ3kDmDg",
+          "iscn_version_at_mint": "1",
+          "account": ""
+        },
+        "config": {
+          "burnable": true,
+          "max_supply": "0",
+          "blind_box_config": null
+        },
+        "blind_box_state": {
+          "content_count": "0",
+          "to_be_revealed": false
+        }
+      }
+    }
+  }
+iscndataresponse: |
+  {
+    "owner": "like13f4glvg80zvfrrs7utft5p68pct4mcq7t5atf6",
+    "latest_version": "5",
+    "records": [
+      {
+        "ipld": "baguqeeradqaota25jdgu4uact6zrfo7oalpeene64psxlztrt4slrwwsomcq",
+        "data": {
+          "@context": {
+            "@vocab": "http://iscn.io/",
+            "contentMetadata": {
+              "@context": null
+            },
+            "recordParentIPLD": {
+              "@container": "@index"
+            },
+            "stakeholders": {
+              "@context": {
+                "@vocab": "http://schema.org/",
+                "contributionType": "http://iscn.io/contributionType",
+                "entity": "http://iscn.io/entity",
+                "footprint": "http://iscn.io/footprint",
+                "rewardProportion": "http://iscn.io/rewardProportion"
+              }
+            }
+          },
+          "@id": "iscn://likecoin-chain/Cb-mL2bZeCffDeEmiZlaalJrYqGwOILYCT_WJ3kDmDg/5",
+          "@type": "Record",
+          "contentFingerprints": [
+            "ar://hYtn-ySANq7HBqaZRW8eVPxp0u3j9d_023n03nymz50",
+            "ar://IQ97SDTnWJt5VRc_cYWJmhd_kpjDpcu0TtjtCUvyzPc"
+          ],
+          "contentMetadata": {
+            "@context": "http://schema.org/",
+            "@type": "Book",
+            "author": {
+              "description": "地球人。人文為體，科技為用。\n\n創業者。LikeCoin、DHK dao 發起人。\n\n創作者。著有《區塊鏈社會學：金錢、媒體與民主的再想像》、《財富自由主義：金錢的多元宇宙》、《Game 以載道》、《好 game 有好報》等。逢週四於 DHK 週報發表文章，內容全面開放，同步收錄於 ckxpress.com。\n\n沒有固定手機號碼，但一封電郵就能輕鬆聯繫上—— kin@ckxpress.com。",
+              "name": "高重建"
+            },
+            "datePublished": "",
+            "description": "假如有人 2020 年建議你每日買一百元比特幣，你會不會聽？\n\n比特幣剛升破十萬美元。現在才開始投資比特幣，是否為時已晚？\n\n雖然看好比特幣，但對這神秘高深的投資選項半信半疑，或無從入手？\n\n假如不是假如，高重建早於 2020 年就在《蘋果日報》專欄倡議每日定額定投比特幣。本書收錄作者七年多來討論比特幣的 20 篇文章，目的不是要以「I told you so」奚落當年錯過機會的旁觀者，而是以史為鑑，告訴讀者一切尚早，現時行動未為晚也。\n\n本書除了解釋為什麼「每天買一百元比特幣」是最符合成本效益的投資策略，也深入淺出介紹比特幣的概念，跟傳統貨幣比較，及與社會日常的關係，幫助我們在專注生活與生產的同時妥善分配資產，免被通漲蠶食勞動成果。\n\n鼓勵大家坐言起行，向終極的財富自由邁進。",
+            "exifInfo": [
+              {
+                "Format": "image/jpeg",
+                "Size": 137824
+              }
+            ],
+            "inLanguage": "zh",
+            "isbn": "9786269943906",
+            "keywords": "理財,投資,科技,Bitcoin,區塊鏈",
+            "name": "每天買一百元比特幣：我的定額定投四年戰績實錄",
+            "publisher": "飛地出版",
+            "sameAs": [
+              "ar://hYtn-ySANq7HBqaZRW8eVPxp0u3j9d_023n03nymz50?name=每天買一百元比特幣-高重建.epub"
+            ],
+            "thumbnailUrl": "ar://yY1IjxpTtp_QItTzirhOREYmFZEeW9IjlEmRcp-Cz5w",
+            "url": "https://ckxpress.com/btc-dca",
+            "usageInfo": "https://creativecommons.org/licenses/by/4.0/",
+            "version": "5"
+          },
+          "recordNotes": "",
+          "recordParentIPLD": {
+            "/": "baguqeerau4xkgfkmsze2jacegyotommwdiuxybvqxevkekezkmvlzmcruoaa"
+          },
+          "recordTimestamp": "2025-01-28T16:55:45+00:00",
+          "recordVersion": 5,
+          "stakeholders": [
+            {
+              "contributionType": "http://schema.org/publisher",
+              "entity": {
+                "@id": "飛地出版"
+              },
+              "rewardProportion": 0
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like13f4glvg80zvfrrs7utft5p68pct4mcq7t5atf6",
+                "description": "地球人。人文為體，科技為用。\n\n創業者。LikeCoin、DHK dao 發起人。\n\n創作者。著有《區塊鏈社會學：金錢、媒體與民主的再想像》、《財富自由主義：金錢的多元宇宙》、《Game 以載道》、《好 game 有好報》等。逢週四於 DHK 週報發表文章，內容全面開放，同步收錄於 ckxpress.com。\n\n沒有固定手機號碼，但一封電郵就能輕鬆聯繫上—— kin@ckxpress.com。",
+                "identifier": [
+                  {
+                    "@type": "PropertyValue",
+                    "propertyID": "LikeCoin Wallet",
+                    "value": "like13f4glvg80zvfrrs7utft5p68pct4mcq7t5atf6"
+                  },
+                  {
+                    "@type": "PropertyValue",
+                    "propertyID": "Liker ID",
+                    "value": "https://like.co/ckxpress"
+                  }
+                ],
+                "name": "高重建",
+                "sameAs": [
+                  "https://ckxpress.com/kin"
+                ],
+                "url": "https://like.co/ckxpress"
+              },
+              "rewardProportion": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+contractlevelmetadata: |
+  {
+    "name": "每天買一百元比特幣：我的定額定投四年戰績實錄",
+    "symbol": "BOOK",
+    "description": "假如有人 2020 年建議你每日買一百元比特幣，你會不會聽？\n\n比特幣剛升破十萬美元。現在才開始投資比特幣，是否為時已晚？\n\n雖然看好比特幣，但對這神秘高深的投資選項半信半疑，或無從入手？\n\n假如不是假如，高重建早於 2020 年就在《蘋果日報》專欄倡議每日定額定投比特幣。本書收錄作者七年多來討論比特幣的 20 篇文章，目的不是要以「I told you so」奚落當年錯過機會的旁觀者，而是以史為鑑，告訴讀者一切尚早，現時行動未為晚也。\n\n本書除了解釋為什麼「每天買一百元比特幣」是最符合成本效益的投資策略，也深入淺出介紹比特幣的概念，跟傳統貨幣比較，及與社會日常的關係，幫助我們在專注生活與生產的同時妥善分配資產，免被通漲蠶食勞動成果。\n\n鼓勵大家坐言起行，向終極的財富自由邁進。",
+    "image": "ar://yY1IjxpTtp_QItTzirhOREYmFZEeW9IjlEmRcp-Cz5w",
+    "nft_meta_collection_id": "nft_book",
+    "nft_meta_collection_name": "NFT Book",
+    "nft_meta_collection_description": "NFT Book by Liker Land",
+    "external_link": "https://ckxpress.com/btc-dca",
+    "@context": "http://schema.org/",
+    "@type": "Book",
+    "author": {
+      "description": "地球人。人文為體，科技為用。\n\n創業者。LikeCoin、DHK dao 發起人。\n\n創作者。著有《區塊鏈社會學：金錢、媒體與民主的再想像》、《財富自由主義：金錢的多元宇宙》、《Game 以載道》、《好 game 有好報》等。逢週四於 DHK 週報發表文章，內容全面開放，同步收錄於 ckxpress.com。\n\n沒有固定手機號碼，但一封電郵就能輕鬆聯繫上—— kin@ckxpress.com。",
+      "name": "高重建"
+    },
+    "exifInfo": [
+      {
+        "Format": "image/jpeg",
+        "Size": 137824
+      }
+    ],
+    "inLanguage": "zh",
+    "isbn": "9786269943906",
+    "keywords": "理財,投資,科技,Bitcoin,區塊鏈",
+    "publisher": "飛地出版",
+    "sameAs": [],
+    "thumbnailUrl": "ar://yY1IjxpTtp_QItTzirhOREYmFZEeW9IjlEmRcp-Cz5w",
+    "url": "https://ckxpress.com/btc-dca",
+    "usageInfo": "https://creativecommons.org/licenses/by/4.0/",
+    "version": "5",
+    "contentFingerprints": [
+      "ar://hYtn-ySANq7HBqaZRW8eVPxp0u3j9d_023n03nymz50",
+      "ar://IQ97SDTnWJt5VRc_cYWJmhd_kpjDpcu0TtjtCUvyzPc"
+    ],
+    "dateCreated": "2025-01-28T16:55:45+00:00",
+    "attributes": [{
+      "trait_type": "Author",
+      "value": "高重建"
+    },{
+      "trait_type": "Publisher",
+      "value": "飛地出版"
+    }],
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": [{
+        "@type": "EntryPoint",
+        "contentType": "application/epub+zip",
+        "url": "ar://hYtn-ySANq7HBqaZRW8eVPxp0u3j9d_023n03nymz50",
+        "name": "每天買一百元比特幣-高重建.epub"
+      }]
+    },
+    "likecoin": {
+      "iscnIdPrefix": "iscn://likecoin-chain/Cb-mL2bZeCffDeEmiZlaalJrYqGwOILYCT_WJ3kDmDg",
+      "classId": "likenft1dpegnjnklnh5g66nn06gz64wv0ec6k04f4v5lx69qlv6xlh493eqdq454j"
+    }
+  }

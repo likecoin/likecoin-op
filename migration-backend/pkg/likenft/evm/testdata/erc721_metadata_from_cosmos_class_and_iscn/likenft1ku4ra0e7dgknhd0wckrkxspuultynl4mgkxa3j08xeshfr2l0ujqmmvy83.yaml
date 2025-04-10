@@ -1,0 +1,259 @@
+name: likenft1ku4ra0e7dgknhd0wckrkxspuultynl4mgkxa3j08xeshfr2l0ujqmmvy83/moneyverse-0878
+cosmosnft: |
+  {
+    "class_id": "likenft1ku4ra0e7dgknhd0wckrkxspuultynl4mgkxa3j08xeshfr2l0ujqmmvy83",
+    "id": "moneyverse-0878",
+    "uri": "https://api.ckxpress.com/book-nft/metadata?book_id=1&class_id=likenft1ku4ra0e7dgknhd0wckrkxspuultynl4mgkxa3j08xeshfr2l0ujqmmvy83&nft_id=moneyverse-0878",
+    "uri_hash": "",
+    "data": {
+      "@type": "/likechain.likenft.v1.NFTData",
+      "metadata": {
+        "name": "《所謂「我不投資」，就是 all in 在法定貨幣》",
+        "description": "#0878",
+        "image": "ipfs://bafybeidgdnzcpx54savj6wcuzqpxqlejbexrbunro3fzmaorzm63dxeiza",
+        "external_url": "https://bit.ly/moneyverse-pdf",
+        "fileName": "2-sliver-0212",
+        "ipfs_hash": "ipfs://bafybeidgdnzcpx54savj6wcuzqpxqlejbexrbunro3fzmaorzm63dxeiza",
+        "attributes": {
+          "background": "Mixing",
+          "publish_info_layout": "Bottom",
+          "coins_layout": "Standard",
+          "coins_color": "Sliver",
+          "coin_1_rotate": {
+            "X": 0.0089,
+            "Z": 0.0038
+          },
+          "coin_2_rotate": {
+            "X": -0.0089,
+            "Z": -0.0038
+          }
+        }
+      },
+      "class_parent": {
+        "type": "ISCN",
+        "iscn_id_prefix": "iscn://likecoin-chain/FyZ13m_hgwzUC6UoaS3vFdYvdG6QXfajU3vcatw7X1c",
+        "iscn_version_at_mint": "1",
+        "account": ""
+      },
+      "to_be_revealed": false
+    }
+  }
+
+cosmosclassresponse: |
+  {
+    "class": {
+      "id": "likenft1ku4ra0e7dgknhd0wckrkxspuultynl4mgkxa3j08xeshfr2l0ujqmmvy83",
+      "name": "《所謂「我不投資」，就是 all in 在法定貨幣》",
+      "symbol": "BOOK",
+      "description": "購買本書會透過郵件收到 epub 和 pdf 檔，同時得到換領本書 NFT 的資格。書的 epub 和 pdf 歡迎轉發給朋友，讓更多人獲得相關知識。有別於粵語中「翻版」的原意，「翻版」不是「盜版」，並不違法。\n然而，翻版雖然不是盜版，卻也不是正版。唯有 NFT 的持有者，手上的 epub 和 pdf 才是正版。購買正版是一份美德，是能力所及的讀者該付出的一點承擔，代表著對作者的支持，對知識、報道和創作的尊重。\n翻版是傳播，正版是應援；傳播的同時，不要忘了鼓勵對方購買正版，讓正念 pay it forward。\n鼓勵正版，允許翻版，消滅盜版，是《所謂「我不投資」，就是 all in 在法定貨幣》分散式出版的核心理念。",
+      "uri": "https://api.ckxpress.com/book-nft/metadata?book_id=1\u0026iscn_id=iscn%3A%2F%2Flikecoin-chain%2FFyZ13m_hgwzUC6UoaS3vFdYvdG6QXfajU3vcatw7X1c%2F1",
+      "uri_hash": "",
+      "data": {
+        "@type": "/likechain.likenft.v1.ClassData",
+        "metadata": {"image":"ipfs://bafybeierwqwwtj7wynjaud2jwi5yjxfqnnthvxfky66suih5wlpjuofvey","external_url":"https://bit.ly/moneyverse-pdf","message":"唯有 NFT 的持有者，手上的 epub 和 pdf 才是正版。購買正版是一份美德，是能力所及的讀者該付出的一點承擔，代表著對作者的支持，對知識、報道和創作的尊重。","nft_meta_collection_id":"nft_book","nft_meta_collection_name":"NFT Book","nft_meta_collection_description":"NFT Book"},
+        "parent": {
+          "type": "ISCN",
+          "iscn_id_prefix": "iscn://likecoin-chain/FyZ13m_hgwzUC6UoaS3vFdYvdG6QXfajU3vcatw7X1c",
+          "iscn_version_at_mint": "1",
+          "account": ""
+        },
+        "config": {
+          "burnable": false,
+          "max_supply": "0",
+          "blind_box_config": null
+        },
+        "blind_box_state": {
+          "content_count": "0",
+          "to_be_revealed": false
+        }
+      }
+    }
+  }
+iscndataresponse: |
+  {
+    "owner": "like13f4glvg80zvfrrs7utft5p68pct4mcq7t5atf6",
+    "latest_version": "2",
+    "records": [
+      {
+        "ipld": "baguqeerafdcv7vqiyjwclvqymzodv7rjmqmpej53z5uogivhlyuza6coi3oq",
+        "data": {
+          "@context": {
+            "@vocab": "http://iscn.io/",
+            "contentMetadata": {
+              "@context": null
+            },
+            "recordParentIPLD": {
+              "@container": "@index"
+            },
+            "stakeholders": {
+              "@context": {
+                "@vocab": "http://schema.org/",
+                "contributionType": "http://iscn.io/contributionType",
+                "entity": "http://iscn.io/entity",
+                "footprint": "http://iscn.io/footprint",
+                "rewardProportion": "http://iscn.io/rewardProportion"
+              }
+            }
+          },
+          "@id": "iscn://likecoin-chain/FyZ13m_hgwzUC6UoaS3vFdYvdG6QXfajU3vcatw7X1c/2",
+          "@type": "Record",
+          "contentFingerprints": [
+            "ipfs://QmcbCCFEz8pLxDyqkZaqXVHr8eapeD6xsQGdvZzMJvQ2B4"
+          ],
+          "contentMetadata": {
+            "@context": "http://schema.org/",
+            "@type": "Book",
+            "author": "高重建",
+            "contentMetadata": {
+              "context": "http://schema.org/",
+              "description": "購買本書會透過郵件收到 epub 和 pdf 檔，同時得到換領本書 NFT 的資格。書的 epub 和 pdf 歡迎轉發給朋友，讓更多人獲得相關知識。有別於粵語中「翻版」的原意，「翻版」不是「盜版」，並不違法。\n然而，翻版雖然不是盜版，卻也不是正版。唯有 NFT 的持有者，手上的 epub 和 pdf 才是正版。購買正版是一份美德，是能力所及的讀者該付出的一點承擔，代表著對作者的支持，對知識、報道和創作的尊重。\n翻版是傳播，正版是應援；傳播的同時，不要忘了鼓勵對方購買正版，讓正念 pay it forward。\n鼓勵正版，允許翻版，消滅盜版，是《所謂「我不投資」，就是 all in 在法定貨幣》分散式出版的核心理念。",
+              "keywords": [
+                "blockchain",
+                "defi",
+                "money",
+                "hongkong",
+                "crypto",
+                "moneyverse",
+                "LikeCoin",
+                "ckxpress"
+              ],
+              "name": "《所謂「我不投資」，就是 all in 在法定貨幣》",
+              "type": "Book",
+              "url": "https://ckxpress.com/moneyverse/",
+              "usageInfo": "CC-BY 4.0",
+              "version": 1
+            },
+            "description": "甚麼是財富自由？如何才能達成財富自由？\n\nLikeCoin、DHK dao 發起人高重建以這本「死心塌地」之作，誠摯告訴你：\n在當前政經環境之下，財務自由必須被重新定義——\n「終極的財務自由，是免於被剝奪資產的自由。」\n\n學習「挖礦」、「區塊鏈」、「密碼貨幣」，才能在財富宇宙中自由穿梭。",
+            "isbn": "9786269836208",
+            "keywords": "投資,區塊鏈,密碼貨幣,金融,財經",
+            "name": "財富自由主義：金錢的多元宇宙",
+            "sameAs": [
+              "https://files.ckxpress.com/moneyverse.pdf"
+            ],
+            "url": "https://ckxpress.com/moneyverse/",
+            "usageInfo": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+            "version": 1
+          },
+          "recordNotes": "",
+          "recordParentIPLD": {
+            "/": "baguqeeraavnpcxksmo7inv3so4wjkwml7gcnit6qvalko5dsbvwkljfwdvcq"
+          },
+          "recordTimestamp": "2024-02-06T07:41:20+00:00",
+          "recordVersion": 2,
+          "stakeholders": [
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like13f4glvg80zvfrrs7utft5p68pct4mcq7t5atf6",
+                "name": "作者：高重建"
+              },
+              "rewardProportion": "50"
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like103w3wl6wst5taq4qq4epe6znqdrs3p8c9lr0c0",
+                "name": "出版：FAB DAO"
+              },
+              "rewardProportion": "20"
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like103w3wl6wst5taq4qq4epe6znqdrs3p8c9lr0c0",
+                "name": "設計：金彥良"
+              },
+              "rewardProportion": "10"
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like155vxtzlthq93tv4c2jr3mhnplqc8f2np5pra3r",
+                "name": "編輯：高盈穎"
+              },
+              "rewardProportion": "10"
+            },
+            {
+              "contributionType": "http://schema.org/author",
+              "entity": {
+                "@id": "like10ywsmztkxjl55xarxnhlxwc83z9v2hkxtsajwl",
+                "name": "Liker Land 技術支援"
+              },
+              "rewardProportion": "10"
+            }
+          ]
+        }
+      }
+    ]
+  }
+contractlevelmetadata: |
+  {
+    "symbol": "BOOK",
+    "message": "唯有 NFT 的持有者，手上的 epub 和 pdf 才是正版。購買正版是一份美德，是能力所及的讀者該付出的一點承擔，代表著對作者的支持，對知識、報道和創作的尊重。",
+    "nft_meta_collection_id": "nft_book",
+    "nft_meta_collection_name": "NFT Book",
+    "nft_meta_collection_description": "NFT Book",
+    "image":"https://nft-static-1.ckxpress.com/2-sliver-0212.webp",
+    "external_url":"https://ckxpress.com/moneyverse/",
+    "@context": "http://schema.org/",
+    "@type": "Book",
+    "author": "高重建",
+    "description": "甚麼是財富自由？如何才能達成財富自由？\n\nLikeCoin、DHK dao 發起人高重建以這本「死心塌地」之作，誠摯告訴你：\n在當前政經環境之下，財務自由必須被重新定義——\n「終極的財務自由，是免於被剝奪資產的自由。」\n\n學習「挖礦」、「區塊鏈」、「密碼貨幣」，才能在財富宇宙中自由穿梭。",
+    "isbn": "9786269836208",
+    "keywords": "投資,區塊鏈,密碼貨幣,金融,財經",
+    "name": "財富自由主義：金錢的多元宇宙",
+    "sameAs": [],
+    "usageInfo": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "version": 1,
+    "url": "https://ckxpress.com/moneyverse/",
+    "dateCreated": "2024-02-06T07:41:20+00:00",
+    "contentFingerprints": [
+      "ipfs://QmcbCCFEz8pLxDyqkZaqXVHr8eapeD6xsQGdvZzMJvQ2B4"
+    ],
+    "attributes": [{
+      "trait_type": "background",
+      "value": "Mixing"
+    },{
+      "display_type": "number",
+      "trait_type": "coin_1_rotate_X",
+      "value": 0.0089
+    },{
+      "display_type": "number",
+      "trait_type": "coin_1_rotate_Z",
+      "value": 0.0038
+    },{
+      "display_type": "number",
+      "trait_type": "coin_2_rotate_X",
+      "value": -0.0089
+    },{
+      "display_type": "number",
+      "trait_type": "coin_2_rotate_Z",
+      "value": -0.0038
+    },{
+      "trait_type": "coins_color",
+      "value": "Sliver"
+    },{
+      "trait_type": "coins_layout",
+      "value": "Standard"
+    },{
+      "trait_type": "publish_info_layout",
+      "value": "Bottom"
+    },{
+      "trait_type": "Author",
+      "value": "高重建"
+    }],
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": [{
+        "@type": "EntryPoint",
+        "contentType": "application/pdf",
+        "url": "https://files.ckxpress.com/moneyverse.pdf",
+        "name": "moneyverse.pdf"
+      }]
+    },
+    "likecoin": {
+      "iscnIdPrefix": "iscn://likecoin-chain/FyZ13m_hgwzUC6UoaS3vFdYvdG6QXfajU3vcatw7X1c",
+      "classId": "likenft1ku4ra0e7dgknhd0wckrkxspuultynl4mgkxa3j08xeshfr2l0ujqmmvy83",
+      "nftId": "moneyverse-0878",
+    }
+  }
