@@ -60,6 +60,7 @@
               :liker-id="likerId"
               :avatar="avatar"
               :cosmos-address="cosmosAddress"
+              :email="email"
               :current-balance="currentBalance"
               :eth-address="ethAddress"
               :estimated-balance="estimatedBalance"
@@ -73,6 +74,7 @@
               :liker-id="likerId"
               :avatar="avatar"
               :cosmos-address="cosmosAddress"
+              :email="email"
               :current-balance="currentBalance"
               :eth-address="ethAddress"
               :estimated-balance="estimatedBalance"
@@ -325,6 +327,14 @@ export default Vue.extend({
         return this.currentStep.cosmosAddress;
       }
       return null;
+    },
+    email(): string | null {
+      let email: string | null = null;
+      if ('connection' in this.currentStep) {
+        const { user } = this.currentStep.connection;
+        email = user?.primary_email ?? null;
+      }
+      return email;
     },
     currentBalance(): ChainCoin | null {
       if ('currentBalance' in this.currentStep) {
