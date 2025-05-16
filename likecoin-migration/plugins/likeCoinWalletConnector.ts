@@ -18,3 +18,11 @@ declare module 'vue/types/vue' {
     $likeCoinWalletConnector: LikeCoinWalletConnector;
   }
 }
+
+declare module '@likecoin/wallet-connector' {
+  interface LikeCoinWalletConnectorConnectionResult {
+    user?: {
+      primary_email: string;
+    };
+  }
+}

@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@cosmjs/stargate": "^0.28.10",
-    "@likecoin/evm-wallet-connector": "^0.1.0-alpha.8",
+    "@likecoin/evm-wallet-connector": "^0.1.0-alpha.10",
     "@likecoin/wallet-connector": "^0.27.1",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/i18n": "^7.3.1",

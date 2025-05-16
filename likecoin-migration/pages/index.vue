@@ -60,6 +60,8 @@
               :liker-id="likerId"
               :avatar="avatar"
               :cosmos-address="cosmosAddress"
+              :email="email"
+              :preferred-evm-provider-id="preferredEvmProviderId"
               :current-balance="currentBalance"
               :eth-address="ethAddress"
               :estimated-balance="estimatedBalance"
@@ -73,6 +75,8 @@
               :liker-id="likerId"
               :avatar="avatar"
               :cosmos-address="cosmosAddress"
+              :email="email"
+              :preferred-evm-provider-id="preferredEvmProviderId"
               :current-balance="currentBalance"
               :eth-address="ethAddress"
               :estimated-balance="estimatedBalance"
@@ -323,6 +327,42 @@ export default Vue.extend({
     cosmosAddress(): string | null {
       if ('cosmosAddress' in this.currentStep) {
         return this.currentStep.cosmosAddress;
+      }
+      return null;
+    },
+    email(): string | null {
+      let email: string | null = null;
+      if ('connection' in this.currentStep) {
+        const { user } = this.currentStep.connection;
+        email = user?.primary_email ?? null;
+      }
+      return email;
+    },
+    preferredEvmProviderId(): string | null {
+      if ('connection' in this.currentStep) {
+        const { method } = this.currentStep.connection;
+        switch (method) {
+          case 'liker-id':
+          case 'likerland-app':
+            return 'email';
+
+          case 'keplr':
+          case 'keplr-mobile':
+            return 'app.keplr';
+
+          case 'cosmostation':
+          case 'cosmostation-mobile':
+            return 'io.cosmostation';
+
+          case 'leap':
+            return 'io.leapwallet.LeapWallet';
+
+          case 'metamask-leap':
+            return 'io.metamask';
+
+          default:
+            break;
+        }
       }
       return null;
     },
