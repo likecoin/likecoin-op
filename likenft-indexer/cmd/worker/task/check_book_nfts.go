@@ -29,6 +29,7 @@ func NewCheckBookNFTsTask() (*asynq.Task, error) {
 func HandleCheckBookNFTs(ctx context.Context, t *asynq.Task) error {
 	logger := appcontext.LoggerFromContext(ctx)
 	asynqClient := appcontext.AsynqClientFromContext(ctx)
+	cfg := appcontext.ConfigFromContext(ctx)
 
 	mylogger := logger.WithGroup("HandleCheckBookNFTs")
 
@@ -54,7 +55,7 @@ func HandleCheckBookNFTs(ctx context.Context, t *asynq.Task) error {
 
 	mylogger.Info(fmt.Sprintf("%d nft classes found", len(nftClasses)))
 
-	err = handleCheckBookNFTs_enqueueAcquireBookNFTEvents(mylogger, asynqClient, nftClasses)
+	err = handleCheckBookNFTs_enqueueAcquireBookNFTEvents(mylogger, asynqClient, nftClasses, cfg.BookNFTEventsQueryBatchSize)
 	if err != nil {
 		mylogger.Error("handleCheckBookNFTs_enqueueAcquireBookNFTEvents", "err", err)
 	}
@@ -63,7 +64,7 @@ func HandleCheckBookNFTs(ctx context.Context, t *asynq.Task) error {
 }
 
 func handleCheckBookNFTs_enqueueAcquireBookNFTEvents(
-	logger *slog.Logger, asynqClient *asynq.Client, nftClasses []*ent.NFTClass,
+	logger *slog.Logger, asynqClient *asynq.Client, nftClasses []*ent.NFTClass, batchSize int,
 ) error {
 
 	var addresses = make([]string, len(nftClasses))
@@ -71,11 +72,19 @@ func handleCheckBookNFTs_enqueueAcquireBookNFTEvents(
 		addresses[i] = nftClass.Address
 	}
 
-	myLogger := logger.With("batchSize", len(addresses))
+	myLogger := logger.With("addressCount", len(addresses), "batchSize", batchSize)
 	myLogger.Info("Enqueueing AcquireBookNFTEvents tasks...")
-	for _, address := range addresses {
-		mylogger := myLogger.With("address", address)
-		t, err := NewAcquireBookNFTEventsTask([]string{address})
+
+	for i := 0; i < len(addresses); i += batchSize {
+		end := i + batchSize
+		if end > len(addresses) {
+			end = len(addresses)
+		}
+
+		batch := addresses[i:end]
+		mylogger := myLogger.With("batchStartIndex", i, "batchEndIndex", end-1, "batchAddresses", batch)
+
+		t, err := NewAcquireBookNFTEventsTask(batch)
 		if err != nil {
 			mylogger.Error("Cannot create task", "err", err)
 			continue
