@@ -24,6 +24,7 @@ type EnvConfig struct {
 
 	EvmEventLikeProtocolInitialBlockHeight uint64 `envconfig:"EVM_EVENT_LIKE_PROTOCOL_INITIAL_BLOCK_HEIGHT" default:"1"`
 	EvmEventQueryNumberOfBlocksLimit       uint64 `envconfig:"EVM_EVENT_QUERY_NUMBER_OF_BLOCKS_LIMIT"`
+	BookNFTEventsQueryBatchSize            int    `envconfig:"BOOK_NFT_EVENTS_QUERY_BATCH_SIZE" default:"10"`
 }
 
 func LoadEnvConfigFromEnv() (*EnvConfig, error) {
