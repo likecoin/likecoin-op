@@ -92,7 +92,7 @@ func HandleIndexActionCheckLikeProtocol(ctx context.Context, t *asynq.Task) erro
 			"partition",
 			fmt.Sprintf("%d/%d", i, len(blockStarts)),
 		)
-		newBlockNumber, _, err := acquirer.Acquire(
+		newBlockNumber, evmEvents, err := acquirer.Acquire(
 			ctx,
 			mylogger,
 			blockStart,
@@ -102,15 +102,17 @@ func HandleIndexActionCheckLikeProtocol(ctx context.Context, t *asynq.Task) erro
 			return err
 		}
 
-		task, err := NewIndexActionCheckReceivedEventsTask(p.ContractAddress)
-		if err != nil {
-			mylogger.
-				WarnContext(ctx, "cannot create task. should eventually picked up by periodic worker. skip.", "err", err)
-		}
-		_, err = asynqClient.EnqueueContext(ctx, task, asynq.MaxRetry(0))
-		if err != nil {
-			mylogger.
-				WarnContext(ctx, "cannot enqueue task. should eventually picked up by periodic worker. skip.", "err", err)
+		if len(evmEvents) > 0 {
+			task, err := NewIndexActionCheckReceivedEventsTask(p.ContractAddress)
+			if err != nil {
+				mylogger.
+					WarnContext(ctx, "cannot create task. should eventually picked up by periodic worker. skip.", "err", err)
+			}
+			_, err = asynqClient.EnqueueContext(ctx, task, asynq.MaxRetry(0))
+			if err != nil {
+				mylogger.
+					WarnContext(ctx, "cannot enqueue task. should eventually picked up by periodic worker. skip.", "err", err)
+			}
 		}
 
 		err = likeProtocolRepository.CreateOrUpdateLatestEventBlockHeight(

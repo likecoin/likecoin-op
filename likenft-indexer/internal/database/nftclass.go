@@ -9,6 +9,7 @@ import (
 	"likenft-indexer/ent"
 	"likenft-indexer/ent/nft"
 	"likenft-indexer/ent/nftclass"
+	"likenft-indexer/ent/predicate"
 	"likenft-indexer/ent/schema/typeutil"
 	"likenft-indexer/internal/evm/model"
 
@@ -343,9 +344,13 @@ func (r *nftClassRepository) UpdateNFTClassesLatestEventBlockNumber(
 	latestEventBlockNumber typeutil.Uint64,
 ) error {
 	return WithTx(ctx, r.dbService.Client(), func(tx *ent.Tx) error {
+		predicates := make([]predicate.NFTClass, 0, len(addresses))
+		for _, address := range addresses {
+			predicates = append(predicates, nftclass.AddressEqualFold(address))
+		}
 		return tx.NFTClass.
 			Update().
-			Where(nftclass.AddressIn(addresses...)).
+			Where(nftclass.Or(predicates...)).
 			SetLatestEventBlockNumber(latestEventBlockNumber).Exec(ctx)
 	})
 }
