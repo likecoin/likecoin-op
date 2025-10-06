@@ -47,7 +47,7 @@ func HandleCheckBookNFTs(ctx context.Context, t *asynq.Task) error {
 		return fmt.Errorf("json.Unmarshal: %v", err)
 	}
 
-	queueInfo, err := inspector.GetQueueInfo(TypeAcquireBookNFTEventsTaskPayload)
+	queueInfo, err := inspector.GetQueueInfo(TypeAcquireBookNFTEventsTaskPayloadWithLifecyclePayload)
 	currentLength := 0
 	if err != nil {
 		mylogger.Info("get queue info error", "err", err)
