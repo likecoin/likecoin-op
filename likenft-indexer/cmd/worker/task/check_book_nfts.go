@@ -48,10 +48,12 @@ func HandleCheckBookNFTs(ctx context.Context, t *asynq.Task) error {
 	}
 
 	queueInfo, err := inspector.GetQueueInfo(TypeAcquireBookNFTEventsTaskPayload)
+	currentLength := 0
 	if err != nil {
-		return fmt.Errorf("inspector.GetQueueInfo: %v", err)
+		mylogger.Info("get queue info error", "err", err)
+	} else {
+		currentLength = queueInfo.Pending + queueInfo.Active
 	}
-	currentLength := queueInfo.Pending + queueInfo.Active
 	numberOfItemsToBeFetched := config.TaskAcquireBookNFTMaxQueueLength - currentLength
 
 	dbService := database.New()

@@ -82,6 +82,14 @@ func HandleIndexActionCheckBookNFT(ctx context.Context, t *asynq.Task) error {
 		[]string{p.ContractAddress},
 	)
 
+	mylogger.Info(
+		"Begin to acquire events",
+		"contractAddress", p.ContractAddress,
+		"totalPartitions", len(blockStarts),
+		"fromBlock", nftClass.LatestEventBlockNumber,
+		"toBlock", latestBlockNumber,
+	)
+
 	for i, blockStart := range blockStarts {
 		select {
 		case <-ctx.Done():
