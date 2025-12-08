@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"likenft-indexer/internal/api/openapi/model"
+	"likenft-indexer/internal/database"
 	"likenft-indexer/openapi/api"
 )
 
@@ -14,9 +15,19 @@ func (h *OpenAPIHandler) TokenBookNFTsByAccount(ctx context.Context, params api.
 		Reverse:         params.Reverse,
 	}
 
+	metadataEQ := database.ContractLevelMetadataFilterEquatable(
+		params.ContractLevelMetadataEq.Or(api.ContractLevelMetadataEQ{}),
+	)
+
+	metadataNEQ := database.ContractLevelMetadataFilterEquatable(
+		params.ContractLevelMetadataNeq.Or(api.ContractLevelMetadataNEQ{}),
+	)
+
 	nftClasses, count, nextKey, err := h.nftClassRepository.QueryNFTClassesByAccountTokens(
 		ctx,
 		params.EvmAddress,
+		metadataEQ,
+		metadataNEQ,
 		pagination.ToEntPagination(),
 	)
 

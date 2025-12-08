@@ -3704,6 +3704,10 @@ type TokenBookNFTsByAccountParams struct {
 	PaginationKey OptInt
 	// Reverse.
 	Reverse OptBool
+	// Contract_level_metadata_eq.
+	ContractLevelMetadataEq OptContractLevelMetadataEQ
+	// Contract_level_metadata_neq.
+	ContractLevelMetadataNeq OptContractLevelMetadataNEQ
 }
 
 func unpackTokenBookNFTsByAccountParams(packed middleware.Parameters) (params TokenBookNFTsByAccountParams) {
@@ -3739,6 +3743,24 @@ func unpackTokenBookNFTsByAccountParams(packed middleware.Parameters) (params To
 		}
 		if v, ok := packed[key]; ok {
 			params.Reverse = v.(OptBool)
+		}
+	}
+	{
+		key := middleware.ParameterKey{
+			Name: "contract_level_metadata_eq",
+			In:   "query",
+		}
+		if v, ok := packed[key]; ok {
+			params.ContractLevelMetadataEq = v.(OptContractLevelMetadataEQ)
+		}
+	}
+	{
+		key := middleware.ParameterKey{
+			Name: "contract_level_metadata_neq",
+			In:   "query",
+		}
+		if v, ok := packed[key]; ok {
+			params.ContractLevelMetadataNeq = v.(OptContractLevelMetadataNEQ)
 		}
 	}
 	return params
@@ -3920,6 +3942,66 @@ func decodeTokenBookNFTsByAccountParams(args [1]string, argsEscaped bool, r *htt
 	}(); err != nil {
 		return params, &ogenerrors.DecodeParamError{
 			Name: "reverse",
+			In:   "query",
+			Err:  err,
+		}
+	}
+	// Decode query: contract_level_metadata_eq.
+	if err := func() error {
+		cfg := uri.QueryParameterDecodingConfig{
+			Name:    "contract_level_metadata_eq",
+			Style:   uri.QueryStyleForm,
+			Explode: false,
+		}
+
+		if err := q.HasParam(cfg); err == nil {
+			if err := q.DecodeParam(cfg, func(d uri.Decoder) error {
+				var paramsDotContractLevelMetadataEqVal ContractLevelMetadataEQ
+				if err := func() error {
+					return paramsDotContractLevelMetadataEqVal.DecodeURI(d)
+				}(); err != nil {
+					return err
+				}
+				params.ContractLevelMetadataEq.SetTo(paramsDotContractLevelMetadataEqVal)
+				return nil
+			}); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		return params, &ogenerrors.DecodeParamError{
+			Name: "contract_level_metadata_eq",
+			In:   "query",
+			Err:  err,
+		}
+	}
+	// Decode query: contract_level_metadata_neq.
+	if err := func() error {
+		cfg := uri.QueryParameterDecodingConfig{
+			Name:    "contract_level_metadata_neq",
+			Style:   uri.QueryStyleForm,
+			Explode: false,
+		}
+
+		if err := q.HasParam(cfg); err == nil {
+			if err := q.DecodeParam(cfg, func(d uri.Decoder) error {
+				var paramsDotContractLevelMetadataNeqVal ContractLevelMetadataNEQ
+				if err := func() error {
+					return paramsDotContractLevelMetadataNeqVal.DecodeURI(d)
+				}(); err != nil {
+					return err
+				}
+				params.ContractLevelMetadataNeq.SetTo(paramsDotContractLevelMetadataNeqVal)
+				return nil
+			}); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		return params, &ogenerrors.DecodeParamError{
+			Name: "contract_level_metadata_neq",
 			In:   "query",
 			Err:  err,
 		}

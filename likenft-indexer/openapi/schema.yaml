@@ -104,6 +104,8 @@ paths:
         - $ref: "#/components/parameters/PaginationRequestLimit"
         - $ref: "#/components/parameters/PaginationRequestKey"
         - $ref: "#/components/parameters/PaginationRequestReverse"
+        - $ref: "#/components/parameters/ContractLevelMetadataEQ"
+        - $ref: "#/components/parameters/ContractLevelMetadataNEQ"
       responses:
         "200":
           description: BookNFT with requested ID was found

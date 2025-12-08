@@ -2264,6 +2264,14 @@ func (s *Server) handleTokenBookNFTsByAccountRequest(args [1]string, argsEscaped
 					Name: "reverse",
 					In:   "query",
 				}: params.Reverse,
+				{
+					Name: "contract_level_metadata_eq",
+					In:   "query",
+				}: params.ContractLevelMetadataEq,
+				{
+					Name: "contract_level_metadata_neq",
+					In:   "query",
+				}: params.ContractLevelMetadataNeq,
 			},
 			Raw: r,
 		}
