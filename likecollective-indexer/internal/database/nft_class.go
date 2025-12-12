@@ -87,7 +87,18 @@ func (r *nftClassRepository) QueryNFTClasses(
 
 	nextKey = 0
 	if len(nftClasses) > 0 {
-		nextKey = nftClasses[len(nftClasses)-1].ID
+		usingCustomSort := pagination.SortBy != nil && pagination.SortOrder != nil
+		if usingCustomSort {
+			currentOffset := 0
+			if pagination.Key != nil {
+				currentOffset = *pagination.Key
+			}
+			if currentOffset+len(nftClasses) < count {
+				nextKey = currentOffset + len(nftClasses)
+			}
+		} else {
+			nextKey = nftClasses[len(nftClasses)-1].ID
+		}
 	}
 
 	return nftClasses, count, nextKey, nil

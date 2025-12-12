@@ -412,6 +412,30 @@ func (s *BookNftsGetOK) Validate() error {
 	return nil
 }
 
+func (s BookNftsGetSortBy) Validate() error {
+	switch s {
+	case "staked_amount":
+		return nil
+	case "last_staked_at":
+		return nil
+	case "number_of_stakers":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
+}
+
+func (s BookNftsGetSortOrder) Validate() error {
+	switch s {
+	case "asc":
+		return nil
+	case "desc":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
+}
+
 func (s *BookNftsTimeFrameDeltaGetOK) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer

@@ -1286,6 +1286,14 @@ func (s *Server) handleBookNftsGetRequest(args [0]string, argsEscaped bool, w ht
 					Name: "filter_account_in",
 					In:   "query",
 				}: params.FilterAccountIn,
+				{
+					Name: "sort_by",
+					In:   "query",
+				}: params.SortBy,
+				{
+					Name: "sort_order",
+					In:   "query",
+				}: params.SortOrder,
 			},
 			Raw: r,
 		}

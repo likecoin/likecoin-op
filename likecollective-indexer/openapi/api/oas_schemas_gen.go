@@ -446,6 +446,95 @@ func (s *BookNftsGetOK) SetData(val []BookNFT) {
 	s.Data = val
 }
 
+type BookNftsGetSortBy string
+
+const (
+	BookNftsGetSortByStakedAmount    BookNftsGetSortBy = "staked_amount"
+	BookNftsGetSortByLastStakedAt    BookNftsGetSortBy = "last_staked_at"
+	BookNftsGetSortByNumberOfStakers BookNftsGetSortBy = "number_of_stakers"
+)
+
+// AllValues returns all BookNftsGetSortBy values.
+func (BookNftsGetSortBy) AllValues() []BookNftsGetSortBy {
+	return []BookNftsGetSortBy{
+		BookNftsGetSortByStakedAmount,
+		BookNftsGetSortByLastStakedAt,
+		BookNftsGetSortByNumberOfStakers,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s BookNftsGetSortBy) MarshalText() ([]byte, error) {
+	switch s {
+	case BookNftsGetSortByStakedAmount:
+		return []byte(s), nil
+	case BookNftsGetSortByLastStakedAt:
+		return []byte(s), nil
+	case BookNftsGetSortByNumberOfStakers:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *BookNftsGetSortBy) UnmarshalText(data []byte) error {
+	switch BookNftsGetSortBy(data) {
+	case BookNftsGetSortByStakedAmount:
+		*s = BookNftsGetSortByStakedAmount
+		return nil
+	case BookNftsGetSortByLastStakedAt:
+		*s = BookNftsGetSortByLastStakedAt
+		return nil
+	case BookNftsGetSortByNumberOfStakers:
+		*s = BookNftsGetSortByNumberOfStakers
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+type BookNftsGetSortOrder string
+
+const (
+	BookNftsGetSortOrderAsc  BookNftsGetSortOrder = "asc"
+	BookNftsGetSortOrderDesc BookNftsGetSortOrder = "desc"
+)
+
+// AllValues returns all BookNftsGetSortOrder values.
+func (BookNftsGetSortOrder) AllValues() []BookNftsGetSortOrder {
+	return []BookNftsGetSortOrder{
+		BookNftsGetSortOrderAsc,
+		BookNftsGetSortOrderDesc,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s BookNftsGetSortOrder) MarshalText() ([]byte, error) {
+	switch s {
+	case BookNftsGetSortOrderAsc:
+		return []byte(s), nil
+	case BookNftsGetSortOrderDesc:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *BookNftsGetSortOrder) UnmarshalText(data []byte) error {
+	switch BookNftsGetSortOrder(data) {
+	case BookNftsGetSortOrderAsc:
+		*s = BookNftsGetSortOrderAsc
+		return nil
+	case BookNftsGetSortOrderDesc:
+		*s = BookNftsGetSortOrderDesc
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
 type BookNftsTimeFrameDeltaGetOK struct {
 	Pagination BookNftsTimeFrameDeltaGetOKPagination `json:"pagination"`
 	Data       []BookNFTStakeDelta                   `json:"data"`
@@ -1160,6 +1249,98 @@ func (o NilDateTime) Get() (v time.Time, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o NilDateTime) Or(d time.Time) time.Time {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptBookNftsGetSortBy returns new OptBookNftsGetSortBy with value set to v.
+func NewOptBookNftsGetSortBy(v BookNftsGetSortBy) OptBookNftsGetSortBy {
+	return OptBookNftsGetSortBy{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptBookNftsGetSortBy is optional BookNftsGetSortBy.
+type OptBookNftsGetSortBy struct {
+	Value BookNftsGetSortBy
+	Set   bool
+}
+
+// IsSet returns true if OptBookNftsGetSortBy was set.
+func (o OptBookNftsGetSortBy) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptBookNftsGetSortBy) Reset() {
+	var v BookNftsGetSortBy
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptBookNftsGetSortBy) SetTo(v BookNftsGetSortBy) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptBookNftsGetSortBy) Get() (v BookNftsGetSortBy, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptBookNftsGetSortBy) Or(d BookNftsGetSortBy) BookNftsGetSortBy {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptBookNftsGetSortOrder returns new OptBookNftsGetSortOrder with value set to v.
+func NewOptBookNftsGetSortOrder(v BookNftsGetSortOrder) OptBookNftsGetSortOrder {
+	return OptBookNftsGetSortOrder{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptBookNftsGetSortOrder is optional BookNftsGetSortOrder.
+type OptBookNftsGetSortOrder struct {
+	Value BookNftsGetSortOrder
+	Set   bool
+}
+
+// IsSet returns true if OptBookNftsGetSortOrder was set.
+func (o OptBookNftsGetSortOrder) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptBookNftsGetSortOrder) Reset() {
+	var v BookNftsGetSortOrder
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptBookNftsGetSortOrder) SetTo(v BookNftsGetSortOrder) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptBookNftsGetSortOrder) Get() (v BookNftsGetSortOrder, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptBookNftsGetSortOrder) Or(d BookNftsGetSortOrder) BookNftsGetSortOrder {
 	if v, ok := o.Get(); ok {
 		return v
 	}

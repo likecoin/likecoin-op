@@ -255,6 +255,24 @@ paths:
         - $ref: "#/components/parameters/PaginationRequestReverse"
         - $ref: "#/components/parameters/FilterBookNFTIn"
         - $ref: "#/components/parameters/FilterAccountIn"
+        - name: sort_by
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - staked_amount
+              - last_staked_at
+              - number_of_stakers
+        - name: sort_order
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
 
       responses:
         "200":

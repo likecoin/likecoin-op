@@ -51,6 +51,10 @@ type NFTClassPagination struct {
 	PaginationKey api.OptInt
 	// Reverse.
 	Reverse api.OptBool
+	// Sort by.
+	SortBy api.OptBookNftsGetSortBy
+	// Sort order.
+	SortOrder api.OptBookNftsGetSortOrder
 }
 
 func (p *NFTClassPagination) ToEntPagination() database.NFTClassPagination {
@@ -66,9 +70,23 @@ func (p *NFTClassPagination) ToEntPagination() database.NFTClassPagination {
 
 	reverse := FromOpt(p.Reverse)
 
+	var sortBy *string
+	if p.SortBy.Set {
+		s := string(p.SortBy.Value)
+		sortBy = &s
+	}
+
+	var sortOrder *string
+	if p.SortOrder.Set {
+		s := string(p.SortOrder.Value)
+		sortOrder = &s
+	}
+
 	return database.NFTClassPagination{
-		Limit:   limit,
-		Key:     key,
-		Reverse: reverse,
+		Limit:     limit,
+		Key:       key,
+		Reverse:   reverse,
+		SortBy:    sortBy,
+		SortOrder: sortOrder,
 	}
 }

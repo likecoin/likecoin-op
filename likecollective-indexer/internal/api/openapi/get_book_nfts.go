@@ -20,6 +20,8 @@ func (h *openAPIHandler) BookNftsGet(
 		PaginationKey:   params.PaginationKey,
 		PaginationLimit: params.PaginationLimit,
 		Reverse:         params.Reverse,
+		SortBy:          params.SortBy,
+		SortOrder:       params.SortOrder,
 	}
 
 	nftClasses, count, nextKey, err := h.nftClassRepository.QueryNFTClasses(
