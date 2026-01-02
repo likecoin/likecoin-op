@@ -28,5 +28,9 @@ func (h *MigrationRouter) Router() *http.ServeMux {
 		AsynqClient: h.AsynqClient,
 	})
 
+	router.Handle("DELETE /migration/{migrationId}", &FailLikeCoinMigrationHandler{
+		Db: h.Db,
+	})
+
 	return router
 }
