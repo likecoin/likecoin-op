@@ -320,6 +320,14 @@
         <!-- Action Buttons -->
         <div :class="['flex', 'justify-end', 'gap-4', 'mt-4']">
           <AppButton
+            v-if="pendingMigration"
+            variant="danger"
+            :loading="deleting"
+            @click="promptFailLikeCoinMigration(pendingMigration)"
+          >
+            {{ $t("migration.fail_likecoin_migration") }}
+          </AppButton>
+          <AppButton
             v-if="failedMigration"
             variant="warning"
             :loading="deleting"
@@ -338,6 +346,7 @@ import { format } from "date-fns";
 import numeral from "numeral";
 import Vue from "vue";
 
+import { makeFailLikeCoinMigrationAPI } from "~/apis/FailLikeCoinMigration";
 import { makeGetLikeCoinMigrationsAPI } from "~/apis/GetLikeCoinMigration";
 import {
   LikeCoinMigration,
@@ -388,6 +397,15 @@ export default Vue.extend({
     },
     failedMigration(): LikeCoinMigration | null {
       if (this.migration != null && this.migration.status === "failed") {
+        return this.migration;
+      }
+      return null;
+    },
+    pendingMigration(): LikeCoinMigration | null {
+      if (
+        this.migration != null &&
+        this.migration.status === "pending_cosmos_tx_hash"
+      ) {
         return this.migration;
       }
       return null;
@@ -455,6 +473,26 @@ export default Vue.extend({
         confirm(this.$t("migration.confirm_retry_likecoin_migration") as string)
       ) {
         await this.retryLikeCoinMigration(failedMigration);
+      }
+    },
+
+    async failLikeCoinMigration(pendingMigration: LikeCoinMigration) {
+      this.deleting = true;
+      try {
+        const resp = await makeFailLikeCoinMigrationAPI(pendingMigration.id)(
+          this.$apiClient
+        )();
+        this.migration = resp.migration;
+      } finally {
+        this.deleting = false;
+      }
+    },
+
+    async promptFailLikeCoinMigration(pendingMigration: LikeCoinMigration) {
+      if (
+        confirm(this.$t("migration.confirm_fail_likecoin_migration") as string)
+      ) {
+        await this.failLikeCoinMigration(pendingMigration);
       }
     },
 

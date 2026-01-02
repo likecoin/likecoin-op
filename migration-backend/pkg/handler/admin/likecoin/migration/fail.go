@@ -68,5 +68,5 @@ func (h *FailLikeCoinMigrationHandler) handle(migrationId uint64) (*api_model.Li
 		return nil, err
 	}
 
-	return api_model.LikeCoinMigrationFromModel(*m), nil
+	return api_model.LikeCoinMigrationFromModel(m), nil
 }
