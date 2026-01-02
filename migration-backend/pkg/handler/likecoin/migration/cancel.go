@@ -36,7 +36,7 @@ func (h *CancelLikeCoinMigrationHandler) ServeHTTP(w http.ResponseWriter, r *htt
 		return
 	}
 
-	handler.SendJSON(w, http.StatusOK, api_model.LikeCoinMigrationFromModel(*m))
+	handler.SendJSON(w, http.StatusOK, api_model.LikeCoinMigrationFromModel(m))
 }
 
 func (h *CancelLikeCoinMigrationHandler) handle(cosmosAddress string) (*model.LikeCoinMigration, error) {
