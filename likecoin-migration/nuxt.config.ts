@@ -9,18 +9,49 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'likecoin-migration',
+    title: 'LikeCoin v3 Migration - Upgrade Your Tokens',
     htmlAttrs: {
       lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Upgrade your LikeCoin v2 tokens to v3. Connect your wallet to migrate your Liker ID and access the latest features. Join the 10M LIKE rewards pool by staking on 3ook.com.',
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'LikeCoin v3 Migration - Upgrade Your Tokens',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content:
+          'Upgrade your LikeCoin v2 tokens to v3. Connect your wallet to migrate your Liker ID and access the latest features. Join the 10M LIKE rewards pool by staking on 3ook.com.',
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: 'https://v3-token-migration.like.co/cover.png',
+      },
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: 'https://v3-token-migration.like.co',
+      },
+      {
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'website',
+      },
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       {
         rel: 'preconnect',
