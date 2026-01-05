@@ -37,7 +37,7 @@
     },
     "introduction": {
       "confirm": "下一步",
-      "text": "LikeCoin 已經升級 v3 並遷移至以太坊 Base 鏈。請於 2026 年 2 月 2 日前升級你的 LikeCoin v2 token、以免招致損失。\n\n如有 LikeCoin 正質押於驗證者，請先解除所有質押，待通證於 21 天後返回錢包，再執行升級程式。",
+      "text": "LikeCoin 已經升級 v3 並遷移至以太坊 Base 鏈。請於 2026 年 2 月 2 日前升級你的 LikeCoin v2 token、以免招致損失。\n\n如有 LikeCoin 正質押於驗證者，請先解除所有質押，待通證於 21 天後返回錢包，再執行升級程式。\n\n以 Matters / Facebook / Twitter 帳號註冊的用戶，連接 v2 LikeCoin 錢包時，請以電郵地址登入，如忘記密碼，可使用 Reset password 功能。",
       "title": "簡介"
     },
     "migration-completed": {
