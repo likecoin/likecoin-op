@@ -321,7 +321,7 @@
         <div :class="['flex', 'justify-end', 'gap-4', 'mt-4']">
           <AppButton
             v-if="pendingMigration"
-            variant="danger"
+            variant="warning"
             :loading="deleting"
             @click="promptFailLikeCoinMigration(pendingMigration)"
           >
@@ -483,6 +483,10 @@ export default Vue.extend({
           this.$apiClient
         )();
         this.migration = resp.migration;
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
+        alert(`${this.$t("migration.error_failing")}: ${errorMessage}`);
       } finally {
         this.deleting = false;
       }

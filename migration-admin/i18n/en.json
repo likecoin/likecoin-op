@@ -21,6 +21,7 @@
     "confirm_retry_likecoin_migration": "Are you sure you want to retry this likecoin migration? This cannot be undone.",
     "delete_migration": "Delete Migration",
     "error_details": "Error Details",
+    "error_failing": "Error failing migration",
     "error_fetching": "Error fetching transaction details",
     "fail_likecoin_migration": "Fail LikeCoin Migration",
     "hashes": "Transaction Hashes",
