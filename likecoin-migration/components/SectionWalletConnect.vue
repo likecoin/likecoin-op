@@ -113,6 +113,7 @@
         <AppButton
           variant="secondary"
           :class="['w-full']"
+          :disabled="isV3ButtonDisabled"
           @click="handleConnectTargetWalletClick"
         >
           {{ $t('section.wallet-connect.connect-migration-wallet') }}
@@ -216,6 +217,16 @@ export default Vue.extend({
     estimatedBalance: {
       type: Object as PropType<ViewCoin | null>,
       default: null,
+    },
+    isV2WalletDataFetching: {
+      type: Boolean as PropType<boolean>,
+      default: false,
+    },
+  },
+
+  computed: {
+    isV3ButtonDisabled(): boolean {
+      return this.isV2WalletDataFetching;
     },
   },
 

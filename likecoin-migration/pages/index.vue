@@ -75,6 +75,7 @@
               :current-balance="currentBalance"
               :eth-address="ethAddress"
               :estimated-balance="estimatedBalance"
+              :is-v2-wallet-data-fetching="isV2WalletDataFetching"
               @likeCoinWalletConnected="handleLikeCoinWalletConnected"
               @likeCoinEVMWalletConnected="handleLikeCoinEVMWalletConnected"
             />
@@ -500,6 +501,15 @@ export default Vue.extend({
         return this.currentStep.cancelReason;
       }
       return this.migration?.failed_reason ?? null;
+    },
+
+    isV2WalletDataFetching(): boolean {
+      return (
+        this.isTransitioning &&
+        this.currentStep.step === 2 &&
+        (this.currentStep.state === 'CosmosConnected' ||
+          this.currentStep.state === 'LikerIdResolved')
+      );
     },
 
     getUserProfile(): GetUserProfile {
