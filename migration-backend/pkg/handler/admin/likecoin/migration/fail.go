@@ -16,6 +16,10 @@ import (
 
 const MinMigrationAgeForAdminCancel = 5 * time.Minute
 
+type FailLikeCoinMigrationResponseBody struct {
+	Migration *api_model.LikeCoinMigration `json:"migration,omitempty"`
+}
+
 type FailLikeCoinMigrationHandler struct {
 	Db *sql.DB
 }
@@ -54,7 +58,9 @@ func (h *FailLikeCoinMigrationHandler) ServeHTTP(w http.ResponseWriter, r *http.
 		return
 	}
 
-	handler.SendJSON(w, http.StatusOK, migration)
+	handler.SendJSON(w, http.StatusOK, &FailLikeCoinMigrationResponseBody{
+		Migration: migration,
+	})
 }
 
 func (h *FailLikeCoinMigrationHandler) handle(migrationId uint64) (*api_model.LikeCoinMigration, error) {
