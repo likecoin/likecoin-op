@@ -1831,6 +1831,31 @@ func (s *TokensByAccountOK) SetData(val []NFT) {
 	s.Data = val
 }
 
+type TokensByBookNFTAndAccountOK struct {
+	Pagination PaginationResponse `json:"pagination"`
+	Data       []NFT              `json:"data"`
+}
+
+// GetPagination returns the value of Pagination.
+func (s *TokensByBookNFTAndAccountOK) GetPagination() PaginationResponse {
+	return s.Pagination
+}
+
+// GetData returns the value of Data.
+func (s *TokensByBookNFTAndAccountOK) GetData() []NFT {
+	return s.Data
+}
+
+// SetPagination sets the value of Pagination.
+func (s *TokensByBookNFTAndAccountOK) SetPagination(val PaginationResponse) {
+	s.Pagination = val
+}
+
+// SetData sets the value of Data.
+func (s *TokensByBookNFTAndAccountOK) SetData(val []NFT) {
+	s.Data = val
+}
+
 type TokensByBookNFTOK struct {
 	Pagination PaginationResponse `json:"pagination"`
 	Data       []NFT              `json:"data"`

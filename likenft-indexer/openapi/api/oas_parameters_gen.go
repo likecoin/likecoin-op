@@ -4556,3 +4556,290 @@ func decodeTokensByBookNFTParams(args [1]string, argsEscaped bool, r *http.Reque
 	}
 	return params, nil
 }
+
+// TokensByBookNFTAndAccountParams is parameters of tokensByBookNFTAndAccount operation.
+type TokensByBookNFTAndAccountParams struct {
+	// Evm address of the BookNFT.
+	ID string
+	// Evm_address of the Account.
+	EvmAddress string
+	// Pagination.limit.
+	PaginationLimit OptInt
+	// Pagination.key.
+	PaginationKey OptInt
+	// Reverse.
+	Reverse OptBool
+}
+
+func unpackTokensByBookNFTAndAccountParams(packed middleware.Parameters) (params TokensByBookNFTAndAccountParams) {
+	{
+		key := middleware.ParameterKey{
+			Name: "id",
+			In:   "path",
+		}
+		params.ID = packed[key].(string)
+	}
+	{
+		key := middleware.ParameterKey{
+			Name: "evm_address",
+			In:   "path",
+		}
+		params.EvmAddress = packed[key].(string)
+	}
+	{
+		key := middleware.ParameterKey{
+			Name: "pagination.limit",
+			In:   "query",
+		}
+		if v, ok := packed[key]; ok {
+			params.PaginationLimit = v.(OptInt)
+		}
+	}
+	{
+		key := middleware.ParameterKey{
+			Name: "pagination.key",
+			In:   "query",
+		}
+		if v, ok := packed[key]; ok {
+			params.PaginationKey = v.(OptInt)
+		}
+	}
+	{
+		key := middleware.ParameterKey{
+			Name: "reverse",
+			In:   "query",
+		}
+		if v, ok := packed[key]; ok {
+			params.Reverse = v.(OptBool)
+		}
+	}
+	return params
+}
+
+func decodeTokensByBookNFTAndAccountParams(args [2]string, argsEscaped bool, r *http.Request) (params TokensByBookNFTAndAccountParams, _ error) {
+	q := uri.NewQueryDecoder(r.URL.Query())
+	// Decode path: id.
+	if err := func() error {
+		param := args[0]
+		if argsEscaped {
+			unescaped, err := url.PathUnescape(args[0])
+			if err != nil {
+				return errors.Wrap(err, "unescape path")
+			}
+			param = unescaped
+		}
+		if len(param) > 0 {
+			d := uri.NewPathDecoder(uri.PathDecoderConfig{
+				Param:   "id",
+				Value:   param,
+				Style:   uri.PathStyleSimple,
+				Explode: false,
+			})
+
+			if err := func() error {
+				val, err := d.DecodeValue()
+				if err != nil {
+					return err
+				}
+
+				c, err := conv.ToString(val)
+				if err != nil {
+					return err
+				}
+
+				params.ID = c
+				return nil
+			}(); err != nil {
+				return err
+			}
+		} else {
+			return validate.ErrFieldRequired
+		}
+		return nil
+	}(); err != nil {
+		return params, &ogenerrors.DecodeParamError{
+			Name: "id",
+			In:   "path",
+			Err:  err,
+		}
+	}
+	// Decode path: evm_address.
+	if err := func() error {
+		param := args[1]
+		if argsEscaped {
+			unescaped, err := url.PathUnescape(args[1])
+			if err != nil {
+				return errors.Wrap(err, "unescape path")
+			}
+			param = unescaped
+		}
+		if len(param) > 0 {
+			d := uri.NewPathDecoder(uri.PathDecoderConfig{
+				Param:   "evm_address",
+				Value:   param,
+				Style:   uri.PathStyleSimple,
+				Explode: false,
+			})
+
+			if err := func() error {
+				val, err := d.DecodeValue()
+				if err != nil {
+					return err
+				}
+
+				c, err := conv.ToString(val)
+				if err != nil {
+					return err
+				}
+
+				params.EvmAddress = c
+				return nil
+			}(); err != nil {
+				return err
+			}
+		} else {
+			return validate.ErrFieldRequired
+		}
+		return nil
+	}(); err != nil {
+		return params, &ogenerrors.DecodeParamError{
+			Name: "evm_address",
+			In:   "path",
+			Err:  err,
+		}
+	}
+	// Set default value for query: pagination.limit.
+	{
+		val := int(0)
+		params.PaginationLimit.SetTo(val)
+	}
+	// Decode query: pagination.limit.
+	if err := func() error {
+		cfg := uri.QueryParameterDecodingConfig{
+			Name:    "pagination.limit",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.HasParam(cfg); err == nil {
+			if err := q.DecodeParam(cfg, func(d uri.Decoder) error {
+				var paramsDotPaginationLimitVal int
+				if err := func() error {
+					val, err := d.DecodeValue()
+					if err != nil {
+						return err
+					}
+
+					c, err := conv.ToInt(val)
+					if err != nil {
+						return err
+					}
+
+					paramsDotPaginationLimitVal = c
+					return nil
+				}(); err != nil {
+					return err
+				}
+				params.PaginationLimit.SetTo(paramsDotPaginationLimitVal)
+				return nil
+			}); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		return params, &ogenerrors.DecodeParamError{
+			Name: "pagination.limit",
+			In:   "query",
+			Err:  err,
+		}
+	}
+	// Decode query: pagination.key.
+	if err := func() error {
+		cfg := uri.QueryParameterDecodingConfig{
+			Name:    "pagination.key",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.HasParam(cfg); err == nil {
+			if err := q.DecodeParam(cfg, func(d uri.Decoder) error {
+				var paramsDotPaginationKeyVal int
+				if err := func() error {
+					val, err := d.DecodeValue()
+					if err != nil {
+						return err
+					}
+
+					c, err := conv.ToInt(val)
+					if err != nil {
+						return err
+					}
+
+					paramsDotPaginationKeyVal = c
+					return nil
+				}(); err != nil {
+					return err
+				}
+				params.PaginationKey.SetTo(paramsDotPaginationKeyVal)
+				return nil
+			}); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		return params, &ogenerrors.DecodeParamError{
+			Name: "pagination.key",
+			In:   "query",
+			Err:  err,
+		}
+	}
+	// Set default value for query: reverse.
+	{
+		val := bool(false)
+		params.Reverse.SetTo(val)
+	}
+	// Decode query: reverse.
+	if err := func() error {
+		cfg := uri.QueryParameterDecodingConfig{
+			Name:    "reverse",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.HasParam(cfg); err == nil {
+			if err := q.DecodeParam(cfg, func(d uri.Decoder) error {
+				var paramsDotReverseVal bool
+				if err := func() error {
+					val, err := d.DecodeValue()
+					if err != nil {
+						return err
+					}
+
+					c, err := conv.ToBool(val)
+					if err != nil {
+						return err
+					}
+
+					paramsDotReverseVal = c
+					return nil
+				}(); err != nil {
+					return err
+				}
+				params.Reverse.SetTo(paramsDotReverseVal)
+				return nil
+			}); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		return params, &ogenerrors.DecodeParamError{
+			Name: "reverse",
+			In:   "query",
+			Err:  err,
+		}
+	}
+	return params, nil
+}

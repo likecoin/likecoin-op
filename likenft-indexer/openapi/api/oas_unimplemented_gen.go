@@ -153,6 +153,15 @@ func (UnimplementedHandler) TokensByBookNFT(ctx context.Context, params TokensBy
 	return r, ht.ErrNotImplemented
 }
 
+// TokensByBookNFTAndAccount implements tokensByBookNFTAndAccount operation.
+//
+// Query tokens by BookNFT and account.
+//
+// GET /booknft/{id}/account/{evm_address}/tokens
+func (UnimplementedHandler) TokensByBookNFTAndAccount(ctx context.Context, params TokensByBookNFTAndAccountParams) (r *TokensByBookNFTAndAccountOK, _ error) {
+	return r, ht.ErrNotImplemented
+}
+
 // NewError creates *ErrorStatusCode from error returned by handler.
 //
 // Used for common default response.

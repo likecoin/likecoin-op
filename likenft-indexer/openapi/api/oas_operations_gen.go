@@ -22,4 +22,5 @@ const (
 	TokenBookNFTsByAccountOperation                OperationName = "TokenBookNFTsByAccount"
 	TokensByAccountOperation                       OperationName = "TokensByAccount"
 	TokensByBookNFTOperation                       OperationName = "TokensByBookNFT"
+	TokensByBookNFTAndAccountOperation             OperationName = "TokensByBookNFTAndAccount"
 )

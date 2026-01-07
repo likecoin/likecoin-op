@@ -100,6 +100,12 @@ type Handler interface {
 	//
 	// GET /booknft/{id}/tokens
 	TokensByBookNFT(ctx context.Context, params TokensByBookNFTParams) (*TokensByBookNFTOK, error)
+	// TokensByBookNFTAndAccount implements tokensByBookNFTAndAccount operation.
+	//
+	// Query tokens by BookNFT and account.
+	//
+	// GET /booknft/{id}/account/{evm_address}/tokens
+	TokensByBookNFTAndAccount(ctx context.Context, params TokensByBookNFTAndAccountParams) (*TokensByBookNFTAndAccountOK, error)
 	// NewError creates *ErrorStatusCode from error returned by handler.
 	//
 	// Used for common default response.
