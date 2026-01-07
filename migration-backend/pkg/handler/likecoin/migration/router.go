@@ -46,6 +46,9 @@ func (h *MigrationRouter) Router() *http.ServeMux {
 		Db:          h.Db,
 		AsynqClient: h.AsynqClient,
 	})
+	router.Handle("DELETE /migration/{cosmosWalletAddress}", &CancelLikeCoinMigrationHandler{
+		Db: h.Db,
+	})
 
 	return router
 }

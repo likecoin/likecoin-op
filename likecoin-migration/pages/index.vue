@@ -291,6 +291,10 @@ import { verifyMessage } from 'ethers';
 import Vue from 'vue';
 
 import {
+  CancelLikeCoinMigration,
+  makeCancelLikeCoinMigrationAPI,
+} from '~/apis/cancelLikeCoinMigration';
+import {
   CreateCosmosMemoData,
   makeCreateCosmosMemoDataAPI,
 } from '~/apis/createCosmosMemoData';
@@ -516,6 +520,9 @@ export default Vue.extend({
     },
     createLikeCoinMigration(): CreateLikeCoinMigration {
       return makeCreateLikeCoinMigrationAPI(this.$apiClient);
+    },
+    cancelLikeCoinMigration(): CancelLikeCoinMigration {
+      return makeCancelLikeCoinMigrationAPI(this.$apiClient);
     },
     getLatestLikeCoinMigration(): GetLatestLikeCoinMigration {
       return makeGetLatestLikeCoinMigrationAPI(this.$apiClient);
@@ -773,6 +780,17 @@ export default Vue.extend({
           this.currentStep.state === 'Failed' ||
           this.currentStep.state === 'InvalidEthSignature'
         ) {
+          // Cancel the pending migration before retrying
+          if (this.currentStep.state === 'InvalidEthSignature') {
+            try {
+              await this.cancelLikeCoinMigration(
+                this.currentStep.cosmosAddress
+              );
+            } catch (error) {
+              // Ignore errors if migration is already cancelled/failed
+              console.warn('Failed to cancel migration:', error);
+            }
+          }
           this.currentStep = migrationRetryFailed(this.currentStep);
         }
       }
