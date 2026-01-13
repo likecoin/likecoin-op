@@ -2,13 +2,13 @@
 
 CREATE MATERIALIZED VIEW book_nft_delta_time_bucket_7d
 WITH (timescaledb.continuous) AS
-SELECT 
+SELECT
     nft_class_address || '_' || time_bucket(INTERVAL '7 day', datetime) as id,
     nft_class_address as evm_address,
     time_bucket(INTERVAL '7 day', datetime) AS bucket,
     sum(staked_amount_added) as staked_amount,
     max(datetime) as last_staked_at,
-    count(distinct nft_class_address) as number_of_stakers
+    count(distinct account_evm_address) as number_of_stakers
 FROM staking_events_hyper_table
 WHERE event_type = 'staked'
 GROUP BY nft_class_address, bucket;
@@ -33,7 +33,7 @@ SELECT
     time_bucket(INTERVAL '30 day', datetime) AS bucket,
     sum(staked_amount_added) as staked_amount,
     max(datetime) as last_staked_at,
-    count(distinct nft_class_address) as number_of_stakers
+    count(distinct account_evm_address) as number_of_stakers
 FROM staking_events_hyper_table
 WHERE event_type = 'staked'
 GROUP BY nft_class_address, bucket;
@@ -58,7 +58,7 @@ SELECT
     time_bucket(INTERVAL '1 year', datetime) AS bucket,
     sum(staked_amount_added) as staked_amount,
     max(datetime) as last_staked_at,
-    count(distinct nft_class_address) as number_of_stakers
+    count(distinct account_evm_address) as number_of_stakers
 FROM staking_events_hyper_table
 WHERE event_type = 'staked'
 GROUP BY nft_class_address, bucket;
