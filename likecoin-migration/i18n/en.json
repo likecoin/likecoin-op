@@ -32,6 +32,10 @@
     "connect-wallet": {
       "title": "Connect Wallet"
     },
+    "ended": {
+      "substack-link-text": "LikeCoin's Substack",
+      "text": "The migration of LikeCoin officially spanned from November 3, 2025, to February 2, 2026 (GMT +8). This three-month window marked a pivotal shift for the ecosystem, ensuring a smooth transition for all stakeholders involved.\n\nFor a comprehensive breakdown of the migration's impact and the final statistics, you can find the detailed report on {link}."
+    },
     "error-row": {
       "retry": "Retry"
     },
