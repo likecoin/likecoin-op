@@ -25,7 +25,7 @@ likecoinMigration:
     annotations:
       nginx.ingress.kubernetes.io/auth-type: basic
       nginx.ingress.kubernetes.io/auth-secret: extended-basic-auth
-      nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - LikeProtocol'
+      nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - User Support'
     path: /extended
 
   resources:
