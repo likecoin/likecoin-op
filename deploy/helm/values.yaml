@@ -21,6 +21,13 @@ likecoinMigration:
     tls:
       secretName: tls-likecoin-migration
 
+  ingressExtended:
+    annotations:
+      nginx.ingress.kubernetes.io/auth-type: basic
+      nginx.ingress.kubernetes.io/auth-secret: extended-basic-auth
+      nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - LikeProtocol'
+    path: /extended
+
   resources:
     requests:
       cpu: "10m"

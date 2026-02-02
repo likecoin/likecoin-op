@@ -31,6 +31,39 @@ spec:
     - hosts:
         - {{ .Values.likecoinMigration.ingress.tls.host }}
       secretName: {{ .Values.likecoinMigration.ingress.tls.secretName }}
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: {{ .Values.ingress.name }}-coin-migrate-extended
+  labels:
+    app.kubernetes.io/name: {{ .Values.ingress.name }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    kubernetes.io/tls-acme: "true"
+  {{- with .Values.ingress.annotations }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.likecoinMigration.ingressExtended.annotations }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  rules:
+    - host: {{ .Values.likecoinMigration.ingress.host }}
+      http:
+        paths:
+          - path: {{ .Values.likecoinMigration.ingressExtended.path | quote }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ .Values.likecoinMigration.name }}
+                port:
+                  number: {{ .Values.likecoinMigration.service.port }}
+  tls:
+    - hosts:
+        - {{ .Values.likecoinMigration.ingress.tls.host }}
+      secretName: {{ .Values.likecoinMigration.ingress.tls.secretName }}
 {{- end }}
 ---
 {{- if .Values.likenftMigration.enabled }}

@@ -32,6 +32,10 @@
     "connect-wallet": {
       "title": "連接錢包"
     },
+    "ended": {
+      "substack-link-text": "LikeCoin 的 Substack",
+      "text": "LikeCoin 的升級遷移期正式跨越 2025 年 11 月 3 日至 2026 年 2 月 2 日（GMT +8），這三個月的時間標誌著生態系統的一個關鍵轉折，確保所有利益相關者都能順利過渡。\n\n有關升級遷移的詳細影響和最終統計數據，您可以在 {link} 上找到詳細報告。"
+    },
     "error-row": {
       "retry": "重試"
     },
