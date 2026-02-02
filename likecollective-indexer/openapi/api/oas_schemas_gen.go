@@ -1724,13 +1724,16 @@ func (s *Staking) SetClaimedRewardAmount(val Uint256) {
 // Ref: #/components/schemas/StakingEvent
 // StakingEvent represents sum type.
 type StakingEvent struct {
-	Type                          StakingEventType // switch on this field
-	StakingEventStaked            StakingEventStaked
-	StakingEventUnstaked          StakingEventUnstaked
-	StakingEventRewardAdded       StakingEventRewardAdded
-	StakingEventRewardClaimed     StakingEventRewardClaimed
-	StakingEventRewardDeposited   StakingEventRewardDeposited
-	StakingEventAllRewardsClaimed StakingEventAllRewardsClaimed
+	Type                                 StakingEventType // switch on this field
+	StakingEventStaked                   StakingEventStaked
+	StakingEventUnstaked                 StakingEventUnstaked
+	StakingEventRewardAdded              StakingEventRewardAdded
+	StakingEventRewardClaimed            StakingEventRewardClaimed
+	StakingEventRewardDeposited          StakingEventRewardDeposited
+	StakingEventRewardDepositDistributed StakingEventRewardDepositDistributed
+	StakingEventAllRewardsClaimed        StakingEventAllRewardsClaimed
+	StakingEventStakePositionTransferred StakingEventStakePositionTransferred
+	StakingEventStakePositionReceived    StakingEventStakePositionReceived
 }
 
 // StakingEventType is oneOf type of StakingEvent.
@@ -1738,12 +1741,15 @@ type StakingEventType string
 
 // Possible values for StakingEventType.
 const (
-	StakingEventStakedStakingEvent            StakingEventType = "staked"
-	StakingEventUnstakedStakingEvent          StakingEventType = "unstaked"
-	StakingEventRewardAddedStakingEvent       StakingEventType = "reward-added"
-	StakingEventRewardClaimedStakingEvent     StakingEventType = "reward-claimed"
-	StakingEventRewardDepositedStakingEvent   StakingEventType = "reward-deposited"
-	StakingEventAllRewardsClaimedStakingEvent StakingEventType = "all-rewards-claimed"
+	StakingEventStakedStakingEvent                   StakingEventType = "staked"
+	StakingEventUnstakedStakingEvent                 StakingEventType = "unstaked"
+	StakingEventRewardAddedStakingEvent              StakingEventType = "reward-added"
+	StakingEventRewardClaimedStakingEvent            StakingEventType = "reward-claimed"
+	StakingEventRewardDepositedStakingEvent          StakingEventType = "reward-deposited"
+	StakingEventRewardDepositDistributedStakingEvent StakingEventType = "reward-deposit-distributed"
+	StakingEventAllRewardsClaimedStakingEvent        StakingEventType = "all-rewards-claimed"
+	StakingEventStakePositionTransferredStakingEvent StakingEventType = "stake-position-transferred"
+	StakingEventStakePositionReceivedStakingEvent    StakingEventType = "stake-position-received"
 )
 
 // IsStakingEventStaked reports whether StakingEvent is StakingEventStaked.
@@ -1769,9 +1775,24 @@ func (s StakingEvent) IsStakingEventRewardDeposited() bool {
 	return s.Type == StakingEventRewardDepositedStakingEvent
 }
 
+// IsStakingEventRewardDepositDistributed reports whether StakingEvent is StakingEventRewardDepositDistributed.
+func (s StakingEvent) IsStakingEventRewardDepositDistributed() bool {
+	return s.Type == StakingEventRewardDepositDistributedStakingEvent
+}
+
 // IsStakingEventAllRewardsClaimed reports whether StakingEvent is StakingEventAllRewardsClaimed.
 func (s StakingEvent) IsStakingEventAllRewardsClaimed() bool {
 	return s.Type == StakingEventAllRewardsClaimedStakingEvent
+}
+
+// IsStakingEventStakePositionTransferred reports whether StakingEvent is StakingEventStakePositionTransferred.
+func (s StakingEvent) IsStakingEventStakePositionTransferred() bool {
+	return s.Type == StakingEventStakePositionTransferredStakingEvent
+}
+
+// IsStakingEventStakePositionReceived reports whether StakingEvent is StakingEventStakePositionReceived.
+func (s StakingEvent) IsStakingEventStakePositionReceived() bool {
+	return s.Type == StakingEventStakePositionReceivedStakingEvent
 }
 
 // SetStakingEventStaked sets StakingEvent to StakingEventStaked.
@@ -1879,6 +1900,27 @@ func NewStakingEventRewardDepositedStakingEvent(v StakingEventRewardDeposited) S
 	return s
 }
 
+// SetStakingEventRewardDepositDistributed sets StakingEvent to StakingEventRewardDepositDistributed.
+func (s *StakingEvent) SetStakingEventRewardDepositDistributed(v StakingEventRewardDepositDistributed) {
+	s.Type = StakingEventRewardDepositDistributedStakingEvent
+	s.StakingEventRewardDepositDistributed = v
+}
+
+// GetStakingEventRewardDepositDistributed returns StakingEventRewardDepositDistributed and true boolean if StakingEvent is StakingEventRewardDepositDistributed.
+func (s StakingEvent) GetStakingEventRewardDepositDistributed() (v StakingEventRewardDepositDistributed, ok bool) {
+	if !s.IsStakingEventRewardDepositDistributed() {
+		return v, false
+	}
+	return s.StakingEventRewardDepositDistributed, true
+}
+
+// NewStakingEventRewardDepositDistributedStakingEvent returns new StakingEvent from StakingEventRewardDepositDistributed.
+func NewStakingEventRewardDepositDistributedStakingEvent(v StakingEventRewardDepositDistributed) StakingEvent {
+	var s StakingEvent
+	s.SetStakingEventRewardDepositDistributed(v)
+	return s
+}
+
 // SetStakingEventAllRewardsClaimed sets StakingEvent to StakingEventAllRewardsClaimed.
 func (s *StakingEvent) SetStakingEventAllRewardsClaimed(v StakingEventAllRewardsClaimed) {
 	s.Type = StakingEventAllRewardsClaimedStakingEvent
@@ -1897,6 +1939,48 @@ func (s StakingEvent) GetStakingEventAllRewardsClaimed() (v StakingEventAllRewar
 func NewStakingEventAllRewardsClaimedStakingEvent(v StakingEventAllRewardsClaimed) StakingEvent {
 	var s StakingEvent
 	s.SetStakingEventAllRewardsClaimed(v)
+	return s
+}
+
+// SetStakingEventStakePositionTransferred sets StakingEvent to StakingEventStakePositionTransferred.
+func (s *StakingEvent) SetStakingEventStakePositionTransferred(v StakingEventStakePositionTransferred) {
+	s.Type = StakingEventStakePositionTransferredStakingEvent
+	s.StakingEventStakePositionTransferred = v
+}
+
+// GetStakingEventStakePositionTransferred returns StakingEventStakePositionTransferred and true boolean if StakingEvent is StakingEventStakePositionTransferred.
+func (s StakingEvent) GetStakingEventStakePositionTransferred() (v StakingEventStakePositionTransferred, ok bool) {
+	if !s.IsStakingEventStakePositionTransferred() {
+		return v, false
+	}
+	return s.StakingEventStakePositionTransferred, true
+}
+
+// NewStakingEventStakePositionTransferredStakingEvent returns new StakingEvent from StakingEventStakePositionTransferred.
+func NewStakingEventStakePositionTransferredStakingEvent(v StakingEventStakePositionTransferred) StakingEvent {
+	var s StakingEvent
+	s.SetStakingEventStakePositionTransferred(v)
+	return s
+}
+
+// SetStakingEventStakePositionReceived sets StakingEvent to StakingEventStakePositionReceived.
+func (s *StakingEvent) SetStakingEventStakePositionReceived(v StakingEventStakePositionReceived) {
+	s.Type = StakingEventStakePositionReceivedStakingEvent
+	s.StakingEventStakePositionReceived = v
+}
+
+// GetStakingEventStakePositionReceived returns StakingEventStakePositionReceived and true boolean if StakingEvent is StakingEventStakePositionReceived.
+func (s StakingEvent) GetStakingEventStakePositionReceived() (v StakingEventStakePositionReceived, ok bool) {
+	if !s.IsStakingEventStakePositionReceived() {
+		return v, false
+	}
+	return s.StakingEventStakePositionReceived, true
+}
+
+// NewStakingEventStakePositionReceivedStakingEvent returns new StakingEvent from StakingEventStakePositionReceived.
+func NewStakingEventStakePositionReceivedStakingEvent(v StakingEventStakePositionReceived) StakingEvent {
+	var s StakingEvent
+	s.SetStakingEventStakePositionReceived(v)
 	return s
 }
 
@@ -2204,6 +2288,99 @@ func (s *StakingEventRewardClaimedEventType) UnmarshalText(data []byte) error {
 	}
 }
 
+// Ref: #/components/schemas/StakingEventRewardDepositDistributed
+type StakingEventRewardDepositDistributed struct {
+	EventType StakingEventRewardDepositDistributedEventType `json:"event_type"`
+	BookNft   EvmAddress                                    `json:"book_nft"`
+	Account   EvmAddress                                    `json:"account"`
+	Amount    Uint256                                       `json:"amount"`
+	Datetime  time.Time                                     `json:"datetime"`
+}
+
+// GetEventType returns the value of EventType.
+func (s *StakingEventRewardDepositDistributed) GetEventType() StakingEventRewardDepositDistributedEventType {
+	return s.EventType
+}
+
+// GetBookNft returns the value of BookNft.
+func (s *StakingEventRewardDepositDistributed) GetBookNft() EvmAddress {
+	return s.BookNft
+}
+
+// GetAccount returns the value of Account.
+func (s *StakingEventRewardDepositDistributed) GetAccount() EvmAddress {
+	return s.Account
+}
+
+// GetAmount returns the value of Amount.
+func (s *StakingEventRewardDepositDistributed) GetAmount() Uint256 {
+	return s.Amount
+}
+
+// GetDatetime returns the value of Datetime.
+func (s *StakingEventRewardDepositDistributed) GetDatetime() time.Time {
+	return s.Datetime
+}
+
+// SetEventType sets the value of EventType.
+func (s *StakingEventRewardDepositDistributed) SetEventType(val StakingEventRewardDepositDistributedEventType) {
+	s.EventType = val
+}
+
+// SetBookNft sets the value of BookNft.
+func (s *StakingEventRewardDepositDistributed) SetBookNft(val EvmAddress) {
+	s.BookNft = val
+}
+
+// SetAccount sets the value of Account.
+func (s *StakingEventRewardDepositDistributed) SetAccount(val EvmAddress) {
+	s.Account = val
+}
+
+// SetAmount sets the value of Amount.
+func (s *StakingEventRewardDepositDistributed) SetAmount(val Uint256) {
+	s.Amount = val
+}
+
+// SetDatetime sets the value of Datetime.
+func (s *StakingEventRewardDepositDistributed) SetDatetime(val time.Time) {
+	s.Datetime = val
+}
+
+type StakingEventRewardDepositDistributedEventType string
+
+const (
+	StakingEventRewardDepositDistributedEventTypeRewardDepositDistributed StakingEventRewardDepositDistributedEventType = "reward-deposit-distributed"
+)
+
+// AllValues returns all StakingEventRewardDepositDistributedEventType values.
+func (StakingEventRewardDepositDistributedEventType) AllValues() []StakingEventRewardDepositDistributedEventType {
+	return []StakingEventRewardDepositDistributedEventType{
+		StakingEventRewardDepositDistributedEventTypeRewardDepositDistributed,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s StakingEventRewardDepositDistributedEventType) MarshalText() ([]byte, error) {
+	switch s {
+	case StakingEventRewardDepositDistributedEventTypeRewardDepositDistributed:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *StakingEventRewardDepositDistributedEventType) UnmarshalText(data []byte) error {
+	switch StakingEventRewardDepositDistributedEventType(data) {
+	case StakingEventRewardDepositDistributedEventTypeRewardDepositDistributed:
+		*s = StakingEventRewardDepositDistributedEventTypeRewardDepositDistributed
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
 // Ref: #/components/schemas/StakingEventRewardDeposited
 type StakingEventRewardDeposited struct {
 	EventType StakingEventRewardDepositedEventType `json:"event_type"`
@@ -2291,6 +2468,192 @@ func (s *StakingEventRewardDepositedEventType) UnmarshalText(data []byte) error 
 	switch StakingEventRewardDepositedEventType(data) {
 	case StakingEventRewardDepositedEventTypeRewardDeposited:
 		*s = StakingEventRewardDepositedEventTypeRewardDeposited
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Ref: #/components/schemas/StakingEventStakePositionReceived
+type StakingEventStakePositionReceived struct {
+	EventType StakingEventStakePositionReceivedEventType `json:"event_type"`
+	BookNft   EvmAddress                                 `json:"book_nft"`
+	Account   EvmAddress                                 `json:"account"`
+	Amount    Uint256                                    `json:"amount"`
+	Datetime  time.Time                                  `json:"datetime"`
+}
+
+// GetEventType returns the value of EventType.
+func (s *StakingEventStakePositionReceived) GetEventType() StakingEventStakePositionReceivedEventType {
+	return s.EventType
+}
+
+// GetBookNft returns the value of BookNft.
+func (s *StakingEventStakePositionReceived) GetBookNft() EvmAddress {
+	return s.BookNft
+}
+
+// GetAccount returns the value of Account.
+func (s *StakingEventStakePositionReceived) GetAccount() EvmAddress {
+	return s.Account
+}
+
+// GetAmount returns the value of Amount.
+func (s *StakingEventStakePositionReceived) GetAmount() Uint256 {
+	return s.Amount
+}
+
+// GetDatetime returns the value of Datetime.
+func (s *StakingEventStakePositionReceived) GetDatetime() time.Time {
+	return s.Datetime
+}
+
+// SetEventType sets the value of EventType.
+func (s *StakingEventStakePositionReceived) SetEventType(val StakingEventStakePositionReceivedEventType) {
+	s.EventType = val
+}
+
+// SetBookNft sets the value of BookNft.
+func (s *StakingEventStakePositionReceived) SetBookNft(val EvmAddress) {
+	s.BookNft = val
+}
+
+// SetAccount sets the value of Account.
+func (s *StakingEventStakePositionReceived) SetAccount(val EvmAddress) {
+	s.Account = val
+}
+
+// SetAmount sets the value of Amount.
+func (s *StakingEventStakePositionReceived) SetAmount(val Uint256) {
+	s.Amount = val
+}
+
+// SetDatetime sets the value of Datetime.
+func (s *StakingEventStakePositionReceived) SetDatetime(val time.Time) {
+	s.Datetime = val
+}
+
+type StakingEventStakePositionReceivedEventType string
+
+const (
+	StakingEventStakePositionReceivedEventTypeStakePositionReceived StakingEventStakePositionReceivedEventType = "stake-position-received"
+)
+
+// AllValues returns all StakingEventStakePositionReceivedEventType values.
+func (StakingEventStakePositionReceivedEventType) AllValues() []StakingEventStakePositionReceivedEventType {
+	return []StakingEventStakePositionReceivedEventType{
+		StakingEventStakePositionReceivedEventTypeStakePositionReceived,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s StakingEventStakePositionReceivedEventType) MarshalText() ([]byte, error) {
+	switch s {
+	case StakingEventStakePositionReceivedEventTypeStakePositionReceived:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *StakingEventStakePositionReceivedEventType) UnmarshalText(data []byte) error {
+	switch StakingEventStakePositionReceivedEventType(data) {
+	case StakingEventStakePositionReceivedEventTypeStakePositionReceived:
+		*s = StakingEventStakePositionReceivedEventTypeStakePositionReceived
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Ref: #/components/schemas/StakingEventStakePositionTransferred
+type StakingEventStakePositionTransferred struct {
+	EventType StakingEventStakePositionTransferredEventType `json:"event_type"`
+	BookNft   EvmAddress                                    `json:"book_nft"`
+	Account   EvmAddress                                    `json:"account"`
+	Amount    Uint256                                       `json:"amount"`
+	Datetime  time.Time                                     `json:"datetime"`
+}
+
+// GetEventType returns the value of EventType.
+func (s *StakingEventStakePositionTransferred) GetEventType() StakingEventStakePositionTransferredEventType {
+	return s.EventType
+}
+
+// GetBookNft returns the value of BookNft.
+func (s *StakingEventStakePositionTransferred) GetBookNft() EvmAddress {
+	return s.BookNft
+}
+
+// GetAccount returns the value of Account.
+func (s *StakingEventStakePositionTransferred) GetAccount() EvmAddress {
+	return s.Account
+}
+
+// GetAmount returns the value of Amount.
+func (s *StakingEventStakePositionTransferred) GetAmount() Uint256 {
+	return s.Amount
+}
+
+// GetDatetime returns the value of Datetime.
+func (s *StakingEventStakePositionTransferred) GetDatetime() time.Time {
+	return s.Datetime
+}
+
+// SetEventType sets the value of EventType.
+func (s *StakingEventStakePositionTransferred) SetEventType(val StakingEventStakePositionTransferredEventType) {
+	s.EventType = val
+}
+
+// SetBookNft sets the value of BookNft.
+func (s *StakingEventStakePositionTransferred) SetBookNft(val EvmAddress) {
+	s.BookNft = val
+}
+
+// SetAccount sets the value of Account.
+func (s *StakingEventStakePositionTransferred) SetAccount(val EvmAddress) {
+	s.Account = val
+}
+
+// SetAmount sets the value of Amount.
+func (s *StakingEventStakePositionTransferred) SetAmount(val Uint256) {
+	s.Amount = val
+}
+
+// SetDatetime sets the value of Datetime.
+func (s *StakingEventStakePositionTransferred) SetDatetime(val time.Time) {
+	s.Datetime = val
+}
+
+type StakingEventStakePositionTransferredEventType string
+
+const (
+	StakingEventStakePositionTransferredEventTypeStakePositionTransferred StakingEventStakePositionTransferredEventType = "stake-position-transferred"
+)
+
+// AllValues returns all StakingEventStakePositionTransferredEventType values.
+func (StakingEventStakePositionTransferredEventType) AllValues() []StakingEventStakePositionTransferredEventType {
+	return []StakingEventStakePositionTransferredEventType{
+		StakingEventStakePositionTransferredEventTypeStakePositionTransferred,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s StakingEventStakePositionTransferredEventType) MarshalText() ([]byte, error) {
+	switch s {
+	case StakingEventStakePositionTransferredEventTypeStakePositionTransferred:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *StakingEventStakePositionTransferredEventType) UnmarshalText(data []byte) error {
+	switch StakingEventStakePositionTransferredEventType(data) {
+	case StakingEventStakePositionTransferredEventTypeStakePositionTransferred:
+		*s = StakingEventStakePositionTransferredEventTypeStakePositionTransferred
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)

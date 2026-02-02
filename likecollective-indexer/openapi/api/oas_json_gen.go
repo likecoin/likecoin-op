@@ -3217,6 +3217,28 @@ func (s StakingEvent) encodeFields(e *jx.Encoder) {
 				json.EncodeDateTime(e, s.Datetime)
 			}
 		}
+	case StakingEventRewardDepositDistributedStakingEvent:
+		e.FieldStart("event_type")
+		e.Str("reward-deposit-distributed")
+		{
+			s := s.StakingEventRewardDepositDistributed
+			{
+				e.FieldStart("book_nft")
+				s.BookNft.Encode(e)
+			}
+			{
+				e.FieldStart("account")
+				s.Account.Encode(e)
+			}
+			{
+				e.FieldStart("amount")
+				s.Amount.Encode(e)
+			}
+			{
+				e.FieldStart("datetime")
+				json.EncodeDateTime(e, s.Datetime)
+			}
+		}
 	case StakingEventAllRewardsClaimedStakingEvent:
 		e.FieldStart("event_type")
 		e.Str("all-rewards-claimed")
@@ -3233,6 +3255,50 @@ func (s StakingEvent) encodeFields(e *jx.Encoder) {
 					elem.Encode(e)
 				}
 				e.ArrEnd()
+			}
+			{
+				e.FieldStart("datetime")
+				json.EncodeDateTime(e, s.Datetime)
+			}
+		}
+	case StakingEventStakePositionTransferredStakingEvent:
+		e.FieldStart("event_type")
+		e.Str("stake-position-transferred")
+		{
+			s := s.StakingEventStakePositionTransferred
+			{
+				e.FieldStart("book_nft")
+				s.BookNft.Encode(e)
+			}
+			{
+				e.FieldStart("account")
+				s.Account.Encode(e)
+			}
+			{
+				e.FieldStart("amount")
+				s.Amount.Encode(e)
+			}
+			{
+				e.FieldStart("datetime")
+				json.EncodeDateTime(e, s.Datetime)
+			}
+		}
+	case StakingEventStakePositionReceivedStakingEvent:
+		e.FieldStart("event_type")
+		e.Str("stake-position-received")
+		{
+			s := s.StakingEventStakePositionReceived
+			{
+				e.FieldStart("book_nft")
+				s.BookNft.Encode(e)
+			}
+			{
+				e.FieldStart("account")
+				s.Account.Encode(e)
+			}
+			{
+				e.FieldStart("amount")
+				s.Amount.Encode(e)
 			}
 			{
 				e.FieldStart("datetime")
@@ -3280,8 +3346,17 @@ func (s *StakingEvent) Decode(d *jx.Decoder) error {
 				case "reward-deposited":
 					s.Type = StakingEventRewardDepositedStakingEvent
 					found = true
+				case "reward-deposit-distributed":
+					s.Type = StakingEventRewardDepositDistributedStakingEvent
+					found = true
 				case "all-rewards-claimed":
 					s.Type = StakingEventAllRewardsClaimedStakingEvent
+					found = true
+				case "stake-position-transferred":
+					s.Type = StakingEventStakePositionTransferredStakingEvent
+					found = true
+				case "stake-position-received":
+					s.Type = StakingEventStakePositionReceivedStakingEvent
 					found = true
 				default:
 					return errors.Errorf("unknown type %s", typ)
@@ -3317,8 +3392,20 @@ func (s *StakingEvent) Decode(d *jx.Decoder) error {
 		if err := s.StakingEventRewardDeposited.Decode(d); err != nil {
 			return err
 		}
+	case StakingEventRewardDepositDistributedStakingEvent:
+		if err := s.StakingEventRewardDepositDistributed.Decode(d); err != nil {
+			return err
+		}
 	case StakingEventAllRewardsClaimedStakingEvent:
 		if err := s.StakingEventAllRewardsClaimed.Decode(d); err != nil {
+			return err
+		}
+	case StakingEventStakePositionTransferredStakingEvent:
+		if err := s.StakingEventStakePositionTransferred.Decode(d); err != nil {
+			return err
+		}
+	case StakingEventStakePositionReceivedStakingEvent:
+		if err := s.StakingEventStakePositionReceived.Decode(d); err != nil {
 			return err
 		}
 	default:
@@ -4046,6 +4133,200 @@ func (s *StakingEventRewardClaimedEventType) UnmarshalJSON(data []byte) error {
 }
 
 // Encode implements json.Marshaler.
+func (s *StakingEventRewardDepositDistributed) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *StakingEventRewardDepositDistributed) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("event_type")
+		s.EventType.Encode(e)
+	}
+	{
+		e.FieldStart("book_nft")
+		s.BookNft.Encode(e)
+	}
+	{
+		e.FieldStart("account")
+		s.Account.Encode(e)
+	}
+	{
+		e.FieldStart("amount")
+		s.Amount.Encode(e)
+	}
+	{
+		e.FieldStart("datetime")
+		json.EncodeDateTime(e, s.Datetime)
+	}
+}
+
+var jsonFieldsNameOfStakingEventRewardDepositDistributed = [5]string{
+	0: "event_type",
+	1: "book_nft",
+	2: "account",
+	3: "amount",
+	4: "datetime",
+}
+
+// Decode decodes StakingEventRewardDepositDistributed from json.
+func (s *StakingEventRewardDepositDistributed) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode StakingEventRewardDepositDistributed to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "event_type":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				if err := s.EventType.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"event_type\"")
+			}
+		case "book_nft":
+			requiredBitSet[0] |= 1 << 1
+			if err := func() error {
+				if err := s.BookNft.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"book_nft\"")
+			}
+		case "account":
+			requiredBitSet[0] |= 1 << 2
+			if err := func() error {
+				if err := s.Account.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"account\"")
+			}
+		case "amount":
+			requiredBitSet[0] |= 1 << 3
+			if err := func() error {
+				if err := s.Amount.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"amount\"")
+			}
+		case "datetime":
+			requiredBitSet[0] |= 1 << 4
+			if err := func() error {
+				v, err := json.DecodeDateTime(d)
+				s.Datetime = v
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"datetime\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode StakingEventRewardDepositDistributed")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00011111,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfStakingEventRewardDepositDistributed) {
+					name = jsonFieldsNameOfStakingEventRewardDepositDistributed[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *StakingEventRewardDepositDistributed) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *StakingEventRewardDepositDistributed) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes StakingEventRewardDepositDistributedEventType as json.
+func (s StakingEventRewardDepositDistributedEventType) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes StakingEventRewardDepositDistributedEventType from json.
+func (s *StakingEventRewardDepositDistributedEventType) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode StakingEventRewardDepositDistributedEventType to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch StakingEventRewardDepositDistributedEventType(v) {
+	case StakingEventRewardDepositDistributedEventTypeRewardDepositDistributed:
+		*s = StakingEventRewardDepositDistributedEventTypeRewardDepositDistributed
+	default:
+		*s = StakingEventRewardDepositDistributedEventType(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s StakingEventRewardDepositDistributedEventType) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *StakingEventRewardDepositDistributedEventType) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
 func (s *StakingEventRewardDeposited) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
@@ -4235,6 +4516,394 @@ func (s StakingEventRewardDepositedEventType) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *StakingEventRewardDepositedEventType) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *StakingEventStakePositionReceived) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *StakingEventStakePositionReceived) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("event_type")
+		s.EventType.Encode(e)
+	}
+	{
+		e.FieldStart("book_nft")
+		s.BookNft.Encode(e)
+	}
+	{
+		e.FieldStart("account")
+		s.Account.Encode(e)
+	}
+	{
+		e.FieldStart("amount")
+		s.Amount.Encode(e)
+	}
+	{
+		e.FieldStart("datetime")
+		json.EncodeDateTime(e, s.Datetime)
+	}
+}
+
+var jsonFieldsNameOfStakingEventStakePositionReceived = [5]string{
+	0: "event_type",
+	1: "book_nft",
+	2: "account",
+	3: "amount",
+	4: "datetime",
+}
+
+// Decode decodes StakingEventStakePositionReceived from json.
+func (s *StakingEventStakePositionReceived) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode StakingEventStakePositionReceived to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "event_type":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				if err := s.EventType.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"event_type\"")
+			}
+		case "book_nft":
+			requiredBitSet[0] |= 1 << 1
+			if err := func() error {
+				if err := s.BookNft.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"book_nft\"")
+			}
+		case "account":
+			requiredBitSet[0] |= 1 << 2
+			if err := func() error {
+				if err := s.Account.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"account\"")
+			}
+		case "amount":
+			requiredBitSet[0] |= 1 << 3
+			if err := func() error {
+				if err := s.Amount.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"amount\"")
+			}
+		case "datetime":
+			requiredBitSet[0] |= 1 << 4
+			if err := func() error {
+				v, err := json.DecodeDateTime(d)
+				s.Datetime = v
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"datetime\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode StakingEventStakePositionReceived")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00011111,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfStakingEventStakePositionReceived) {
+					name = jsonFieldsNameOfStakingEventStakePositionReceived[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *StakingEventStakePositionReceived) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *StakingEventStakePositionReceived) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes StakingEventStakePositionReceivedEventType as json.
+func (s StakingEventStakePositionReceivedEventType) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes StakingEventStakePositionReceivedEventType from json.
+func (s *StakingEventStakePositionReceivedEventType) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode StakingEventStakePositionReceivedEventType to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch StakingEventStakePositionReceivedEventType(v) {
+	case StakingEventStakePositionReceivedEventTypeStakePositionReceived:
+		*s = StakingEventStakePositionReceivedEventTypeStakePositionReceived
+	default:
+		*s = StakingEventStakePositionReceivedEventType(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s StakingEventStakePositionReceivedEventType) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *StakingEventStakePositionReceivedEventType) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *StakingEventStakePositionTransferred) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *StakingEventStakePositionTransferred) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("event_type")
+		s.EventType.Encode(e)
+	}
+	{
+		e.FieldStart("book_nft")
+		s.BookNft.Encode(e)
+	}
+	{
+		e.FieldStart("account")
+		s.Account.Encode(e)
+	}
+	{
+		e.FieldStart("amount")
+		s.Amount.Encode(e)
+	}
+	{
+		e.FieldStart("datetime")
+		json.EncodeDateTime(e, s.Datetime)
+	}
+}
+
+var jsonFieldsNameOfStakingEventStakePositionTransferred = [5]string{
+	0: "event_type",
+	1: "book_nft",
+	2: "account",
+	3: "amount",
+	4: "datetime",
+}
+
+// Decode decodes StakingEventStakePositionTransferred from json.
+func (s *StakingEventStakePositionTransferred) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode StakingEventStakePositionTransferred to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "event_type":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				if err := s.EventType.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"event_type\"")
+			}
+		case "book_nft":
+			requiredBitSet[0] |= 1 << 1
+			if err := func() error {
+				if err := s.BookNft.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"book_nft\"")
+			}
+		case "account":
+			requiredBitSet[0] |= 1 << 2
+			if err := func() error {
+				if err := s.Account.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"account\"")
+			}
+		case "amount":
+			requiredBitSet[0] |= 1 << 3
+			if err := func() error {
+				if err := s.Amount.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"amount\"")
+			}
+		case "datetime":
+			requiredBitSet[0] |= 1 << 4
+			if err := func() error {
+				v, err := json.DecodeDateTime(d)
+				s.Datetime = v
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"datetime\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode StakingEventStakePositionTransferred")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00011111,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfStakingEventStakePositionTransferred) {
+					name = jsonFieldsNameOfStakingEventStakePositionTransferred[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *StakingEventStakePositionTransferred) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *StakingEventStakePositionTransferred) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes StakingEventStakePositionTransferredEventType as json.
+func (s StakingEventStakePositionTransferredEventType) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes StakingEventStakePositionTransferredEventType from json.
+func (s *StakingEventStakePositionTransferredEventType) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode StakingEventStakePositionTransferredEventType to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch StakingEventStakePositionTransferredEventType(v) {
+	case StakingEventStakePositionTransferredEventTypeStakePositionTransferred:
+		*s = StakingEventStakePositionTransferredEventTypeStakePositionTransferred
+	default:
+		*s = StakingEventStakePositionTransferredEventType(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s StakingEventStakePositionTransferredEventType) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *StakingEventStakePositionTransferredEventType) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }

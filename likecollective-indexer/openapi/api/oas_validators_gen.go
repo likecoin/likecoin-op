@@ -871,8 +871,23 @@ func (s StakingEvent) Validate() error {
 			return err
 		}
 		return nil
+	case StakingEventRewardDepositDistributedStakingEvent:
+		if err := s.StakingEventRewardDepositDistributed.Validate(); err != nil {
+			return err
+		}
+		return nil
 	case StakingEventAllRewardsClaimedStakingEvent:
 		if err := s.StakingEventAllRewardsClaimed.Validate(); err != nil {
+			return err
+		}
+		return nil
+	case StakingEventStakePositionTransferredStakingEvent:
+		if err := s.StakingEventStakePositionTransferred.Validate(); err != nil {
+			return err
+		}
+		return nil
+	case StakingEventStakePositionReceivedStakingEvent:
+		if err := s.StakingEventStakePositionReceived.Validate(); err != nil {
 			return err
 		}
 		return nil
@@ -1116,6 +1131,71 @@ func (s StakingEventRewardClaimedEventType) Validate() error {
 	}
 }
 
+func (s *StakingEventRewardDepositDistributed) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := s.EventType.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "event_type",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := s.BookNft.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "book_nft",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := s.Account.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "account",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := s.Amount.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "amount",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s StakingEventRewardDepositDistributedEventType) Validate() error {
+	switch s {
+	case "reward-deposit-distributed":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
+}
+
 func (s *StakingEventRewardDeposited) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
@@ -1175,6 +1255,136 @@ func (s *StakingEventRewardDeposited) Validate() error {
 func (s StakingEventRewardDepositedEventType) Validate() error {
 	switch s {
 	case "reward-deposited":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
+}
+
+func (s *StakingEventStakePositionReceived) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := s.EventType.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "event_type",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := s.BookNft.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "book_nft",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := s.Account.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "account",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := s.Amount.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "amount",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s StakingEventStakePositionReceivedEventType) Validate() error {
+	switch s {
+	case "stake-position-received":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
+}
+
+func (s *StakingEventStakePositionTransferred) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := s.EventType.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "event_type",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := s.BookNft.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "book_nft",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := s.Account.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "account",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := s.Amount.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "amount",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s StakingEventStakePositionTransferredEventType) Validate() error {
+	switch s {
+	case "stake-position-transferred":
 		return nil
 	default:
 		return errors.Errorf("invalid value: %v", s)
