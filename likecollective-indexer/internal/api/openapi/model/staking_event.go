@@ -72,7 +72,7 @@ func MakeStakingEvent(stakingEvent *ent.StakingEvent) api.StakingEvent {
 		}
 	}
 
-	panic("unknown staking event type")
+	panic("unknown staking event type: " + stakingEvent.EventType)
 }
 
 type StakingEventFilterParams struct {
