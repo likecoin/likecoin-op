@@ -7,7 +7,7 @@ export default {
       method,
       ...others,
     });
-    redirect(`/?${queries.toString()}`);
+    redirect(`/extended?${queries.toString()}`);
   },
 };
 </script>
