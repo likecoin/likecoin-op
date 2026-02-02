@@ -21,6 +21,9 @@ likecoinMigration:
     tls:
       secretName: tls-likecoin-migration
 
+  ingressExtended:
+    htpasswdPath: ""
+
   resources:
     requests:
       cpu: "10m"
