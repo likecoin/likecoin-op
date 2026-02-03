@@ -18,7 +18,14 @@ import (
 type EVMEventRepository interface {
 	GetEvmEventById(ctx context.Context, id int) (*ent.EVMEvent, error)
 
+	GetEvmEvents(ctx context.Context, filter *EvmEventsFilter) ([]*ent.EVMEvent, int, error)
+
 	GetEVMEventsByStatus(ctx context.Context, status evmevent.Status) ([]*ent.EVMEvent, error)
+	GetEVMEventsByContractAddressAndStatus(
+		ctx context.Context,
+		contractAddress string,
+		status evmevent.Status,
+	) ([]*ent.EVMEvent, error)
 
 	QueryStakingEvmEvents(
 		ctx context.Context,
@@ -73,9 +80,37 @@ func (s *evmEventRepository) GetEvmEventById(ctx context.Context, id int) (*ent.
 	return s.dbService.Client().EVMEvent.Get(ctx, id)
 }
 
+func (s *evmEventRepository) GetEvmEvents(ctx context.Context, filter *EvmEventsFilter) ([]*ent.EVMEvent, int, error) {
+	q := s.dbService.Client().EVMEvent.Query()
+	q = filter.HandleFilter(q)
+	count, err := q.Count(ctx)
+	if err != nil {
+		return nil, 0, err
+	}
+	q = filter.HandlePagination(q)
+	q = filter.HandleSort(q)
+	events, err := q.All(ctx)
+	if err != nil {
+		return nil, 0, err
+	}
+	return events, count, nil
+}
+
 func (s *evmEventRepository) GetEVMEventsByStatus(ctx context.Context, status evmevent.Status) ([]*ent.EVMEvent, error) {
 	return s.BaseQuery(s.dbService.Client().EVMEvent.Query()).
 		Where(evmevent.StatusEQ(status)).All(ctx)
+}
+
+func (s *evmEventRepository) GetEVMEventsByContractAddressAndStatus(
+	ctx context.Context,
+	contractAddress string,
+	status evmevent.Status,
+) ([]*ent.EVMEvent, error) {
+	return s.BaseQuery(s.dbService.Client().EVMEvent.Query()).
+		Where(
+			evmevent.AddressEqualFold(contractAddress),
+			evmevent.StatusEQ(status),
+		).All(ctx)
 }
 
 func (s *evmEventRepository) QueryStakingEvmEvents(
