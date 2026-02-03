@@ -16,6 +16,7 @@ type openAPIHandler struct {
 	accountRepository      database.AccountRepository
 	nftClassRepository     database.NFTClassRepository
 	stakingEventRepository database.StakingEventRepository
+	evmEventRepository     database.EVMEventRepository
 
 	bookNFTDeltaTimeBucketRepository database.BookNFTDeltaTimeBucketRepository
 }
@@ -33,6 +34,7 @@ func NewOpenAPIHandler(
 		accountRepository:      database.MakeAccountRepository(db),
 		nftClassRepository:     database.MakeNFTClassRepository(db),
 		stakingEventRepository: database.MakeStakingEventRepository(db),
+		evmEventRepository:     database.MakeEVMEventRepository(db),
 
 		bookNFTDeltaTimeBucketRepository: database.MakeBookNFTDeltaTimeBucketRepository(timescaleDbService),
 	}
