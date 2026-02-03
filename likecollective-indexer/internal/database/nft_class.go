@@ -71,7 +71,9 @@ func (r *nftClassRepository) QueryNFTClasses(
 	nextKey int,
 	err error,
 ) {
-	q := r.dbService.Client().NFTClass.Query()
+	q := r.dbService.Client().NFTClass.Query().Where(func(s *sql.Selector) {
+		s.Where(sql.GT(nftclass.FieldStakedAmount, 0))
+	})
 	q = filter.HandleFilter(q)
 
 	count, err = q.Count(ctx)
@@ -108,7 +110,9 @@ func (r *nftClassRepository) QueryNFTClass(
 	ctx context.Context,
 	address string,
 ) (*ent.NFTClass, error) {
-	nftClass, err := r.dbService.Client().NFTClass.Query().Where(
+	nftClass, err := r.dbService.Client().NFTClass.Query().Where(func(s *sql.Selector) {
+		s.Where(sql.GT(nftclass.FieldStakedAmount, 0))
+	}).Where(
 		nftclass.AddressEqualFold(address),
 	).Only(ctx)
 	if err != nil {
