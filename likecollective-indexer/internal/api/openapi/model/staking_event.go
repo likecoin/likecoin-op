@@ -55,6 +55,17 @@ func MakeStakingEvent(stakingEvent *ent.StakingEvent) api.StakingEvent {
 				Datetime:  stakingEvent.Datetime,
 			},
 		}
+	case stakingevent.EventTypeRewardDepositDistributed:
+		return api.StakingEvent{
+			Type: api.StakingEventRewardDepositDistributedStakingEvent,
+			StakingEventRewardDepositDistributed: api.StakingEventRewardDepositDistributed{
+				EventType: api.StakingEventRewardDepositDistributedEventTypeRewardDepositDistributed,
+				BookNft:   api.EvmAddress(stakingEvent.NftClassAddress),
+				Account:   api.EvmAddress(stakingEvent.AccountEvmAddress),
+				Amount:    api.Uint256((*uint256.Int)(stakingEvent.PendingRewardAmountAdded).String()),
+				Datetime:  stakingEvent.Datetime,
+			},
+		}
 	case stakingevent.EventTypeAllRewardsClaimed:
 		return api.StakingEvent{
 			Type: api.StakingEventAllRewardsClaimedStakingEvent,
@@ -70,9 +81,31 @@ func MakeStakingEvent(stakingEvent *ent.StakingEvent) api.StakingEvent {
 				Datetime: stakingEvent.Datetime,
 			},
 		}
+	case stakingevent.EventTypeStakePositionTransferred:
+		return api.StakingEvent{
+			Type: api.StakingEventStakePositionTransferredStakingEvent,
+			StakingEventStakePositionTransferred: api.StakingEventStakePositionTransferred{
+				EventType: api.StakingEventStakePositionTransferredEventTypeStakePositionTransferred,
+				BookNft:   api.EvmAddress(stakingEvent.NftClassAddress),
+				Account:   api.EvmAddress(stakingEvent.AccountEvmAddress),
+				Amount:    api.Uint256((*uint256.Int)(stakingEvent.StakedAmountRemoved).String()),
+				Datetime:  stakingEvent.Datetime,
+			},
+		}
+	case stakingevent.EventTypeStakePositionReceived:
+		return api.StakingEvent{
+			Type: api.StakingEventStakePositionReceivedStakingEvent,
+			StakingEventStakePositionReceived: api.StakingEventStakePositionReceived{
+				EventType: api.StakingEventStakePositionReceivedEventTypeStakePositionReceived,
+				Account:   api.EvmAddress(stakingEvent.AccountEvmAddress),
+				BookNft:   api.EvmAddress(stakingEvent.NftClassAddress),
+				Amount:    api.Uint256((*uint256.Int)(stakingEvent.StakedAmountAdded).String()),
+				Datetime:  stakingEvent.Datetime,
+			},
+		}
 	}
 
-	panic("unknown staking event type")
+	panic("unknown staking event type: " + stakingEvent.EventType)
 }
 
 type StakingEventFilterParams struct {

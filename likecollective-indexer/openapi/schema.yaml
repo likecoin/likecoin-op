@@ -892,7 +892,10 @@ components:
         - $ref: "#/components/schemas/StakingEventRewardAdded"
         - $ref: "#/components/schemas/StakingEventRewardClaimed"
         - $ref: "#/components/schemas/StakingEventRewardDeposited"
+        - $ref: "#/components/schemas/StakingEventRewardDepositDistributed"
         - $ref: "#/components/schemas/StakingEventAllRewardsClaimed"
+        - $ref: "#/components/schemas/StakingEventStakePositionTransferred"
+        - $ref: "#/components/schemas/StakingEventStakePositionReceived"
       discriminator:
         propertyName: event_type
         mapping:
@@ -901,7 +904,10 @@ components:
           reward-added: "#/components/schemas/StakingEventRewardAdded"
           reward-claimed: "#/components/schemas/StakingEventRewardClaimed"
           reward-deposited: "#/components/schemas/StakingEventRewardDeposited"
+          reward-deposit-distributed: "#/components/schemas/StakingEventRewardDepositDistributed"
           all-rewards-claimed: "#/components/schemas/StakingEventAllRewardsClaimed"
+          stake-position-transferred: "#/components/schemas/StakingEventStakePositionTransferred"
+          stake-position-received: "#/components/schemas/StakingEventStakePositionReceived"
 
     StakingEventStaked:
       type: object
@@ -1018,6 +1024,29 @@ components:
         - amount
         - datetime
 
+    StakingEventRewardDepositDistributed:
+      type: object
+      properties:
+        event_type:
+          type: string
+          enum:
+            - reward-deposit-distributed
+        book_nft:
+          $ref: "#/components/schemas/EvmAddress"
+        account:
+          $ref: "#/components/schemas/EvmAddress"
+        amount:
+          $ref: "#/components/schemas/Uint256"
+        datetime:
+          type: string
+          format: date-time
+      required:
+        - event_type
+        - book_nft
+        - account
+        - amount
+        - datetime
+
     StakingEventAllRewardsClaimed:
       type: object
       properties:
@@ -1049,6 +1078,52 @@ components:
         - event_type
         - account
         - claimed_amount_list
+        - datetime
+
+    StakingEventStakePositionTransferred:
+      type: object
+      properties:
+        event_type:
+          type: string
+          enum:
+            - stake-position-transferred
+        book_nft:
+          $ref: "#/components/schemas/EvmAddress"
+        account:
+          $ref: "#/components/schemas/EvmAddress"
+        amount:
+          $ref: "#/components/schemas/Uint256"
+        datetime:
+          type: string
+          format: date-time
+      required:
+        - event_type
+        - book_nft
+        - account
+        - amount
+        - datetime
+
+    StakingEventStakePositionReceived:
+      type: object
+      properties:
+        event_type:
+          type: string
+          enum:
+            - stake-position-received
+        book_nft:
+          $ref: "#/components/schemas/EvmAddress"
+        account:
+          $ref: "#/components/schemas/EvmAddress"
+        amount:
+          $ref: "#/components/schemas/Uint256"
+        datetime:
+          type: string
+          format: date-time
+      required:
+        - event_type
+        - account
+        - book_nft
+        - amount
         - datetime
 
     BookNFT:
