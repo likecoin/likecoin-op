@@ -19,6 +19,11 @@ error ErrVoidContract();
  *      and can be verified via blockchain Transfer event logs.
  */
 contract BookNFTVoid is Initializable {
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    constructor() {
+        _disableInitializers();
+    }
+
     // Must match BookNFT storage layout exactly for proxy compatibility
     struct BookNFTStorage {
         string name;
