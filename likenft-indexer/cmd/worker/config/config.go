@@ -27,6 +27,7 @@ type EnvConfig struct {
 	EvmEventQueryToBlockPadding            uint64 `envconfig:"EVM_EVENT_QUERY_TO_BLOCK_PADDING" default:"10"`
 
 	TaskAcquireBookNFTMaxQueueLength int `envconfig:"TASK_ACQUIRE_BOOKNFT_MAX_QUEUE_LENGTH" default:"500"`
+	TaskAcquireBookNFTBatchSize      int `envconfig:"TASK_ACQUIRE_BOOKNFT_BATCH_SIZE" default:"50"`
 
 	// The block height weight is the multiplier for the block height to be added to the score
 	TaskAcquireBookNFTNextProcessingBlockHeightWeight float64 `envconfig:"TASK_ACQUIRE_BOOKNFT_NEXT_PROCESSING_BLOCK_HEIGHT_WEIGHT" default:"0.00000001"`

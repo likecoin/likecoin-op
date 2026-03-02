@@ -5,8 +5,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log/slog"
+	"strings"
 
 	appcontext "likenft-indexer/cmd/worker/context"
+	"likenft-indexer/cmd/worker/config"
 	"likenft-indexer/ent"
 	"likenft-indexer/ent/schema/typeutil"
 	"likenft-indexer/internal/database"
@@ -104,6 +107,19 @@ func HandleAcquireBookNFTEventsTask(ctx context.Context, t *asynq.Task) error {
 			cfg.EvmEventQueryNumberOfBlocksLimit,
 		)
 
+		if err != nil && len(addresses) > 1 && isResponseTooLargeError(err) {
+			mylogger.Warn("batched eth_getLogs response too large, falling back to per-address queries",
+				"addressCount", len(addresses), "err", err)
+			if fallbackErr := acquirePerAddress(
+				ctx, logger, cfg, evmEventQueryClient, evmEventRepository,
+				evmEventQueryClient, evmClient, nftClassRepository,
+				addresses, uint64(latestEventsBlockHeight),
+			); fallbackErr != nil {
+				return fallbackErr
+			}
+			continue
+		}
+
 		if err != nil {
 			mylogger.Error("acquirer.Acquire", "err", err)
 			var errCannotConvertLog *contractevmeventacquirer.ErrCannotConvertLog
@@ -124,6 +140,74 @@ func HandleAcquireBookNFTEventsTask(ctx context.Context, t *asynq.Task) error {
 
 		if err != nil {
 			mylogger.Error("nftClassRepository.UpdateNFTClassesLatestEventsBlockNumber", "err", err)
+		}
+	}
+
+	return nil
+}
+
+// isResponseTooLargeError checks if an RPC error indicates the eth_getLogs
+// response exceeded the provider's size limit.
+// Known error messages:
+//   - Alchemy: "Log response size exceeded."
+//   - Geth/others: "query returned more than 10000 results"
+func isResponseTooLargeError(err error) bool {
+	msg := strings.ToLower(err.Error())
+	return strings.Contains(msg, "log response size exceeded") ||
+		strings.Contains(msg, "query returned more than")
+}
+
+// acquirePerAddress retries event acquisition one address at a time.
+// Used as a fallback when a batched FilterLogs call exceeds response limits.
+func acquirePerAddress(
+	ctx context.Context,
+	logger *slog.Logger,
+	cfg *config.EnvConfig,
+	abiManager contractevmeventacquirer.ABIManager,
+	evmEventRepository database.EVMEventRepository,
+	evmEventQueryClient contractevmeventacquirer.EvmEventQueryClient,
+	evmClient contractevmeventacquirer.EvmClient,
+	nftClassRepository database.NFTClassRepository,
+	addresses []string,
+	fromBlock uint64,
+) error {
+	mylogger := logger.WithGroup("acquirePerAddress")
+
+	for _, addr := range addresses {
+		singleAcquirer := contractevmeventacquirer.NewContractEvmEventsAcquirer(
+			abiManager,
+			evmEventRepository,
+			evmEventQueryClient,
+			evmClient,
+			cfg.EvmEventQueryToBlockPadding,
+			contractevmeventacquirer.ContractEvmEventsAcquirerContractTypeBookNFT,
+			[]string{addr},
+		)
+
+		newBlockHeight, _, err := singleAcquirer.Acquire(
+			ctx,
+			logger,
+			fromBlock,
+			cfg.EvmEventQueryNumberOfBlocksLimit,
+		)
+		if err != nil {
+			mylogger.Error("acquirer.Acquire", "addr", addr, "err", err)
+			var errCannotConvertLog *contractevmeventacquirer.ErrCannotConvertLog
+			if errors.As(err, &errCannotConvertLog) {
+				if disableErr := nftClassRepository.DisableForIndexing(
+					ctx, errCannotConvertLog.Log.Address.Hex(), err.Error(),
+				); disableErr != nil {
+					mylogger.Error("DisableForIndexing", "addr", addr, "err", disableErr)
+				}
+				continue
+			}
+			return err
+		}
+
+		if updateErr := nftClassRepository.UpdateNFTClassesLatestEventBlockNumber(
+			ctx, []string{addr}, typeutil.Uint64(newBlockHeight),
+		); updateErr != nil {
+			mylogger.Error("UpdateNFTClassesLatestEventBlockNumber", "addr", addr, "err", updateErr)
 		}
 	}
 
