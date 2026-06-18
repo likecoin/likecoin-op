@@ -479,6 +479,18 @@ describe("LikeCollective", async function () {
         expectedTotalStake,
       );
 
+      // The indexer derives staked totals by summing Staked event amounts, so the
+      // compounded firstReward must be emitted as a Staked event too. Without it the
+      // sum lags getTotalStake and the indexer drifts out of sync with the chain.
+      const stakedEvents = await likeCollective.getEvents.Staked(undefined, {
+        fromBlock: 0n,
+      });
+      const totalStakedFromEvents = stakedEvents.reduce(
+        (sum, e) => sum + (e.args.stakedAmount ?? 0n),
+        0n,
+      );
+      expect(totalStakedFromEvents).to.equal(expectedTotalStake);
+
       // Second reward divides by totalStaked. With the correct total, the sole staker's
       // pending equals the reward exactly. Pre-fix the undersized total inflated this.
       await likecoin.write.approve([likeCollective.address, secondReward], {

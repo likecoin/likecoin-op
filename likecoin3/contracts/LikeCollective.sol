@@ -204,6 +204,11 @@ contract LikeCollective is
 
         emit Staked(bookNFT, _msgSender(), amount);
         emit RewardClaimed(bookNFT, _msgSender(), pendingRewards);
+        if (pendingRewards > 0) {
+            // Compounded rewards add to the staked principal too, so event consumers
+            // (e.g. the indexer) that sum Staked amounts stay consistent with totalStaked.
+            emit Staked(bookNFT, _msgSender(), pendingRewards);
+        }
     }
 
     function decreaseStakePosition(
