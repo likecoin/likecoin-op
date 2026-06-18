@@ -190,7 +190,9 @@ contract LikeCollective is
         address bookNFT = position.bookNFT;
 
         PoolData storage pool = $.pools[bookNFT];
-        pool.totalStaked = pool.totalStaked + amount;
+        // Pending rewards are compounded into the position principal (newAmount),
+        // so they must be added to the pool total as well, mirroring restakeRewardPosition.
+        pool.totalStaked = pool.totalStaked + amount + pendingRewards;
         pool.rewardPending = pool.rewardPending - pendingRewards;
         pool.totalRewarded = pool.totalRewarded + pendingRewards;
         pool.rewardIndexes[tokenID] = pool.rewardIndex;

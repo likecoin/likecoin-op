@@ -405,7 +405,8 @@ describe("LikeCollective", async function () {
         10000n * 10n ** 6n - baseStakeAmount - additionalStakeAmount,
       );
 
-      // Position stake includes baseStakeAmount + additionalStakeAmount + rewardAmount; pool total stake increased only by additionalStakeAmount
+      // Position stake includes baseStakeAmount + additionalStakeAmount + rewardAmount;
+      // pool total stake must track the same total, since rewards are compounded into principal
       expect(
         await likeCollective.read.getStakeForUser([
           rick.account.address,
@@ -416,12 +417,82 @@ describe("LikeCollective", async function () {
         await likeCollective.read.getRewardsOfPosition([nextTokenId]),
       ).to.equal(0n);
       expect(await likeCollective.read.getTotalStake([mockBookNFT])).to.equal(
-        baseStakeAmount + additionalStakeAmount,
+        baseStakeAmount + additionalStakeAmount + rewardAmount,
       );
       // Pool pending rewards should drained
       expect(
         await likeCollective.read.getPendingRewardsPool([mockBookNFT]),
       ).to.equal(0n);
+    });
+
+    // Regression: increaseStakeToPosition compounds pending rewards into the position
+    // principal, so pool.totalStaked must grow by amount + pendingRewards too. Otherwise it
+    // drifts below the staked total, a later depositReward divides by an undersized total,
+    // and getPendingRewardsForUser explodes. See on-chain book 0xa750...bed78d.
+    it("should keep totalStaked in sync when compounding rewards, so later rewards stay sane", async function () {
+      const { likeCollective, rick, likeStakePosition, likecoin, kin } =
+        await loadFixture(deployCollective);
+      const mockBookNFT = "0x1234567890123456789012345678901234567890";
+      const baseStakeAmount = 1000n * 10n ** 6n;
+      const additionalStakeAmount = 500n * 10n ** 6n;
+      const firstReward = 1000n * 10n ** 6n;
+      const secondReward = 1000n * 10n ** 6n;
+
+      const nextTokenId = await likeStakePosition.read.getNextTokenId();
+
+      await likecoin.write.approve(
+        [likeCollective.address, baseStakeAmount + additionalStakeAmount],
+        { account: rick.account },
+      );
+      await likeCollective.write.newStakePosition(
+        [mockBookNFT, baseStakeAmount],
+        { account: rick.account },
+      );
+
+      // First reward: rick is the sole staker, so all of it is pending for his position
+      await likecoin.write.approve([likeCollective.address, firstReward], {
+        account: kin.account,
+      });
+      await likeCollective.write.depositReward([mockBookNFT, firstReward], {
+        account: kin.account,
+      });
+      expect(
+        await likeCollective.read.getRewardsOfPosition([nextTokenId]),
+      ).to.equal(firstReward);
+
+      // Compound: folds firstReward into principal and adds additionalStakeAmount
+      await likeCollective.write.increaseStakeToPosition(
+        [nextTokenId, additionalStakeAmount],
+        { account: rick.account },
+      );
+
+      // Invariant: pool total stake must equal the sum of all position stakes.
+      // Pre-fix this was baseStakeAmount + additionalStakeAmount (missing firstReward).
+      const expectedTotalStake =
+        baseStakeAmount + additionalStakeAmount + firstReward;
+      const userStake = await likeCollective.read.getStakeForUser([
+        rick.account.address,
+        mockBookNFT,
+      ]);
+      expect(userStake).to.equal(expectedTotalStake);
+      expect(await likeCollective.read.getTotalStake([mockBookNFT])).to.equal(
+        expectedTotalStake,
+      );
+
+      // Second reward divides by totalStaked. With the correct total, the sole staker's
+      // pending equals the reward exactly. Pre-fix the undersized total inflated this.
+      await likecoin.write.approve([likeCollective.address, secondReward], {
+        account: kin.account,
+      });
+      await likeCollective.write.depositReward([mockBookNFT, secondReward], {
+        account: kin.account,
+      });
+      expect(
+        await likeCollective.read.getPendingRewardsForUser([
+          rick.account.address,
+          mockBookNFT,
+        ]),
+      ).to.equal(secondReward);
     });
 
     it("should decrease stake without rewards and update balances/stake", async function () {
