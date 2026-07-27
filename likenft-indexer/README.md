@@ -1,6 +1,11 @@
 # Project likenft-indexer
 
-One Paragraph of project description goes here
+Indexes the `LikeProtocol` and `BookNFT` contracts, on Base in production, so
+that downstream applications can query BookNFT classes, tokens, owners and
+transfer memos without hitting the chain directly. It ingests EVM events, keeps
+the NFT state in postgres and exposes it through an api. The chain and contract
+address come from `ETH_NETWORK_EVENT_RPC_URL` and
+`ETH_LIKE_PROTOCOL_CONTRACT_ADDRESS`, see `.env.example`.
 
 ## Pre-requisite
 
