@@ -1,3 +1,4 @@
+{{- if .Values.migrationBackend.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,3 +27,4 @@ spec:
               name: {{ .Values.migrationBackend.name }}
         resources:
           {{- toYaml .Values.migrationBackend.scheduler.resources | nindent 12 }}
+{{- end }}

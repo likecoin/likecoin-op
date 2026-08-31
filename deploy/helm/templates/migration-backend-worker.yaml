@@ -1,3 +1,4 @@
+{{- if .Values.migrationBackend.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -37,3 +38,4 @@ spec:
         - name: cosmos-likecoin-network-config
           configMap:
             name: {{ .Values.cosmosLikeCoinNetworkConfig.name }}
+{{- end }}

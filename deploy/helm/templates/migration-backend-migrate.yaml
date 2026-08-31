@@ -1,3 +1,4 @@
+{{- if .Values.migrationBackend.enabled }}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -35,3 +36,4 @@ spec:
           {{- toYaml .Values.migrationBackend.resources | nindent 12 }}
       restartPolicy: "{{ .Values.migrationBackend.migrate.restartPolicy | default "Never" }}"
   backoffLimit: {{ .Values.migrationBackend.migrate.backoffLimit | default 1 }}
+{{- end }}

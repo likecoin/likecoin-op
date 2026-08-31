@@ -1,3 +1,4 @@
+{{- if .Values.signerBackend.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -44,3 +45,4 @@ spec:
         - containerPort: {{ .Values.signerBackend.container.port }}
         resources:
           {{- toYaml .Values.signerBackend.resources | nindent 12 }}
+{{- end }}

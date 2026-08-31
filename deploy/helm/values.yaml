@@ -83,6 +83,7 @@ migrationAdmin:
       memory: "10Mi"
 
 migrationBackend:
+  enabled: true
   name: migration-backend
   env:
     BATCH_MINT_ITEM_PER_PAGE: "10"
@@ -128,6 +129,7 @@ migrationBackend:
         memory: "10Mi"
 
 signerBackend:
+  enabled: true
   name: signer-backend
 
   migrate:

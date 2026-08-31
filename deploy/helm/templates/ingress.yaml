@@ -101,6 +101,7 @@ spec:
       secretName: {{ .Values.likenftMigration.ingress.tls.secretName }}
 {{- end }}
 ---
+{{- if .Values.migrationAdmin.enabled }}
 kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:
@@ -154,7 +155,9 @@ spec:
     - hosts:
         - {{ .Values.migrationBackend.ingress.tls.host }}
       secretName: {{ .Values.migrationBackend.ingress.tls.secretName }}
+{{- end }}
 ---
+{{- if .Values.migrationBackend.enabled }}
 kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:
@@ -187,6 +190,7 @@ spec:
     - hosts:
         - {{ .Values.migrationBackend.ingress.tls.host }}
       secretName: {{ .Values.migrationBackend.ingress.tls.secretName }}
+{{- end }}
 ---
 kind: Ingress
 apiVersion: networking.k8s.io/v1
