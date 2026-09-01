@@ -1,4 +1,4 @@
-{{- if .Values.likecollectiveIndexer.enabled }}
+{{- if and .Values.likecollectiveIndexer.enabled .Values.likecollectiveIndexer.timescaleDb.enabled }}
 apiVersion: v1
 kind: Secret
 metadata:

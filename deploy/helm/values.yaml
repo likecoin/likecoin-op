@@ -295,6 +295,13 @@ likecollectiveIndexer:
             memory: "10Mi"
 
   timescaleDb:
+    # Backs the book_nft_delta_time_bucket_* continuous aggregates, which serve
+    # GET /api/book-nfts/{time_frame}/delta and nothing else. Cloud SQL does not
+    # offer the timescaledb extension, so this is an in-cluster StatefulSet or
+    # nothing; environments that can live without that one endpoint set this to
+    # false and skip the StatefulSet, its PVC and the migrate hook.
+    enabled: true
+
     container:
       image: timescale/timescaledb-ha:pg16
       imagePullPolicy: IfNotPresent
