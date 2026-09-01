@@ -298,8 +298,15 @@ likecollectiveIndexer:
     # Backs the book_nft_delta_time_bucket_* continuous aggregates, which serve
     # GET /api/book-nfts/{time_frame}/delta and nothing else. Cloud SQL does not
     # offer the timescaledb extension, so this is an in-cluster StatefulSet or
-    # nothing; environments that can live without that one endpoint set this to
-    # false and skip the StatefulSet, its PVC and the migrate hook.
+    # nothing.
+    #
+    # false skips the Service, Secret, StatefulSet and PVC, plus the migrate
+    # hook's Secret and Job. Leave DB_TIMESCALE_* out of
+    # likecollectiveIndexer.env when you do: nothing writes to timescale, and
+    # NewTimescaleService only calls sql.Open, which does not dial and accepts
+    # the resulting empty DSN, so the API still starts and the delta endpoint is
+    # the only thing that stops working. Repointing DB_TIMESCALE_* at the main
+    # database does not bring it back -- the aggregates are not there either.
     enabled: true
 
     container:
