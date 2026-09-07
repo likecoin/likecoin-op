@@ -20,6 +20,9 @@ type AccountRepository interface {
 	QueryAccountsByEvmAddresses(ctx context.Context, evmAddresses []string) ([]*ent.Account, error)
 	QueryAccountsByNFTClassAddresses(ctx context.Context, nftClassAddresses []string) ([]*ent.Account, error)
 
+	// QueryAllAccounts returns every account, unfiltered and unpaginated.
+	QueryAllAccounts(ctx context.Context) ([]*ent.Account, error)
+
 	GetOrCreateAccount(
 		ctx context.Context,
 		tx *ent.Tx,
@@ -175,4 +178,8 @@ func (r *accountRepository) CreateOrUpdateAccount(
 		SetPendingRewardAmount(pendingRewardAmount).
 		SetClaimedRewardAmount(claimedRewardAmount).
 		Save(ctx)
+}
+
+func (r *accountRepository) QueryAllAccounts(ctx context.Context) ([]*ent.Account, error) {
+	return r.dbService.Client().Account.Query().All(ctx)
 }

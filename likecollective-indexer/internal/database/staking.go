@@ -54,6 +54,10 @@ type StakingRepository interface {
 		bookNFTAddresses []string,
 	) ([]*ent.Staking, error)
 
+	// QueryAllStakings returns every staking with its account and nft class
+	// edges loaded, unfiltered and unpaginated.
+	QueryAllStakings(ctx context.Context) ([]*ent.Staking, error)
+
 	GetOrCreateStaking(
 		ctx context.Context,
 		tx *ent.Tx,
@@ -261,4 +265,11 @@ func (r *stakingRepository) RecomputePoolSharesByNFTClassAddress(
 		}
 	}
 	return nil
+}
+
+func (r *stakingRepository) QueryAllStakings(ctx context.Context) ([]*ent.Staking, error) {
+	return r.dbService.Client().Staking.Query().
+		WithAccount().
+		WithNftClass().
+		All(ctx)
 }

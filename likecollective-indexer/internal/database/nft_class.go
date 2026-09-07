@@ -38,6 +38,12 @@ type NFTClassRepository interface {
 		addresses []string,
 	) ([]*ent.NFTClass, error)
 
+	// QueryAllNFTClasses returns every nft class, including those with no
+	// stake. QueryNFTClasses hides those, which a reconciliation against the
+	// chain must not do: a book NFT whose last staker left still has a row to
+	// zero.
+	QueryAllNFTClasses(ctx context.Context) ([]*ent.NFTClass, error)
+
 	GetOrCreateNFTClass(
 		ctx context.Context,
 		tx *ent.Tx,
@@ -216,4 +222,8 @@ func (r *nftClassRepository) RecomputeNumberOfStakersByNFTClassAddress(
 	}
 
 	return tx.NFTClass.UpdateOne(nftClass).SetNumberOfStakers(uint64(c)).Save(ctx)
+}
+
+func (r *nftClassRepository) QueryAllNFTClasses(ctx context.Context) ([]*ent.NFTClass, error) {
+	return r.dbService.Client().NFTClass.Query().All(ctx)
 }

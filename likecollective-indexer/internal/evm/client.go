@@ -21,6 +21,32 @@ type EVMClient interface {
 
 	LatestBlockNumber(ctx context.Context) (*big.Int, error)
 
+	ListStakePositions(
+		ctx context.Context,
+		blockNumber *big.Int,
+		concurrency int,
+	) ([]*StakePosition, error)
+
+	GetStakeForUser(
+		ctx context.Context,
+		blockNumber *big.Int,
+		user common.Address,
+		bookNFT common.Address,
+	) (*big.Int, error)
+
+	GetPendingRewardsForUser(
+		ctx context.Context,
+		blockNumber *big.Int,
+		user common.Address,
+		bookNFT common.Address,
+	) (*big.Int, error)
+
+	GetTotalStake(
+		ctx context.Context,
+		blockNumber *big.Int,
+		bookNFT common.Address,
+	) (*big.Int, error)
+
 	GetRewardsOfPosition(
 		ctx context.Context,
 		blockNumber *big.Int,

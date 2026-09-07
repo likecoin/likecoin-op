@@ -165,6 +165,40 @@ wrong base. Two things guard that.
   exhausted their asynq retries and were parked at `failed`. Without it a
   single failed event stayed failed forever.
 
+### Repairing
+
+`resync` rebuilds all three tables from one pinned-block on-chain snapshot:
+
+```bash
+go run ./cmd/cli resync                  # report the diff, write nothing
+go run ./cmd/cli resync --apply          # write it
+go run ./cmd/cli resync --report out.json
+```
+
+It enumerates every live position through `LikeStakePosition`, unions those
+pairs with the rows already stored so a burned position is zeroed rather than
+left at its last value, and refuses to write when the contract's two
+independent accessors disagree with each other.
+
+It is deliberately **manual**. Running it on a schedule would have it rewriting
+financial columns unattended, and it takes no lock against the live worker, so
+an event applied between its read and its commit is overwritten. Run it when
+`check-evm-event-gaps` says something was lost, and prefer running it in
+cluster -- the mainnet write takes ~80s there against ~35 minutes over a
+port-forward.
+
+### What none of this repairs
+
+- **`claimed_reward_amount`** is lifetime-cumulative and the contract keeps no
+  such counter, so a snapshot cannot rebuild it. Only replaying `RewardClaimed`
+  from logs can.
+- **`staking_events`** is history, not current state, so `resync` leaves it
+  alone. Anything reading it -- including the TimescaleDB
+  `book_nft_delta_time_bucket_*` aggregates behind
+  `GET /collective/api/book-nfts/{7d|30d|1y}/delta` -- still reflects the gap.
+- **`nft_classes.last_staked_at`** is not part of a snapshot; rows a resync
+  creates get the ent schema default.
+
 `check-evm-event-gaps` has two blind spots of its own. It only looks at a
 window behind the head, so if the scheduler itself is down for longer than that
 window, the interval it skipped is never examined by any later pass -- it keeps
@@ -177,9 +211,8 @@ are registered out of band, so if either is missing, paused, or filtered on a
 stale address, every log from that contract is correctly reported missing. Run
 it somewhere quiet before pointing it at sentry.
 
-Replaying missing logs back into `evm_events` would let the pipeline rebuild
-what the gap cost, and `check-evm-event-gaps` already identifies exactly which
-logs to replay. It is
+Replaying missing logs back into `evm_events` would repair the first two, and
+`check-evm-event-gaps` already identifies exactly which logs to replay. It is
 not implemented yet because it is not safe yet: `RewardDeposited` fans out into
 a per-staker split derived from the stake distribution held **at the time it is
 applied**, so a log replayed late would distribute against today's distribution
