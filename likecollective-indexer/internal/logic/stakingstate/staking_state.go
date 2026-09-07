@@ -11,6 +11,7 @@ import (
 	"likecollective-indexer/internal/logic/stakingstate/persistor"
 
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/holiman/uint256"
 )
 
 type StakingState interface {
@@ -22,6 +23,16 @@ type stakingState struct {
 	accounts   []*model.Account
 	nftClasses []*model.NFTClass
 	stakings   []*model.Staking
+
+	// chainBacked marks a state whose staked and pending amounts are replaced
+	// from the chain once the events are applied. The applications then write
+	// only the history and leave those amounts as loaded: see add, lacks and
+	// subtract.
+	chainBacked bool
+
+	// touched holds the stakings an event named, which the chain is re-read
+	// for even when they hold nothing as loaded.
+	touched map[*model.Staking]struct{}
 }
 
 func LoadStakingState(
@@ -29,6 +40,15 @@ func LoadStakingState(
 	stakingStateLoader loader.StakingStateLoader,
 	stakingEvents []*ent.StakingEvent,
 ) (StakingState, error) {
+	return loadStakingState(ctx, stakingStateLoader, stakingEvents, false)
+}
+
+func loadStakingState(
+	ctx context.Context,
+	stakingStateLoader loader.StakingStateLoader,
+	stakingEvents []*ent.StakingEvent,
+	chainBacked bool,
+) (*stakingState, error) {
 	loadStates := make([]*loader.LoadState, 0)
 	for _, stakingEvent := range stakingEvents {
 		loadStateFactory, err := loader.MakeLoadStateFactory(stakingEvent)
@@ -44,9 +64,10 @@ func LoadStakingState(
 	}
 
 	return &stakingState{
-		accounts:   accounts,
-		nftClasses: nftClasses,
-		stakings:   stakings,
+		accounts:    accounts,
+		nftClasses:  nftClasses,
+		stakings:    stakings,
+		chainBacked: chainBacked,
 	}, nil
 }
 
@@ -105,6 +126,52 @@ func (s *stakingState) Persist(
 		s.nftClasses,
 		s.stakings,
 	)
+}
+
+// add returns total + amount, or total as it is on chain-backed state.
+//
+// reconcileFromChain moves an account by how far each of its stakings moved
+// from what was loaded, so on chain-backed state nothing may move them first.
+func (s *stakingState) add(total *uint256.Int, amount *uint256.Int) *uint256.Int {
+	if s.chainBacked {
+		return total
+	}
+	return new(uint256.Int).Add(total, amount)
+}
+
+// lacks reports whether total is too small for amount to be removed from it.
+//
+// Never on chain-backed state. The loaded amount there may already have been
+// re-read at a head past this event -- an earlier event in the queue read it
+// after this one's removal landed on chain -- so an amount smaller than the
+// removal is expected rather than a sign of corruption. Refusing it would fail
+// the event on every retry, and nothing after it could correct that.
+func (s *stakingState) lacks(total *uint256.Int, amount *uint256.Int) bool {
+	if s.chainBacked {
+		return false
+	}
+	return total.Lt(amount)
+}
+
+// subtract returns total - amount, or total as it is on chain-backed state. On
+// delta state the caller must have checked lacks first.
+func (s *stakingState) subtract(total *uint256.Int, amount *uint256.Int) *uint256.Int {
+	if s.chainBacked {
+		return total
+	}
+	return new(uint256.Int).Sub(total, amount)
+}
+
+func (s *stakingState) touch(staking *model.Staking) {
+	if s.touched == nil {
+		s.touched = make(map[*model.Staking]struct{})
+	}
+	s.touched[staking] = struct{}{}
+}
+
+func (s *stakingState) isTouched(staking *model.Staking) bool {
+	_, ok := s.touched[staking]
+	return ok
 }
 
 func (s *stakingState) GetAccountByAddress(evmAddress common.Address) (*model.Account, bool) {

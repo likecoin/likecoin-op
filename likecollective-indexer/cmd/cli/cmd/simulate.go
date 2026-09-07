@@ -107,7 +107,7 @@ var simulateCmd = &cobra.Command{
 
 		persistor := simulate.MakeSimulationPersistor(handleResult)
 
-		stakingEvmEventProcessor := stakingstate.MakeStakingEvmEventProcessor(
+		stakingEvmEventProcessor := stakingstate.MakeSimulationStakingEvmEventProcessor(
 			evmClient,
 			stakingStateLoader,
 			persistor,

@@ -78,10 +78,11 @@ func (s *stakedEventApplication) Apply(state *stakingState) (*stakingState, []St
 	account := state.GetOrCreateAccount(s.accountEVMAddress)
 	nftClass := state.GetOrCreateNFTClass(s.nftClassAddress)
 	staking := state.GetOrCreateStaking(s.accountEVMAddress, s.nftClassAddress)
+	state.touch(staking)
 
-	account.StakedAmount = uint256.NewInt(0).Add(account.StakedAmount, s.stakedAmountAdded)
-	nftClass.StakedAmount = uint256.NewInt(0).Add(nftClass.StakedAmount, s.stakedAmountAdded)
-	staking.StakedAmount = uint256.NewInt(0).Add(staking.StakedAmount, s.stakedAmountAdded)
+	account.StakedAmount = state.add(account.StakedAmount, s.stakedAmountAdded)
+	nftClass.StakedAmount = state.add(nftClass.StakedAmount, s.stakedAmountAdded)
+	staking.StakedAmount = state.add(staking.StakedAmount, s.stakedAmountAdded)
 
 	return state, []StakingEventApplication{}, nil
 }
@@ -141,29 +142,30 @@ func (s *unstakedEventApplication) Apply(state *stakingState) (*stakingState, []
 			errors.New("staking not found"),
 		)
 	}
+	state.touch(staking)
 
-	if account.StakedAmount.Cmp(s.stakedAmountRemoved) < 0 {
+	if state.lacks(account.StakedAmount, s.stakedAmountRemoved) {
 		return nil, nil, errors.Join(
 			ErrUnstakedEventApplication,
 			errors.New("staked amount is less than staked amount removed"),
 		)
 	}
-	if nftClass.StakedAmount.Cmp(s.stakedAmountRemoved) < 0 {
+	if state.lacks(nftClass.StakedAmount, s.stakedAmountRemoved) {
 		return nil, nil, errors.Join(
 			ErrUnstakedEventApplication,
 			errors.New("nft class staked amount is less than staked amount removed"),
 		)
 	}
-	if staking.StakedAmount.Cmp(s.stakedAmountRemoved) < 0 {
+	if state.lacks(staking.StakedAmount, s.stakedAmountRemoved) {
 		return nil, nil, errors.Join(
 			ErrUnstakedEventApplication,
 			errors.New("staking staked amount is less than staked amount removed"),
 		)
 	}
 
-	account.StakedAmount = uint256.NewInt(0).Sub(account.StakedAmount, s.stakedAmountRemoved)
-	nftClass.StakedAmount = uint256.NewInt(0).Sub(nftClass.StakedAmount, s.stakedAmountRemoved)
-	staking.StakedAmount = uint256.NewInt(0).Sub(staking.StakedAmount, s.stakedAmountRemoved)
+	account.StakedAmount = state.subtract(account.StakedAmount, s.stakedAmountRemoved)
+	nftClass.StakedAmount = state.subtract(nftClass.StakedAmount, s.stakedAmountRemoved)
+	staking.StakedAmount = state.subtract(staking.StakedAmount, s.stakedAmountRemoved)
 
 	return state, []StakingEventApplication{}, nil
 }
@@ -226,23 +228,24 @@ func (s *rewardClaimedEventApplication) Apply(state *stakingState) (*stakingStat
 			errors.New("staking not found"),
 		)
 	}
+	state.touch(staking)
 
-	if account.PendingRewardAmount.Cmp(s.pendingRewardAmountRemoved) < 0 {
+	if state.lacks(account.PendingRewardAmount, s.pendingRewardAmountRemoved) {
 		return nil, nil, errors.Join(
 			ErrRewardClaimedEventApplication,
 			errors.New("pending reward amount is less than pending reward amount removed"),
 		)
 	}
-	if staking.PendingRewardAmount.Cmp(s.pendingRewardAmountRemoved) < 0 {
+	if state.lacks(staking.PendingRewardAmount, s.pendingRewardAmountRemoved) {
 		return nil, nil, errors.Join(
 			ErrRewardClaimedEventApplication,
 			errors.New("staking pending reward amount is less than pending reward amount removed"),
 		)
 	}
 
-	account.PendingRewardAmount = uint256.NewInt(0).Sub(account.PendingRewardAmount, s.pendingRewardAmountRemoved)
+	account.PendingRewardAmount = state.subtract(account.PendingRewardAmount, s.pendingRewardAmountRemoved)
 	account.ClaimedRewardAmount = uint256.NewInt(0).Add(account.ClaimedRewardAmount, s.claimedRewardAmountAdded)
-	staking.PendingRewardAmount = uint256.NewInt(0).Sub(staking.PendingRewardAmount, s.pendingRewardAmountRemoved)
+	staking.PendingRewardAmount = state.subtract(staking.PendingRewardAmount, s.pendingRewardAmountRemoved)
 	staking.ClaimedRewardAmount = uint256.NewInt(0).Add(staking.ClaimedRewardAmount, s.claimedRewardAmountAdded)
 
 	return state, []StakingEventApplication{}, nil
@@ -307,7 +310,8 @@ func (s *rewardDepositedEventApplication) Apply(
 		// This is still a per-deposit approximation: the contract floors
 		// amount * 1e18 / totalStaked into an accumulated reward index and
 		// applies the index delta per position, so the two can differ by
-		// rounding dust per deposit.
+		// rounding dust per deposit. That is why the totals are re-read from
+		// the chain afterwards rather than trusted from here.
 		//
 		// The product is taken at 512 bits: only the share has to fit in
 		// uint256, and refusing a product that does not would fail the event
@@ -379,9 +383,10 @@ func (s *rewardDepositDistributedEventApplication) GetStakingEvent() *ent.Stakin
 func (s *rewardDepositDistributedEventApplication) Apply(state *stakingState) (*stakingState, []StakingEventApplication, error) {
 	account := state.GetOrCreateAccount(s.accountEVMAddress)
 	staking := state.GetOrCreateStaking(s.accountEVMAddress, s.nftClassAddress)
+	state.touch(staking)
 
-	account.PendingRewardAmount = uint256.NewInt(0).Add(account.PendingRewardAmount, s.pendingRewardAmountAdded)
-	staking.PendingRewardAmount = uint256.NewInt(0).Add(staking.PendingRewardAmount, s.pendingRewardAmountAdded)
+	account.PendingRewardAmount = state.add(account.PendingRewardAmount, s.pendingRewardAmountAdded)
+	staking.PendingRewardAmount = state.add(staking.PendingRewardAmount, s.pendingRewardAmountAdded)
 
 	return state, []StakingEventApplication{}, nil
 }
@@ -444,23 +449,24 @@ func (s *allRewardsClaimedEventApplication) Apply(state *stakingState) (*staking
 			errors.New("staking not found"),
 		)
 	}
+	state.touch(staking)
 
-	if account.PendingRewardAmount.Cmp(s.pendingRewardAmountRemoved) < 0 {
+	if state.lacks(account.PendingRewardAmount, s.pendingRewardAmountRemoved) {
 		return nil, nil, errors.Join(
 			ErrAllRewardsClaimedEventApplication,
 			errors.New("pending reward amount is less than pending reward amount removed"),
 		)
 	}
-	if staking.PendingRewardAmount.Cmp(s.pendingRewardAmountRemoved) < 0 {
+	if state.lacks(staking.PendingRewardAmount, s.pendingRewardAmountRemoved) {
 		return nil, nil, errors.Join(
 			ErrAllRewardsClaimedEventApplication,
 			errors.New("staking pending reward amount is less than pending reward amount removed"),
 		)
 	}
 
-	account.PendingRewardAmount = uint256.NewInt(0).Sub(account.PendingRewardAmount, s.pendingRewardAmountRemoved)
+	account.PendingRewardAmount = state.subtract(account.PendingRewardAmount, s.pendingRewardAmountRemoved)
 	account.ClaimedRewardAmount = uint256.NewInt(0).Add(account.ClaimedRewardAmount, s.claimedRewardAmountAdded)
-	staking.PendingRewardAmount = uint256.NewInt(0).Sub(staking.PendingRewardAmount, s.pendingRewardAmountRemoved)
+	staking.PendingRewardAmount = state.subtract(staking.PendingRewardAmount, s.pendingRewardAmountRemoved)
 	staking.ClaimedRewardAmount = uint256.NewInt(0).Add(staking.ClaimedRewardAmount, s.claimedRewardAmountAdded)
 
 	return state, []StakingEventApplication{}, nil
@@ -524,36 +530,37 @@ func (s *stakePositionTransferredEventApplication) Apply(state *stakingState) (*
 			errors.New("staking not found"),
 		)
 	}
+	state.touch(staking)
 
-	if account.StakedAmount.Cmp(s.stakedAmountRemoved) < 0 {
+	if state.lacks(account.StakedAmount, s.stakedAmountRemoved) {
 		return nil, nil, errors.Join(
 			ErrStakePositionTransferredEventApplication,
 			errors.New("stake position transferred staked amount is less than staked amount removed"),
 		)
 	}
-	if account.PendingRewardAmount.Cmp(s.pendingRewardAmountRemoved) < 0 {
+	if state.lacks(account.PendingRewardAmount, s.pendingRewardAmountRemoved) {
 		return nil, nil, errors.Join(
 			ErrStakePositionTransferredEventApplication,
 			errors.New("stake position transferred pending reward amount is less than pending reward amount removed"),
 		)
 	}
-	if staking.StakedAmount.Cmp(s.stakedAmountRemoved) < 0 {
+	if state.lacks(staking.StakedAmount, s.stakedAmountRemoved) {
 		return nil, nil, errors.Join(
 			ErrStakePositionTransferredEventApplication,
 			errors.New("stake position transferred staking staked amount is less than staked amount removed"),
 		)
 	}
-	if staking.PendingRewardAmount.Cmp(s.pendingRewardAmountRemoved) < 0 {
+	if state.lacks(staking.PendingRewardAmount, s.pendingRewardAmountRemoved) {
 		return nil, nil, errors.Join(
 			ErrStakePositionTransferredEventApplication,
 			errors.New("stake position transferred staking pending reward amount is less than pending reward amount removed"),
 		)
 	}
 
-	account.StakedAmount = uint256.NewInt(0).Sub(account.StakedAmount, s.stakedAmountRemoved)
-	account.PendingRewardAmount = uint256.NewInt(0).Sub(account.PendingRewardAmount, s.pendingRewardAmountRemoved)
-	staking.StakedAmount = uint256.NewInt(0).Sub(staking.StakedAmount, s.stakedAmountRemoved)
-	staking.PendingRewardAmount = uint256.NewInt(0).Sub(staking.PendingRewardAmount, s.pendingRewardAmountRemoved)
+	account.StakedAmount = state.subtract(account.StakedAmount, s.stakedAmountRemoved)
+	account.PendingRewardAmount = state.subtract(account.PendingRewardAmount, s.pendingRewardAmountRemoved)
+	staking.StakedAmount = state.subtract(staking.StakedAmount, s.stakedAmountRemoved)
+	staking.PendingRewardAmount = state.subtract(staking.PendingRewardAmount, s.pendingRewardAmountRemoved)
 
 	return state, []StakingEventApplication{}, nil
 }
@@ -604,11 +611,12 @@ func (s *stakePositionReceivedEventApplication) GetStakingEvent() *ent.StakingEv
 func (s *stakePositionReceivedEventApplication) Apply(state *stakingState) (*stakingState, []StakingEventApplication, error) {
 	account := state.GetOrCreateAccount(s.accountEVMAddress)
 	staking := state.GetOrCreateStaking(s.accountEVMAddress, s.nftClassAddress)
+	state.touch(staking)
 
-	account.StakedAmount = uint256.NewInt(0).Add(account.StakedAmount, s.stakedAmountAdded)
-	account.PendingRewardAmount = uint256.NewInt(0).Add(account.PendingRewardAmount, s.pendingRewardAmountAdded)
-	staking.StakedAmount = uint256.NewInt(0).Add(staking.StakedAmount, s.stakedAmountAdded)
-	staking.PendingRewardAmount = uint256.NewInt(0).Add(staking.PendingRewardAmount, s.pendingRewardAmountAdded)
+	account.StakedAmount = state.add(account.StakedAmount, s.stakedAmountAdded)
+	account.PendingRewardAmount = state.add(account.PendingRewardAmount, s.pendingRewardAmountAdded)
+	staking.StakedAmount = state.add(staking.StakedAmount, s.stakedAmountAdded)
+	staking.PendingRewardAmount = state.add(staking.PendingRewardAmount, s.pendingRewardAmountAdded)
 
 	return state, []StakingEventApplication{}, nil
 }
