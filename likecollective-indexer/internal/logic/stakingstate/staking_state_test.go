@@ -497,7 +497,7 @@ func TestStakingStateFromTestData(t *testing.T) {
 								t.Fatal(err)
 							}
 
-							err = stakingState.Persist(context.Background(), processedStakingEvents, persistor)
+							err = stakingState.Persist(context.Background(), nil, processedStakingEvents, persistor)
 							if err != nil {
 								t.Fatal(err)
 							}

@@ -68,6 +68,18 @@ func (f StakingEventFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value
 	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.StakingEventMutation", m)
 }
 
+// The StakingStateHeadFunc type is an adapter to allow the use of ordinary
+// function as StakingStateHead mutator.
+type StakingStateHeadFunc func(context.Context, *ent.StakingStateHeadMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f StakingStateHeadFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.StakingStateHeadMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.StakingStateHeadMutation", m)
+}
+
 // Condition is a hook condition function.
 type Condition func(context.Context, ent.Mutation) bool
 

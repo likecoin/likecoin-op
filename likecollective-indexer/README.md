@@ -165,6 +165,22 @@ totals: those may already have been re-read at a head past the event, so an
 unstake larger than the loaded amount is expected, and refusing it would fail
 the event on every retry.
 
+Every writer -- each event pass and `resync --apply` -- holds one Postgres
+advisory lock across its load, chain read and persist, so worker concurrency and
+replicas cannot interleave a stale load with a newer commit. The persist commits
+on the transaction holding the lock, so a writer whose lock was lost mid-pass
+fails rather than committing after another writer. The head each commit was
+read at is recorded in `staking_state_heads`, and a commit from an older head --
+a load-balanced RPC node lagging the one the previous writer asked -- is refused
+and retried rather than rolling rows back.
+
+The lock only holds back writers that take it. Workers from before it existed
+apply deltas without it, so a rolling deploy onto them would let an old pod
+overwrite what a new pod just read from the chain. Upgrading from such a version
+is a one-off: scale every worker deployment processing EVM events to zero, then
+deploy, which runs the migration before the new pods start. Later rolling
+deploys are safe, since every pod takes the lock.
+
 The totals used to be accumulated too, which is why they drifted: a missing or
 wrong event did not delay a number, it offset it, and every later event built
 on the wrong base. `RewardDeposited` was worse than that, re-deriving the
@@ -206,19 +222,14 @@ pairs with the rows already stored so a burned position is zeroed rather than
 left at its last value, and refuses to write when the contract's two
 independent accessors disagree with each other.
 
+With `--apply` it takes the same lock as the workers from before it picks the
+snapshot block until the write commits, so event processing pauses for the whole
+build. The snapshot block is raised to the head the state was last committed at
+when `--confirmations` would put it behind, and an explicit `--block` behind
+that head is refused.
+
 It is deliberately **manual**. Running it on a schedule would have it rewriting
-financial columns unattended, and it takes no lock against the live worker, so
-an event applied between its read and its commit is overwritten. Stop the
-workers before `--apply`. It refuses a snapshot block older than a staking
-event already applied, because its default of head less `--confirmations`
-would otherwise roll back events that are never replayed, and one at or after
-a staking event still to be applied (received, enqueued, or failed or
-processing before persisting), which a worker would apply on top of the
-snapshot again. Let the workers drain those first. A `processing` row left by a
-crashed worker is never retried, so it keeps refusing until it is reset. Nor
-can it see a webhook delivery that arrives late for a block the snapshot
-already covers, during the write or after it; `--confirmations` is the only
-margin against that, and running `resync` again at a later block repairs it. Run it when
+financial columns unattended. Run it when
 `check-evm-event-gaps` says something was lost, and prefer running it in
 cluster -- the mainnet write takes ~80s there against ~35 minutes over a
 port-forward.

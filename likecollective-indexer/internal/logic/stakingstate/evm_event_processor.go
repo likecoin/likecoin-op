@@ -96,39 +96,44 @@ func (e *stakingEvmEventProcessor) Process(
 		stakingEvents = append(stakingEvents, stakingEvent...)
 	}
 
-	stakingState, err := loadStakingState(
-		ctx, e.stakingStateLoader, stakingEvents, e.reconcileFromChain,
-	)
-	if err != nil {
-		return err
-	}
-
-	processedState, processedStakingEvents, err := stakingState.Process(stakingEvents)
-	if err != nil {
-		return err
-	}
-
-	// The applications above have produced staking_events -- the history. On
-	// chain-backed state they left the staked and pending totals as loaded,
-	// neither moving them by the deltas nor checking the deltas against them:
-	// the loaded totals may already be from a head past these events. Now
-	// replace those totals with what the contract itself reports, so a delta
-	// that was wrong, or an event that never arrived, does not leave a
-	// permanent offset behind.
-	if e.reconcileFromChain {
-		if err := reconcileFromChain(
-			ctx, logger, e.evmClient, processedState, newestBlockNumber(evmEvents),
-		); err != nil {
+	// Load, re-read and persist as the only writer: the account totals are
+	// written as the loaded value moved by a correction, and the amounts as
+	// read at a head, so another writer committing in between would be
+	// overwritten by a stale load or an older head.
+	return e.stakingStatePersistor.WithLock(ctx, func(ctx context.Context) error {
+		stakingState, err := loadStakingState(
+			ctx, e.stakingStateLoader, stakingEvents, e.reconcileFromChain,
+		)
+		if err != nil {
 			return err
 		}
-	}
 
-	err = processedState.Persist(ctx, processedStakingEvents, e.stakingStatePersistor)
-	if err != nil {
-		return err
-	}
+		processedState, processedStakingEvents, err := stakingState.Process(stakingEvents)
+		if err != nil {
+			return err
+		}
 
-	return nil
+		// The applications above have produced staking_events -- the history.
+		// On chain-backed state they left the staked and pending totals as
+		// loaded, neither moving them by the deltas nor checking the deltas
+		// against them: the loaded totals may already be from a head past
+		// these events. Now replace those totals with what the contract itself
+		// reports, so a delta that was wrong, or an event that never arrived,
+		// does not leave a permanent offset behind.
+		var headBlockNumber *big.Int
+		if e.reconcileFromChain {
+			headBlockNumber, err = reconcileFromChain(
+				ctx, logger, e.evmClient, processedState, newestBlockNumber(evmEvents),
+			)
+			if err != nil {
+				return err
+			}
+		}
+
+		return processedState.Persist(
+			ctx, headBlockNumber, processedStakingEvents, e.stakingStatePersistor,
+		)
+	})
 }
 
 // newestBlockNumber is the block of the newest event in the batch: the reads

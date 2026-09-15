@@ -1,3 +1,4 @@
-h1:jvpKHpkMvjdbtvA2Gp0FhRa+RsYlWeUgJZXiy34LEFQ=
+h1:EppObqwGb7BXdr7ju/vbMKOcFM+PQFvNMdcnEpEewhc=
 20250910101046_Setup model.sql h1:/+HIn2FIul8dEMWhmYW9RMbE9LkiocnegZaO2bTJmLY=
 20250918134015_Update add log key attributes to staking event table.sql h1:PZU+fkGsC9GXqnG3YiRqqGw1l/S2QNrJ8ycVjXdkuhQ=
+20260916000000_Add staking state head table.sql h1:N2lDfXO6Pv3B2m6AkIQDBQxY6AYG0OlS/mpMDEmmdtY=

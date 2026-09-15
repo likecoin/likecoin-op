@@ -11,6 +11,7 @@ import (
 	"likecollective-indexer/ent/nftclass"
 	"likecollective-indexer/ent/staking"
 	"likecollective-indexer/ent/stakingevent"
+	"likecollective-indexer/ent/stakingstatehead"
 	"reflect"
 	"sync"
 
@@ -77,11 +78,12 @@ var (
 func checkColumn(t, c string) error {
 	initCheck.Do(func() {
 		columnCheck = sql.NewColumnCheck(map[string]func(string) bool{
-			account.Table:      account.ValidColumn,
-			evmevent.Table:     evmevent.ValidColumn,
-			nftclass.Table:     nftclass.ValidColumn,
-			staking.Table:      staking.ValidColumn,
-			stakingevent.Table: stakingevent.ValidColumn,
+			account.Table:          account.ValidColumn,
+			evmevent.Table:         evmevent.ValidColumn,
+			nftclass.Table:         nftclass.ValidColumn,
+			staking.Table:          staking.ValidColumn,
+			stakingevent.Table:     stakingevent.ValidColumn,
+			stakingstatehead.Table: stakingstatehead.ValidColumn,
 		})
 	})
 	return columnCheck(t, c)

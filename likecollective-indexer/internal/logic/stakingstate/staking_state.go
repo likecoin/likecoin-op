@@ -3,6 +3,7 @@ package stakingstate
 import (
 	"context"
 	"fmt"
+	"math/big"
 
 	"likecollective-indexer/ent"
 	"likecollective-indexer/internal/database"
@@ -16,7 +17,7 @@ import (
 
 type StakingState interface {
 	Process(stakingEvents []*ent.StakingEvent) (*stakingState, []*ent.StakingEvent, error)
-	Persist(ctx context.Context, stakingEvents []*ent.StakingEvent, persistor persistor.StakingStatePersistor) error
+	Persist(ctx context.Context, headBlockNumber *big.Int, stakingEvents []*ent.StakingEvent, persistor persistor.StakingStatePersistor) error
 }
 
 type stakingState struct {
@@ -116,11 +117,13 @@ func (s *stakingState) run(applications []StakingEventApplication) (*stakingStat
 
 func (s *stakingState) Persist(
 	ctx context.Context,
+	headBlockNumber *big.Int,
 	stakingEvents []*ent.StakingEvent,
 	persistor persistor.StakingStatePersistor,
 ) error {
 	return persistor.Persist(
 		ctx,
+		headBlockNumber,
 		stakingEvents,
 		s.accounts,
 		s.nftClasses,

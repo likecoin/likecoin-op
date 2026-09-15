@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log/slog"
@@ -33,11 +34,9 @@ Reports the diff and exits without writing unless --apply is given. Does not
 touch staking_events or evm_events, so it repairs the current state only, not
 the history that produced it.
 
---apply takes no lock against the workers, so stop them first. The workers
-apply events as deltas, so it refuses a snapshot block older than a staking
-event already applied, which would be rolled back for good, and one at or
-after a staking event still to be applied (received, enqueued, or failed
-before persisting), which a worker would apply a second time.`,
+With --apply it holds the lock the workers take around each event, so event
+processing pauses until the snapshot is written. The snapshot block is never
+older than the head the state was last committed at.`,
 	Args: cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		envCfg := clicontext.ConfigFromContext(cmd.Context())
@@ -91,18 +90,6 @@ before persisting), which a worker would apply a second time.`,
 			panic(fmt.Errorf("failed to dial eth client: %w", err))
 		}
 
-		// Every read is pinned to one block. Left at "latest" the snapshot
-		// would be stitched together from thousands of calls landing on
-		// different blocks, and could not be internally consistent.
-		blockNumber := big.NewInt(block)
-		if block == 0 {
-			header, err := ethClient.HeaderByNumber(ctx, nil)
-			if err != nil {
-				panic(fmt.Errorf("failed to get latest block header: %w", err))
-			}
-			blockNumber = new(big.Int).Sub(header.Number, big.NewInt(confirmations))
-		}
-
 		evmClient := evm.NewEVMClient(
 			common.HexToAddress(likeCollectiveAddress),
 			common.HexToAddress(likeStakePositionAddress),
@@ -116,66 +103,113 @@ before persisting), which a worker would apply a second time.`,
 			}
 		}()
 
-		snapshot, err := resync.Build(ctx, logger, evmClient, dbService, blockNumber, concurrency)
-		if err != nil {
-			panic(fmt.Errorf("failed to build snapshot: %w", err))
-		}
-
-		if report != "" {
-			reportBytes, err := json.MarshalIndent(snapshot.Changes, "", "  ")
-			if err != nil {
-				panic(fmt.Errorf("failed to marshal report: %w", err))
-			}
-			if err := os.WriteFile(report, reportBytes, 0o600); err != nil {
-				panic(fmt.Errorf("failed to write report %s: %w", report, err))
-			}
-		}
-
-		for _, change := range snapshot.Changes {
-			fmt.Printf("%-11s %-45s %-22s %s -> %s\n",
-				change.Table, change.Key, change.Field, change.Old, change.New)
-		}
-
-		logger.Info("snapshot built",
-			"block_number", blockNumber,
-			"positions", snapshot.Positions,
-			"accounts", len(snapshot.Accounts),
-			"nft_classes", len(snapshot.NFTClasses),
-			"stakings", len(snapshot.Stakings),
-			"changes", len(snapshot.Changes),
-		)
-
-		if !apply {
-			logger.Info("dry run, nothing written; pass --apply to write")
-			return
-		}
-
 		stakingStatePersistor := persistor.MakeStakingStatePersistor(dbService)
 
-		// Checked after the build, not before, so an event a still-running
-		// worker applied during the build is caught too.
-		err = resync.CheckSnapshotBlock(
-			ctx,
-			database.MakeEVMEventRepository(dbService),
-			stakingStatePersistor,
-			blockNumber.Uint64(),
-		)
+		run := func(ctx context.Context) error {
+			// Every read is pinned to one block. Left at "latest" the snapshot
+			// would be stitched together from thousands of calls landing on
+			// different blocks, and could not be internally consistent.
+			blockNumber := big.NewInt(block)
+			if block == 0 {
+				header, err := ethClient.HeaderByNumber(ctx, nil)
+				if err != nil {
+					return fmt.Errorf("failed to get latest block header: %w", err)
+				}
+				blockNumber = new(big.Int).Sub(header.Number, big.NewInt(confirmations))
+			}
+
+			// The workers re-read rows at the head, not the head less
+			// confirmations, so a row may already hold a newer truth than this
+			// snapshot would. Writing it would roll that row back, and the
+			// event that wrote it is processed, so nothing would re-read it.
+			committedHead, err := database.MakeStakingStateHeadRepository(dbService).GetBlockNumber(ctx)
+			if err != nil {
+				return fmt.Errorf("failed to get committed staking state head: %w", err)
+			}
+			committedBlockNumber := new(big.Int).SetUint64(committedHead)
+			switch {
+			case blockNumber.Cmp(committedBlockNumber) >= 0:
+			case block == 0:
+				logger.Info("raising snapshot block to the committed head",
+					"block_number", blockNumber,
+					"committed_block_number", committedBlockNumber,
+				)
+				blockNumber = committedBlockNumber
+			case apply:
+				return fmt.Errorf(
+					"--block %s is older than block %s the staking state is committed at",
+					blockNumber, committedBlockNumber,
+				)
+			default:
+				logger.Warn("snapshot block is older than the committed head; the diff includes changes since",
+					"block_number", blockNumber,
+					"committed_block_number", committedBlockNumber,
+				)
+			}
+
+			snapshot, err := resync.Build(ctx, logger, evmClient, dbService, blockNumber, concurrency)
+			if err != nil {
+				return fmt.Errorf("failed to build snapshot: %w", err)
+			}
+
+			if report != "" {
+				reportBytes, err := json.MarshalIndent(snapshot.Changes, "", "  ")
+				if err != nil {
+					return fmt.Errorf("failed to marshal report: %w", err)
+				}
+				if err := os.WriteFile(report, reportBytes, 0o600); err != nil {
+					return fmt.Errorf("failed to write report %s: %w", report, err)
+				}
+			}
+
+			for _, change := range snapshot.Changes {
+				fmt.Printf("%-11s %-45s %-22s %s -> %s\n",
+					change.Table, change.Key, change.Field, change.Old, change.New)
+			}
+
+			logger.Info("snapshot built",
+				"block_number", blockNumber,
+				"positions", snapshot.Positions,
+				"accounts", len(snapshot.Accounts),
+				"nft_classes", len(snapshot.NFTClasses),
+				"stakings", len(snapshot.Stakings),
+				"changes", len(snapshot.Changes),
+			)
+
+			if !apply {
+				logger.Info("dry run, nothing written; pass --apply to write")
+				return nil
+			}
+
+			err = stakingStatePersistor.Persist(
+				ctx,
+				blockNumber,
+				nil,
+				snapshot.Accounts,
+				snapshot.NFTClasses,
+				snapshot.Stakings,
+			)
+			if err != nil {
+				return fmt.Errorf("failed to persist snapshot: %w", err)
+			}
+
+			logger.Info("snapshot applied", "block_number", blockNumber)
+			return nil
+		}
+
+		// Applying holds the staking state lock from before the block is
+		// chosen until the write commits, so workers wait rather than commit
+		// in between. Otherwise a claim processed mid-build would be rolled
+		// back by the claimed_reward_amount the snapshot carried over, and a
+		// head committed mid-build would be newer than the snapshot.
+		if apply {
+			err = stakingStatePersistor.WithLock(ctx, run)
+		} else {
+			err = run(ctx)
+		}
 		if err != nil {
 			panic(err)
 		}
-
-		err = stakingStatePersistor.Persist(
-			ctx,
-			nil,
-			snapshot.Accounts,
-			snapshot.NFTClasses,
-			snapshot.Stakings,
-		)
-		if err != nil {
-			panic(fmt.Errorf("failed to persist snapshot: %w", err))
-		}
-
-		logger.Info("snapshot applied", "block_number", blockNumber)
 	},
 }
 
@@ -184,7 +218,7 @@ func init() {
 	resyncCmd.Flags().String("like-collective-address", "", "LikeCollective contract address")
 	resyncCmd.Flags().String("like-stake-position-address", "", "LikeStakePosition contract address")
 	resyncCmd.Flags().Int64("block", 0, "Block to snapshot; 0 reads the head less --confirmations")
-	resyncCmd.Flags().Int64("confirmations", 5, "Blocks to stay behind the head when --block is 0")
+	resyncCmd.Flags().Int64("confirmations", 5, "Blocks to stay behind the head when --block is 0, never behind the committed head")
 	resyncCmd.Flags().Int("concurrency", 8, "Concurrent RPC calls")
 	resyncCmd.Flags().Bool("apply", false, "Write the snapshot; without it the diff is only reported")
 	resyncCmd.Flags().String("report", "", "Write the full diff to this path as JSON")

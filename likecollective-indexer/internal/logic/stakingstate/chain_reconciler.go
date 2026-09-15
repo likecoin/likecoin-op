@@ -58,6 +58,9 @@ var ErrChainBehindEvent = errors.New("chain head is behind the event")
 // would otherwise persist a truth older than the event, with nothing left to
 // re-drive it.
 //
+// It returns the head the amounts were read at, which the persist checks is
+// not older than one the state has already been committed at.
+//
 // claimed_reward_amount is left alone. It is lifetime cumulative and the
 // contract keeps no such counter, so there is nothing to read it from.
 func reconcileFromChain(
@@ -66,15 +69,15 @@ func reconcileFromChain(
 	evmClient evm.EVMClient,
 	state *stakingState,
 	eventBlockNumber *big.Int,
-) error {
+) (*big.Int, error) {
 	mylogger := logger.WithGroup("reconcileFromChain")
 
 	head, err := evmClient.LatestBlockNumber(ctx)
 	if err != nil {
-		return fmt.Errorf("failed to get latest block number: %w", err)
+		return nil, fmt.Errorf("failed to get latest block number: %w", err)
 	}
 	if head.Cmp(eventBlockNumber) < 0 {
-		return fmt.Errorf(
+		return nil, fmt.Errorf(
 			"%w: head %s is behind event block %s",
 			ErrChainBehindEvent, head, eventBlockNumber,
 		)
@@ -105,7 +108,7 @@ func reconcileFromChain(
 		return readStakingAmounts(ctx, evmClient, head, staking)
 	})
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	for _, amount := range amounts {
@@ -150,16 +153,16 @@ func reconcileFromChain(
 	for _, nftClass := range state.nftClasses {
 		totalStake, err := evmClient.GetTotalStake(ctx, head, nftClass.EVMAddress)
 		if err != nil {
-			return fmt.Errorf("failed to get total stake of %s: %w", nftClass.EVMAddress, err)
+			return nil, fmt.Errorf("failed to get total stake of %s: %w", nftClass.EVMAddress, err)
 		}
 		staked, err := toUint256(totalStake)
 		if err != nil {
-			return fmt.Errorf("total stake of %s: %w", nftClass.EVMAddress, err)
+			return nil, fmt.Errorf("total stake of %s: %w", nftClass.EVMAddress, err)
 		}
 		nftClass.StakedAmount = staked
 	}
 
-	return nil
+	return head, nil
 }
 
 type stakingAmounts struct {

@@ -122,7 +122,7 @@ func testLogger() *slog.Logger {
 
 func reconcile(t *testing.T, state *stakingState, client *stubEVMClient) {
 	t.Helper()
-	if err := reconcileFromChain(
+	if _, err := reconcileFromChain(
 		context.Background(), testLogger(), client, state, big.NewInt(testEventBlock),
 	); err != nil {
 		t.Fatalf("reconcileFromChain: %v", err)
@@ -255,7 +255,7 @@ func TestReconcileFailsRatherThanPersistPartialState(t *testing.T) {
 	client := chainSaying(1, 1, 1)
 	client.err = errors.New("rpc is down")
 
-	err := reconcileFromChain(
+	_, err := reconcileFromChain(
 		context.Background(), testLogger(), client, state, big.NewInt(testEventBlock),
 	)
 
@@ -295,7 +295,7 @@ func TestReconcileRefusesAHeadBehindTheEvent(t *testing.T) {
 	client := chainSaying(1, 1, 1)
 	client.head = big.NewInt(testEventBlock - 1)
 
-	err := reconcileFromChain(
+	_, err := reconcileFromChain(
 		context.Background(), testLogger(), client, state, big.NewInt(testEventBlock),
 	)
 

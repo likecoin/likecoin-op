@@ -75,3 +75,17 @@ func StakingEventOrErr(p StakingEvent, err error) StakingEvent {
 		p(s)
 	}
 }
+
+// StakingStateHead is the predicate function for stakingstatehead builders.
+type StakingStateHead func(*sql.Selector)
+
+// StakingStateHeadOrErr calls the predicate only if the error is not nit.
+func StakingStateHeadOrErr(p StakingStateHead, err error) StakingStateHead {
+	return func(s *sql.Selector) {
+		if err != nil {
+			s.AddError(err)
+			return
+		}
+		p(s)
+	}
+}

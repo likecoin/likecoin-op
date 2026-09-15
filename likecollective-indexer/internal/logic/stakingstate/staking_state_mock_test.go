@@ -2,6 +2,8 @@ package stakingstate_test
 
 import (
 	"context"
+	"math/big"
+
 	"likecollective-indexer/ent"
 	"likecollective-indexer/internal/logic/stakingstate/loader"
 	"likecollective-indexer/internal/logic/stakingstate/model"
@@ -98,8 +100,16 @@ func (p *stakingStateTestMockPersistor) AlreadyApplied(
 	return false, nil
 }
 
+func (p *stakingStateTestMockPersistor) WithLock(
+	ctx context.Context,
+	fn func(ctx context.Context) error,
+) error {
+	return fn(ctx)
+}
+
 func (p *stakingStateTestMockPersistor) Persist(
 	ctx context.Context,
+	headBlockNumber *big.Int,
 	stakingEvents []*ent.StakingEvent,
 	accounts []*model.Account,
 	nftClasses []*model.NFTClass,

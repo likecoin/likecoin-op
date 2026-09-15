@@ -16,6 +16,7 @@ import (
 	"likecollective-indexer/ent/nftclass"
 	"likecollective-indexer/ent/staking"
 	"likecollective-indexer/ent/stakingevent"
+	"likecollective-indexer/ent/stakingstatehead"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect"
@@ -38,6 +39,8 @@ type Client struct {
 	Staking *StakingClient
 	// StakingEvent is the client for interacting with the StakingEvent builders.
 	StakingEvent *StakingEventClient
+	// StakingStateHead is the client for interacting with the StakingStateHead builders.
+	StakingStateHead *StakingStateHeadClient
 }
 
 // NewClient creates a new client configured with the given options.
@@ -54,6 +57,7 @@ func (c *Client) init() {
 	c.NFTClass = NewNFTClassClient(c.config)
 	c.Staking = NewStakingClient(c.config)
 	c.StakingEvent = NewStakingEventClient(c.config)
+	c.StakingStateHead = NewStakingStateHeadClient(c.config)
 }
 
 type (
@@ -144,13 +148,14 @@ func (c *Client) Tx(ctx context.Context) (*Tx, error) {
 	cfg := c.config
 	cfg.driver = tx
 	return &Tx{
-		ctx:          ctx,
-		config:       cfg,
-		Account:      NewAccountClient(cfg),
-		EVMEvent:     NewEVMEventClient(cfg),
-		NFTClass:     NewNFTClassClient(cfg),
-		Staking:      NewStakingClient(cfg),
-		StakingEvent: NewStakingEventClient(cfg),
+		ctx:              ctx,
+		config:           cfg,
+		Account:          NewAccountClient(cfg),
+		EVMEvent:         NewEVMEventClient(cfg),
+		NFTClass:         NewNFTClassClient(cfg),
+		Staking:          NewStakingClient(cfg),
+		StakingEvent:     NewStakingEventClient(cfg),
+		StakingStateHead: NewStakingStateHeadClient(cfg),
 	}, nil
 }
 
@@ -168,13 +173,14 @@ func (c *Client) BeginTx(ctx context.Context, opts *sql.TxOptions) (*Tx, error) 
 	cfg := c.config
 	cfg.driver = &txDriver{tx: tx, drv: c.driver}
 	return &Tx{
-		ctx:          ctx,
-		config:       cfg,
-		Account:      NewAccountClient(cfg),
-		EVMEvent:     NewEVMEventClient(cfg),
-		NFTClass:     NewNFTClassClient(cfg),
-		Staking:      NewStakingClient(cfg),
-		StakingEvent: NewStakingEventClient(cfg),
+		ctx:              ctx,
+		config:           cfg,
+		Account:          NewAccountClient(cfg),
+		EVMEvent:         NewEVMEventClient(cfg),
+		NFTClass:         NewNFTClassClient(cfg),
+		Staking:          NewStakingClient(cfg),
+		StakingEvent:     NewStakingEventClient(cfg),
+		StakingStateHead: NewStakingStateHeadClient(cfg),
 	}, nil
 }
 
@@ -203,21 +209,23 @@ func (c *Client) Close() error {
 // Use adds the mutation hooks to all the entity clients.
 // In order to add hooks to a specific client, call: `client.Node.Use(...)`.
 func (c *Client) Use(hooks ...Hook) {
-	c.Account.Use(hooks...)
-	c.EVMEvent.Use(hooks...)
-	c.NFTClass.Use(hooks...)
-	c.Staking.Use(hooks...)
-	c.StakingEvent.Use(hooks...)
+	for _, n := range []interface{ Use(...Hook) }{
+		c.Account, c.EVMEvent, c.NFTClass, c.Staking, c.StakingEvent,
+		c.StakingStateHead,
+	} {
+		n.Use(hooks...)
+	}
 }
 
 // Intercept adds the query interceptors to all the entity clients.
 // In order to add interceptors to a specific client, call: `client.Node.Intercept(...)`.
 func (c *Client) Intercept(interceptors ...Interceptor) {
-	c.Account.Intercept(interceptors...)
-	c.EVMEvent.Intercept(interceptors...)
-	c.NFTClass.Intercept(interceptors...)
-	c.Staking.Intercept(interceptors...)
-	c.StakingEvent.Intercept(interceptors...)
+	for _, n := range []interface{ Intercept(...Interceptor) }{
+		c.Account, c.EVMEvent, c.NFTClass, c.Staking, c.StakingEvent,
+		c.StakingStateHead,
+	} {
+		n.Intercept(interceptors...)
+	}
 }
 
 // Mutate implements the ent.Mutator interface.
@@ -233,6 +241,8 @@ func (c *Client) Mutate(ctx context.Context, m Mutation) (Value, error) {
 		return c.Staking.mutate(ctx, m)
 	case *StakingEventMutation:
 		return c.StakingEvent.mutate(ctx, m)
+	case *StakingStateHeadMutation:
+		return c.StakingStateHead.mutate(ctx, m)
 	default:
 		return nil, fmt.Errorf("ent: unknown mutation type %T", m)
 	}
@@ -999,12 +1009,146 @@ func (c *StakingEventClient) mutate(ctx context.Context, m *StakingEventMutation
 	}
 }
 
+// StakingStateHeadClient is a client for the StakingStateHead schema.
+type StakingStateHeadClient struct {
+	config
+}
+
+// NewStakingStateHeadClient returns a client for the StakingStateHead from the given config.
+func NewStakingStateHeadClient(c config) *StakingStateHeadClient {
+	return &StakingStateHeadClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `stakingstatehead.Hooks(f(g(h())))`.
+func (c *StakingStateHeadClient) Use(hooks ...Hook) {
+	c.hooks.StakingStateHead = append(c.hooks.StakingStateHead, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `stakingstatehead.Intercept(f(g(h())))`.
+func (c *StakingStateHeadClient) Intercept(interceptors ...Interceptor) {
+	c.inters.StakingStateHead = append(c.inters.StakingStateHead, interceptors...)
+}
+
+// Create returns a builder for creating a StakingStateHead entity.
+func (c *StakingStateHeadClient) Create() *StakingStateHeadCreate {
+	mutation := newStakingStateHeadMutation(c.config, OpCreate)
+	return &StakingStateHeadCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of StakingStateHead entities.
+func (c *StakingStateHeadClient) CreateBulk(builders ...*StakingStateHeadCreate) *StakingStateHeadCreateBulk {
+	return &StakingStateHeadCreateBulk{config: c.config, builders: builders}
+}
+
+// MapCreateBulk creates a bulk creation builder from the given slice. For each item in the slice, the function creates
+// a builder and applies setFunc on it.
+func (c *StakingStateHeadClient) MapCreateBulk(slice any, setFunc func(*StakingStateHeadCreate, int)) *StakingStateHeadCreateBulk {
+	rv := reflect.ValueOf(slice)
+	if rv.Kind() != reflect.Slice {
+		return &StakingStateHeadCreateBulk{err: fmt.Errorf("calling to StakingStateHeadClient.MapCreateBulk with wrong type %T, need slice", slice)}
+	}
+	builders := make([]*StakingStateHeadCreate, rv.Len())
+	for i := 0; i < rv.Len(); i++ {
+		builders[i] = c.Create()
+		setFunc(builders[i], i)
+	}
+	return &StakingStateHeadCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for StakingStateHead.
+func (c *StakingStateHeadClient) Update() *StakingStateHeadUpdate {
+	mutation := newStakingStateHeadMutation(c.config, OpUpdate)
+	return &StakingStateHeadUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *StakingStateHeadClient) UpdateOne(_m *StakingStateHead) *StakingStateHeadUpdateOne {
+	mutation := newStakingStateHeadMutation(c.config, OpUpdateOne, withStakingStateHead(_m))
+	return &StakingStateHeadUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *StakingStateHeadClient) UpdateOneID(id int) *StakingStateHeadUpdateOne {
+	mutation := newStakingStateHeadMutation(c.config, OpUpdateOne, withStakingStateHeadID(id))
+	return &StakingStateHeadUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for StakingStateHead.
+func (c *StakingStateHeadClient) Delete() *StakingStateHeadDelete {
+	mutation := newStakingStateHeadMutation(c.config, OpDelete)
+	return &StakingStateHeadDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *StakingStateHeadClient) DeleteOne(_m *StakingStateHead) *StakingStateHeadDeleteOne {
+	return c.DeleteOneID(_m.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *StakingStateHeadClient) DeleteOneID(id int) *StakingStateHeadDeleteOne {
+	builder := c.Delete().Where(stakingstatehead.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &StakingStateHeadDeleteOne{builder}
+}
+
+// Query returns a query builder for StakingStateHead.
+func (c *StakingStateHeadClient) Query() *StakingStateHeadQuery {
+	return &StakingStateHeadQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeStakingStateHead},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a StakingStateHead entity by its id.
+func (c *StakingStateHeadClient) Get(ctx context.Context, id int) (*StakingStateHead, error) {
+	return c.Query().Where(stakingstatehead.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *StakingStateHeadClient) GetX(ctx context.Context, id int) *StakingStateHead {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// Hooks returns the client hooks.
+func (c *StakingStateHeadClient) Hooks() []Hook {
+	return c.hooks.StakingStateHead
+}
+
+// Interceptors returns the client interceptors.
+func (c *StakingStateHeadClient) Interceptors() []Interceptor {
+	return c.inters.StakingStateHead
+}
+
+func (c *StakingStateHeadClient) mutate(ctx context.Context, m *StakingStateHeadMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&StakingStateHeadCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&StakingStateHeadUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&StakingStateHeadUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&StakingStateHeadDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown StakingStateHead mutation op: %q", m.Op())
+	}
+}
+
 // hooks and interceptors per client, for fast access.
 type (
 	hooks struct {
-		Account, EVMEvent, NFTClass, Staking, StakingEvent []ent.Hook
+		Account, EVMEvent, NFTClass, Staking, StakingEvent, StakingStateHead []ent.Hook
 	}
 	inters struct {
-		Account, EVMEvent, NFTClass, Staking, StakingEvent []ent.Interceptor
+		Account, EVMEvent, NFTClass, Staking, StakingEvent,
+		StakingStateHead []ent.Interceptor
 	}
 )

@@ -10,6 +10,7 @@ import (
 	"likecollective-indexer/ent/schema/typeutil"
 	"likecollective-indexer/ent/staking"
 	"likecollective-indexer/ent/stakingevent"
+	"likecollective-indexer/ent/stakingstatehead"
 	"time"
 
 	"entgo.io/ent/schema/field"
@@ -129,4 +130,15 @@ func init() {
 	stakingeventDescDatetime := stakingeventFields[13].Descriptor()
 	// stakingevent.DefaultDatetime holds the default value on creation for the datetime field.
 	stakingevent.DefaultDatetime = stakingeventDescDatetime.Default.(time.Time)
+	stakingstateheadFields := schema.StakingStateHead{}.Fields()
+	_ = stakingstateheadFields
+	// stakingstateheadDescBlockNumber is the schema descriptor for block_number field.
+	stakingstateheadDescBlockNumber := stakingstateheadFields[0].Descriptor()
+	stakingstatehead.ValueScanner.BlockNumber = stakingstateheadDescBlockNumber.ValueScanner.(field.TypeValueScanner[typeutil.Uint64])
+	// stakingstateheadDescUpdatedAt is the schema descriptor for updated_at field.
+	stakingstateheadDescUpdatedAt := stakingstateheadFields[1].Descriptor()
+	// stakingstatehead.DefaultUpdatedAt holds the default value on creation for the updated_at field.
+	stakingstatehead.DefaultUpdatedAt = stakingstateheadDescUpdatedAt.Default.(func() time.Time)
+	// stakingstatehead.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
+	stakingstatehead.UpdateDefaultUpdatedAt = stakingstateheadDescUpdatedAt.UpdateDefault.(func() time.Time)
 }

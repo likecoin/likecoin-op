@@ -22,6 +22,8 @@ type Tx struct {
 	Staking *StakingClient
 	// StakingEvent is the client for interacting with the StakingEvent builders.
 	StakingEvent *StakingEventClient
+	// StakingStateHead is the client for interacting with the StakingStateHead builders.
+	StakingStateHead *StakingStateHeadClient
 
 	// lazily loaded.
 	client     *Client
@@ -158,6 +160,7 @@ func (tx *Tx) init() {
 	tx.NFTClass = NewNFTClassClient(tx.config)
 	tx.Staking = NewStakingClient(tx.config)
 	tx.StakingEvent = NewStakingEventClient(tx.config)
+	tx.StakingStateHead = NewStakingStateHeadClient(tx.config)
 }
 
 // txDriver wraps the given dialect.Tx with a nop dialect.Driver implementation.

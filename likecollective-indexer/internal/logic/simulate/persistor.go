@@ -2,6 +2,7 @@ package simulate
 
 import (
 	"context"
+	"math/big"
 
 	"likecollective-indexer/ent"
 	"likecollective-indexer/internal/logic/stakingstate/model"
@@ -35,8 +36,17 @@ func (p *simulationPersistor) AlreadyApplied(
 	return false, nil
 }
 
+// WithLock runs fn directly: a simulation has no other writer.
+func (p *simulationPersistor) WithLock(
+	ctx context.Context,
+	fn func(ctx context.Context) error,
+) error {
+	return fn(ctx)
+}
+
 func (p *simulationPersistor) Persist(
 	ctx context.Context,
+	headBlockNumber *big.Int,
 	stakingEvents []*ent.StakingEvent,
 	accounts []*model.Account,
 	nftClasses []*model.NFTClass,

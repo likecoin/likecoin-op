@@ -19,6 +19,7 @@ import (
 
 type Service interface {
 	Client() *ent.Client
+	DB() *sql.DB
 	Health() map[string]string
 	Close() error
 }
@@ -72,6 +73,10 @@ func New() Service {
 
 func (s *service) Client() *ent.Client {
 	return s.client
+}
+
+func (s *service) DB() *sql.DB {
+	return s.db
 }
 
 // Health checks the health of the database connection by pinging the database.
