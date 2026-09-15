@@ -108,6 +108,12 @@ func (e *stakingEvmEventProcessor) Process(
 			return err
 		}
 
+		if e.reconcileFromChain {
+			if err := readDepositStakes(ctx, e.evmClient, stakingState, stakingEvents); err != nil {
+				return err
+			}
+		}
+
 		processedState, processedStakingEvents, err := stakingState.Process(stakingEvents)
 		if err != nil {
 			return err

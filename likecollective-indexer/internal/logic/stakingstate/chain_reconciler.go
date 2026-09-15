@@ -11,6 +11,7 @@ import (
 	"likecollective-indexer/internal/logic/stakingstate/model"
 	"likecollective-indexer/internal/util/parallel"
 
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/holiman/uint256"
 )
 
@@ -44,9 +45,10 @@ var ErrChainBehindEvent = errors.New("chain head is behind the event")
 // would let an older event commit an older truth on top of a newer one and
 // leave it there. Reading the head, every writer converges on the same answer
 // whatever order they run in, which is the property that makes the totals
-// recoverable. It also means no archive state is required, where a pinned read
-// would need it for every event once retries push one past a non-archive
-// node's window.
+// recoverable. It also means the totals need no archive state, where a pinned
+// read would need it for every event once retries push one past a non-archive
+// node's window. (Splitting a RewardDeposited does pin its reads: see
+// readDepositStakes.)
 //
 // The head is resolved once and every read in the pass is pinned to it. A
 // RewardDeposited fans out into a read per staker, and with each read taking
@@ -151,13 +153,9 @@ func reconcileFromChain(
 	}
 
 	for _, nftClass := range state.nftClasses {
-		totalStake, err := evmClient.GetTotalStake(ctx, head, nftClass.EVMAddress)
+		staked, err := readTotalStake(ctx, evmClient, head, nftClass.EVMAddress)
 		if err != nil {
-			return nil, fmt.Errorf("failed to get total stake of %s: %w", nftClass.EVMAddress, err)
-		}
-		staked, err := toUint256(totalStake)
-		if err != nil {
-			return nil, fmt.Errorf("total stake of %s: %w", nftClass.EVMAddress, err)
+			return nil, err
 		}
 		nftClass.StakedAmount = staked
 	}
@@ -177,14 +175,9 @@ func readStakingAmounts(
 	blockNumber *big.Int,
 	staking *model.Staking,
 ) (*stakingAmounts, error) {
-	stakedAmount, err := evmClient.GetStakeForUser(
-		ctx, blockNumber, staking.AccountEVMAddress, staking.BookNFTEvmAddress,
-	)
+	staked, err := readStake(ctx, evmClient, blockNumber, staking)
 	if err != nil {
-		return nil, fmt.Errorf(
-			"failed to get stake for user %s on %s: %w",
-			staking.AccountEVMAddress, staking.BookNFTEvmAddress, err,
-		)
+		return nil, err
 	}
 	pendingRewardAmount, err := evmClient.GetPendingRewardsForUser(
 		ctx, blockNumber, staking.AccountEVMAddress, staking.BookNFTEvmAddress,
@@ -196,16 +189,54 @@ func readStakingAmounts(
 		)
 	}
 
-	staked, err := toUint256(stakedAmount)
-	if err != nil {
-		return nil, fmt.Errorf("staked amount of %s: %w", staking.AccountEVMAddress, err)
-	}
 	pending, err := toUint256(pendingRewardAmount)
 	if err != nil {
 		return nil, fmt.Errorf("pending reward amount of %s: %w", staking.AccountEVMAddress, err)
 	}
 
 	return &stakingAmounts{staking: staking, staked: staked, pending: pending}, nil
+}
+
+func readStake(
+	ctx context.Context,
+	evmClient evm.EVMClient,
+	blockNumber *big.Int,
+	staking *model.Staking,
+) (*uint256.Int, error) {
+	stakedAmount, err := evmClient.GetStakeForUser(
+		ctx, blockNumber, staking.AccountEVMAddress, staking.BookNFTEvmAddress,
+	)
+	if err != nil {
+		return nil, fmt.Errorf(
+			"failed to get stake for user %s on %s at block %s: %w",
+			staking.AccountEVMAddress, staking.BookNFTEvmAddress, blockNumber, err,
+		)
+	}
+	staked, err := toUint256(stakedAmount)
+	if err != nil {
+		return nil, fmt.Errorf("staked amount of %s: %w", staking.AccountEVMAddress, err)
+	}
+	return staked, nil
+}
+
+func readTotalStake(
+	ctx context.Context,
+	evmClient evm.EVMClient,
+	blockNumber *big.Int,
+	nftClassAddress common.Address,
+) (*uint256.Int, error) {
+	totalStake, err := evmClient.GetTotalStake(ctx, blockNumber, nftClassAddress)
+	if err != nil {
+		return nil, fmt.Errorf(
+			"failed to get total stake of %s at block %s: %w",
+			nftClassAddress, blockNumber, err,
+		)
+	}
+	total, err := toUint256(totalStake)
+	if err != nil {
+		return nil, fmt.Errorf("total stake of %s: %w", nftClassAddress, err)
+	}
+	return total, nil
 }
 
 // applyCorrection moves total by (after - before), clamped at zero.

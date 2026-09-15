@@ -154,11 +154,14 @@ pinned to the event's block: nothing orders the pipeline -- events are enqueued
 oldest-first but asynq retries land late, and `retry-failed-evm-events`
 re-drives old events on purpose -- so a pinned read would let an older event
 commit an older truth over a newer one and leave it there. Reading the head,
-every writer converges on the same answer whatever order they run in, and no
-archive node is needed. The head is resolved once per event and every read in
-that pass is pinned to it, so a pool-wide re-read cannot mix rows from either
-side of a block that lands mid-pass; and an event whose block the node has not
-reached yet fails and is retried rather than read against an older head.
+every writer converges on the same answer whatever order they run in, and those
+reads need no archive node. `RewardDeposited` is the exception: its split is
+read at the deposit's own block, which never changes, and so does need archive
+state once the deposit is older than the node's window. The head is resolved
+once per event and every read in that pass is pinned to it, so a pool-wide
+re-read cannot mix rows from either side of a block that lands mid-pass; and an
+event whose block the node has not reached yet fails and is retried rather than
+read against an older head.
 `staking_events` is still accumulated from deltas -- it is history, and history
 has to be. The deltas are neither applied to nor checked against the loaded
 totals: those may already have been re-read at a head past the event, so an
@@ -270,8 +273,7 @@ it somewhere quiet before pointing it at sentry.
 
 Replaying missing logs back into `evm_events` would repair the first two, and
 `check-evm-event-gaps` already identifies exactly which logs to replay. It is
-not implemented yet because it is not safe yet: `RewardDeposited` fans out into
-a per-staker split derived from the stake distribution held **at the time it is
-applied**, so a log replayed late would distribute against today's distribution
-rather than the one at its own block. That event has to read its amounts from
-the chain at its own block first.
+not implemented yet. `RewardDeposited` is safe to replay late: its per-staker
+split is read from the chain at the deposit's own block, so it distributes
+against the stake it actually met rather than today's -- provided the RPC node
+serves archive state that far back.

@@ -34,6 +34,11 @@ type stakingState struct {
 	// touched holds the stakings an event named, which the chain is re-read
 	// for even when they hold nothing as loaded.
 	touched map[*model.Staking]struct{}
+
+	// depositStakes holds, per RewardDeposited, the pool's stake at the
+	// deposit's block, which chain-backed state splits the reward by: see
+	// readDepositStakes.
+	depositStakes map[*ent.StakingEvent]*depositStakes
 }
 
 func LoadStakingState(
@@ -175,6 +180,13 @@ func (s *stakingState) touch(staking *model.Staking) {
 func (s *stakingState) isTouched(staking *model.Staking) bool {
 	_, ok := s.touched[staking]
 	return ok
+}
+
+func (s *stakingState) setDepositStakes(stakingEvent *ent.StakingEvent, stakes *depositStakes) {
+	if s.depositStakes == nil {
+		s.depositStakes = make(map[*ent.StakingEvent]*depositStakes)
+	}
+	s.depositStakes[stakingEvent] = stakes
 }
 
 func (s *stakingState) GetAccountByAddress(evmAddress common.Address) (*model.Account, bool) {

@@ -292,9 +292,33 @@ func (s *rewardDepositedEventApplication) Apply(
 	stakings := state.GetStakingsByNFTClassAddress(nftClassAddress)
 	distributedApplications := make([]StakingEventApplication, 0)
 
+	// The split is by the stake at the deposit. Delta state holds exactly that
+	// as loaded; chain-backed state holds a head's, possibly past the deposit,
+	// so it splits by what readDepositStakes read at the deposit's block.
+	totalStaked := nftClass.StakedAmount
+	stakedAmountOf := func(staking *model.Staking) *uint256.Int {
+		return staking.StakedAmount
+	}
+	if state.chainBacked {
+		stakes, ok := state.depositStakes[s.stakingEvent]
+		if !ok {
+			return nil, nil, errors.Join(
+				ErrRewardDepositedEventApplication,
+				errors.New("stake at the deposit's block was not read"),
+			)
+		}
+		totalStaked = stakes.total
+		stakedAmountOf = func(staking *model.Staking) *uint256.Int {
+			if staked, ok := stakes.staked[staking.AccountEVMAddress]; ok {
+				return staked
+			}
+			return uint256.NewInt(0)
+		}
+	}
+
 	nonZeroStakings := make([]*model.Staking, 0)
 	for _, staking := range stakings {
-		if staking.StakedAmount.IsZero() {
+		if stakedAmountOf(staking).IsZero() {
 			continue
 		}
 		nonZeroStakings = append(nonZeroStakings, staking)
@@ -317,15 +341,16 @@ func (s *rewardDepositedEventApplication) Apply(
 		// uint256, and refusing a product that does not would fail the event
 		// on every retry.
 		// A pool total of zero gives a share of zero.
+		stakedAmount := stakedAmountOf(staking)
 		pendingRewardAmount, overflow := new(uint256.Int).MulDivOverflow(
-			staking.StakedAmount, rewardAmount, nftClass.StakedAmount,
+			stakedAmount, rewardAmount, totalStaked,
 		)
 		if overflow {
 			return nil, nil, errors.Join(
 				ErrRewardDepositedEventApplication,
 				fmt.Errorf(
 					"share of reward %s for staked amount %s of %s overflows uint256",
-					rewardAmount, staking.StakedAmount, nftClass.StakedAmount,
+					rewardAmount, stakedAmount, totalStaked,
 				),
 			)
 		}
