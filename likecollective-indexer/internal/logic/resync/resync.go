@@ -13,6 +13,7 @@ import (
 	"math/big"
 	"slices"
 
+	"likecollective-indexer/ent"
 	"likecollective-indexer/internal/database"
 	"likecollective-indexer/internal/evm"
 	"likecollective-indexer/internal/logic/stakingstate/model"
@@ -82,6 +83,21 @@ func Build(
 		return nil, fmt.Errorf("failed to query accounts: %w", err)
 	}
 
+	return build(ctx, logger, evmClient, blockNumber, concurrency, dbAccounts, dbNFTClasses, dbStakings)
+}
+
+// build is Build over already loaded database rows, so the snapshot logic can
+// be exercised without a database.
+func build(
+	ctx context.Context,
+	logger *slog.Logger,
+	evmClient evm.EVMClient,
+	blockNumber *big.Int,
+	concurrency int,
+	dbAccounts []*ent.Account,
+	dbNFTClasses []*ent.NFTClass,
+	dbStakings []*ent.Staking,
+) (*Snapshot, error) {
 	positions, err := evmClient.ListStakePositions(ctx, blockNumber, concurrency)
 	if err != nil {
 		return nil, fmt.Errorf("failed to list stake positions: %w", err)

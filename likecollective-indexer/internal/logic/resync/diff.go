@@ -10,6 +10,7 @@ import (
 	entaccount "likecollective-indexer/ent/account"
 	entnftclass "likecollective-indexer/ent/nftclass"
 	entstaking "likecollective-indexer/ent/staking"
+	"likecollective-indexer/internal/database"
 	"likecollective-indexer/internal/logic/stakingstate/model"
 	"likecollective-indexer/internal/util/ordered"
 
@@ -82,9 +83,8 @@ func stakingsByKey(dbStakings []*ent.Staking) map[stakingKey]*ent.Staking {
 	return byKey
 }
 
-// diff reports every column the snapshot would rewrite. pool_share and
-// last_staked_at are left out: the first is derived from the amounts and
-// recomputed on persist, the second is not part of a snapshot at all.
+// diff reports every column the snapshot would rewrite. last_staked_at is left
+// out: it is not part of a snapshot at all.
 func diff(
 	accounts []*model.Account,
 	nftClasses []*model.NFTClass,
@@ -110,6 +110,12 @@ func diff(
 		if !staking.StakedAmount.IsZero() {
 			stakerCounts[staking.BookNFTEvmAddress]++
 		}
+	}
+	// pool_share is likewise recomputed on persist, from each staking's amount
+	// over its nft class total.
+	totalStakedByBookNFT := map[common.Address]*uint256.Int{}
+	for _, nftClass := range nftClasses {
+		totalStakedByBookNFT[nftClass.EVMAddress] = nftClass.StakedAmount
 	}
 
 	for _, account := range accounts {
@@ -154,6 +160,10 @@ func diff(
 			(*uint256.Int)(dbStaking.PendingRewardAmount).String(), staking.PendingRewardAmount.String())
 		changes = appendChange(changes, tableStakings, key, entstaking.FieldClaimedRewardAmount,
 			(*uint256.Int)(dbStaking.ClaimedRewardAmount).String(), staking.ClaimedRewardAmount.String())
+		if totalStaked, ok := totalStakedByBookNFT[staking.BookNFTEvmAddress]; ok {
+			changes = appendChange(changes, tableStakings, key, entstaking.FieldPoolShare,
+				dbStaking.PoolShare, database.PoolSharePercentage(staking.StakedAmount, totalStaked))
+		}
 	}
 
 	return changes

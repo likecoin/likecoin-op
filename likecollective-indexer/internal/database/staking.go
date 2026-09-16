@@ -207,20 +207,14 @@ func (r *stakingRepository) CreateOrUpdateStaking(
 		).
 		Only(ctx)
 
-	var poolShares *big.Rat
-	if (*uint256.Int)(nftClass.StakedAmount).IsZero() {
-		poolShares = big.NewRat(0, 1)
-	} else {
-		poolShares = big.NewRat((*uint256.Int)(stakedAmount).ToBig().Int64(), (*uint256.Int)(nftClass.StakedAmount).ToBig().Int64())
-	}
-	poolSharesPercentage := decimal.NewFromBigRat(poolShares, 2)
+	poolSharesPercentage := PoolSharePercentage((*uint256.Int)(stakedAmount), (*uint256.Int)(nftClass.StakedAmount))
 
 	if err != nil {
 		if ent.IsNotFound(err) {
 			return tx.Staking.Create().
 				SetAccountID(account.ID).
 				SetNftClassID(nftClass.ID).
-				SetPoolShare(poolSharesPercentage.String()).
+				SetPoolShare(poolSharesPercentage).
 				SetStakedAmount(stakedAmount).
 				SetPendingRewardAmount(pendingRewardAmount).
 				SetClaimedRewardAmount(claimedRewardAmount).
@@ -231,10 +225,23 @@ func (r *stakingRepository) CreateOrUpdateStaking(
 
 	return tx.Staking.UpdateOne(s).
 		SetStakedAmount(stakedAmount).
-		SetPoolShare(poolSharesPercentage.String()).
+		SetPoolShare(poolSharesPercentage).
 		SetPendingRewardAmount(pendingRewardAmount).
 		SetClaimedRewardAmount(claimedRewardAmount).
 		Save(ctx)
+}
+
+// PoolSharePercentage is the pool_share stored for a staking of stakedAmount
+// in a pool of totalStakedAmount. It is the one definition both the persist
+// path and the resync diff use, so the diff reports what persist writes.
+func PoolSharePercentage(stakedAmount *uint256.Int, totalStakedAmount *uint256.Int) string {
+	var poolShares *big.Rat
+	if totalStakedAmount.IsZero() {
+		poolShares = big.NewRat(0, 1)
+	} else {
+		poolShares = big.NewRat(stakedAmount.ToBig().Int64(), totalStakedAmount.ToBig().Int64())
+	}
+	return decimal.NewFromBigRat(poolShares, 2).String()
 }
 
 func (r *stakingRepository) RecomputePoolSharesByNFTClassAddress(
@@ -253,14 +260,8 @@ func (r *stakingRepository) RecomputePoolSharesByNFTClassAddress(
 	}
 
 	for _, staking := range stakings {
-		var poolShares *big.Rat
-		if (*uint256.Int)(nftClass.StakedAmount).IsZero() {
-			poolShares = big.NewRat(0, 1)
-		} else {
-			poolShares = big.NewRat((*uint256.Int)(staking.StakedAmount).ToBig().Int64(), (*uint256.Int)(nftClass.StakedAmount).ToBig().Int64())
-		}
-		poolSharePercentage := decimal.NewFromBigRat(poolShares, 2)
-		if _, err = tx.Staking.UpdateOne(staking).SetPoolShare(poolSharePercentage.String()).Save(ctx); err != nil {
+		poolSharePercentage := PoolSharePercentage((*uint256.Int)(staking.StakedAmount), (*uint256.Int)(nftClass.StakedAmount))
+		if _, err = tx.Staking.UpdateOne(staking).SetPoolShare(poolSharePercentage).Save(ctx); err != nil {
 			return err
 		}
 	}
