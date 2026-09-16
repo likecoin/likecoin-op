@@ -7,7 +7,10 @@ import (
 
 // MapWithLimit applies f to every item, running at most limit calls at a time,
 // and returns the results in input order. The first error cancels the context
-// handed to the remaining calls and is the one returned.
+// handed to the remaining calls and is the one returned. A cancelled ctx is
+// returned as an error rather than results: the producer stops handing out
+// items once it is done, so the slice can otherwise come back full length with
+// the untouched entries left at their zero value and nothing to say so.
 func MapWithLimit[T any, R any](
 	ctx context.Context,
 	limit int,
@@ -31,7 +34,9 @@ func MapWithLimit[T any, R any](
 
 	indexes := make(chan int)
 
-	for range limit {
+	// A worker per item at most: goroutines beyond the items would only sit
+	// parked on the channel, and limit can be as large as a cli flag allows.
+	for range min(limit, len(items)) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
@@ -64,6 +69,12 @@ producing:
 
 	if firstErr != nil {
 		return nil, firstErr
+	}
+	// cancel() only runs after a worker error, so with firstErr still nil a
+	// done context can only mean the caller's own was cancelled -- and the
+	// producer may have stopped short, leaving zero values in results.
+	if err := ctx.Err(); err != nil {
+		return nil, err
 	}
 
 	return results, nil
