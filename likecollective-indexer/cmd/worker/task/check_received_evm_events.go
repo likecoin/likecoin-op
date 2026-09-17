@@ -68,9 +68,9 @@ func HandleCheckReceivedEVMEvents(ctx context.Context, t *asynq.Task) error {
 	}
 	mylogger.Info(fmt.Sprintf("%d events found", len(receivedEvents)))
 
-	// Enqueue oldest first. GetEVMEventsByStatus does not order, so without
-	// this the deltas that build staking_events are recorded in whatever order
-	// the query happened to return.
+	// Rows already arrive ordered by block, transaction and log index; sorting
+	// keeps the comparator the single definition of processing order, topic0
+	// ranks included.
 	slices.SortFunc(receivedEvents, model.EvmEventsProcessingComparator)
 	receivedEventIds := make([]int, 0, len(receivedEvents))
 
