@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"reflect"
 	"runtime"
+	"time"
 
 	"likecollective-indexer/ent"
 	"likecollective-indexer/ent/evmevent"
@@ -19,6 +20,8 @@ import (
 )
 
 var ErrAlreadyProcessing = errors.New("evmevent already processing")
+
+const failedStatusUpdateTimeout = 30 * time.Second
 
 type EVMEventProcessor interface {
 	Process(
@@ -88,7 +91,18 @@ func (e *evmEventProcessor) Process(
 		if err != nil {
 			errMsg := err.Error()
 			mylogger.Error("something went wrong", "err", err)
-			_, _ = e.evmEventRepository.UpdateEvmEventStatus(ctx, evmEvent, evmevent.StatusFailed, &errMsg)
+			// Not on ctx: it is often the cancellation being reported, e.g. a
+			// task timing out behind the staking state lock, and an event left
+			// processing is never picked up again. Bounded so a stuck database
+			// cannot hold up shutdown instead.
+			updateCtx, cancel := context.WithTimeout(context.WithoutCancel(ctx), failedStatusUpdateTimeout)
+			defer cancel()
+			_, updateErr := e.evmEventRepository.UpdateEvmEventStatus(
+				updateCtx, evmEvent, evmevent.StatusFailed, &errMsg,
+			)
+			if updateErr != nil {
+				mylogger.Error("failed to mark evm event failed", "err", updateErr)
+			}
 		}
 	}()
 
