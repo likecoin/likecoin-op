@@ -14,16 +14,21 @@ var cmpTransactionIndex ordered.Comparator[*ent.EVMEvent] = func(a, b *ent.EVMEv
 
 var topic0OrderMap map[string]int = map[string]int{}
 
+// cmpTopic0 puts ranked topics before unranked ones. Two unranked topics are
+// equal, so they fall through to the log index rather than comparing as
+// greater both ways.
 var cmpTopic0 ordered.Comparator[*ent.EVMEvent] = func(a, b *ent.EVMEvent) int {
-	orderA, ok := topic0OrderMap[a.Topic0]
-	if !ok {
+	orderA, rankedA := topic0OrderMap[a.Topic0]
+	orderB, rankedB := topic0OrderMap[b.Topic0]
+	switch {
+	case rankedA && rankedB:
+		return ordered.Normalize(orderA, orderB)
+	case rankedA:
+		return -1
+	case rankedB:
 		return 1
 	}
-	orderB, ok := topic0OrderMap[b.Topic0]
-	if !ok {
-		return -1
-	}
-	return ordered.Normalize(orderA, orderB)
+	return 0
 }
 
 var cmpLogIndex ordered.Comparator[*ent.EVMEvent] = func(a, b *ent.EVMEvent) int {
